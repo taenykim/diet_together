@@ -1,20 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
+import proptypes from 'prop-types'
 
-const AppLayout_Container = styled.div`
-  display: flex;
-  margin: 10px;
-  div {
-    margin: 10px;
-  }
-`
+// const AppLayout_Container = styled.div`
+//   display: flex;
+//   color: blue;
+//   margin: 10px;
+//   div {
+//     margin: 10px;
+//   }
+// `
 
 const AppLayout = ({ children }) => {
   return (
     <>
-      <AppLayout_Container>
-        <div key="home">
+      <div style={{ display: 'flex', margin: '10px' }}>
+        <div key="home" style={{ marginRight: '10px' }}>
           <Link href="/">
             <a>홈</a>
           </Link>
@@ -27,7 +29,7 @@ const AppLayout = ({ children }) => {
         <div key="search">
           <input />
         </div>
-      </AppLayout_Container>
+      </div>
       <Link href="/signup">
         <a>
           <button>회원가입</button>
@@ -36,6 +38,10 @@ const AppLayout = ({ children }) => {
       {children}
     </>
   )
+}
+
+AppLayout.proptypes = {
+  children: proptypes.node
 }
 
 export default AppLayout
