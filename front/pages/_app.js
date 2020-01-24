@@ -2,7 +2,7 @@ import React from 'react'
 import AppLayout from '../components/AppLayout'
 import Head from 'next/head'
 import withRedux from 'next-redux-wrapper'
-import { createStore } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import proptypes from 'prop-types'
 import { Provider } from 'react-redux'
 import reducer from '../reducer'
@@ -26,7 +26,13 @@ _app.proptypes = {
 }
 
 export default withRedux((initialState, options) => {
-  const store = createStore(reducer, initialState)
-  // 스토어 커스터마이징
+  const middleware = []
+  const enhancer = compose(
+    applyMiddleware(...middleware),
+    typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : f => f
+  )
+  const store = createStore(reducer, initialState, enhancer)
   return store
 })(_app)
