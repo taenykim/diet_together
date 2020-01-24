@@ -4,15 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
   },
   "author": "taenykim",
   "license": "MIT",
   "dependencies": {
     "next": "^9.2.1",
-    "nodemon": "^2.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "styled-components": "^5.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2",
     "webpack": "^4.41.5"
   }
 }
