@@ -4,6 +4,7 @@ import Link from 'next/link'
 import proptypes from 'prop-types'
 import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
+import { useSelector } from 'react-redux'
 
 // const AppLayout_Container = styled.div`
 //   display: flex;
@@ -14,9 +15,8 @@ import UserProfile from './UserProfile'
 //   }
 // `
 
-const loggedIn = true // true : 로그인 됨
-
 const AppLayout = ({ children }) => {
+  const user = useSelector(state => state.user.user)
   return (
     <>
       <div style={{ display: 'flex', margin: '10px' }}>
@@ -34,7 +34,7 @@ const AppLayout = ({ children }) => {
           <input />
         </div>
       </div>
-      {loggedIn ? <UserProfile /> : <LoginForm />}
+      {user ? <UserProfile /> : <LoginForm />}
       <div>{children}</div>
     </>
   )

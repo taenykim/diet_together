@@ -1,8 +1,8 @@
 import React from 'react'
-
-const imagePaths = []
+import { useSelector } from 'react-redux'
 
 const PostForm = () => {
+  const imagePaths = useSelector(state => state.post.imagePaths)
   return (
     <>
       <form encType="multipart/form-data">
