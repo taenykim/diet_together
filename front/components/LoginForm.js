@@ -1,9 +1,12 @@
 import React, { useState, useCallback } from 'react'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
+import { LOG_IN_REQUEST } from '../reducers/user'
 
 const LoginForm = () => {
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
+  const dispatch = useDispatch()
 
   const onChangeId = useCallback(e => {
     setId(e.target.value)
@@ -16,9 +19,12 @@ const LoginForm = () => {
   const onSubmitForm = useCallback(
     e => {
       e.preventDefault()
-      console.log({
-        id,
-        password
+      dispatch({
+        type: LOG_IN_REQUEST,
+        data: {
+          id,
+          password
+        }
       })
     },
     [id, password]

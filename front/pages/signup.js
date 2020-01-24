@@ -1,4 +1,7 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Router } from 'next/router'
+import { SIGN_UP_REQUEST } from '../reducers/user'
 
 const signup = () => {
   const [id, setId] = useState('')
@@ -10,6 +13,16 @@ const signup = () => {
   const [passwordError, setPasswordError] = useState(false)
   const [termError, setTermError] = useState(false)
 
+  const dispatch = useDispatch()
+  const { me } = useSelector(state => state.user)
+
+  useEffect(() => {
+    if (me) {
+      alert('로그인했으니 메인페이지로 이동')
+      Router.push('/')
+    }
+  }, [me && me.id])
+
   const onSubmit = useCallback(
     e => {
       e.preventDefault()
@@ -19,7 +32,14 @@ const signup = () => {
       if (!term) {
         return setTermError(true)
       }
-      console.log({ id })
+      return dispatch({
+        type: SIGN_UP_REQUEST,
+        data: {
+          id,
+          password,
+          nickname
+        }
+      })
     },
     [password, passwordCheck, term]
   )

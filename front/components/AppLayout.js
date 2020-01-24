@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 // `
 
 const AppLayout = ({ children }) => {
-  const user = useSelector(state => state.user.user)
+  const { isLoggedIn } = useSelector(state => state.user)
   return (
     <>
       <div style={{ display: 'flex', margin: '10px' }}>
@@ -34,7 +34,7 @@ const AppLayout = ({ children }) => {
           <input />
         </div>
       </div>
-      {user ? <UserProfile /> : <LoginForm />}
+      {isLoggedIn ? <UserProfile /> : <LoginForm />}
       <div>{children}</div>
     </>
   )

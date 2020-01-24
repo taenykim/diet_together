@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react'
-import { useDispatch } from 'react-redux'
-import { LOG_OUT } from '../reducer/user'
+import { useDispatch, useSelector } from 'react-redux'
+import { LOG_OUT } from '../reducers/user'
 
 const UserProfile = () => {
+  const { me } = useSelector(state => state.user)
   const dispatch = useDispatch()
   const onLogout = useCallback(() => {
     dispatch({
@@ -11,7 +12,7 @@ const UserProfile = () => {
   }, [])
   return (
     <>
-      <div>내 정보창</div>
+      <div>내 이름 : {me.nickname}</div>
       <button onClick={onLogout}>로그아웃</button>
     </>
   )

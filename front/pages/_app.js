@@ -5,7 +5,7 @@ import withRedux from 'next-redux-wrapper'
 import { createStore, compose, applyMiddleware } from 'redux'
 import proptypes from 'prop-types'
 import { Provider } from 'react-redux'
-import reducer from '../reducer'
+import reducer from '../reducers'
 import rootSaga from '../sagas'
 import createSagaMiddleware from 'redux-saga'
 
@@ -27,7 +27,7 @@ _app.proptypes = {
   store: proptypes.object
 }
 
-export default withRedux((initialState, options) => {
+const configureStore = (initialState, options) => {
   const sagaMiddleware = createSagaMiddleware()
   const middlewares = [sagaMiddleware]
   const enhancer =
@@ -42,4 +42,6 @@ export default withRedux((initialState, options) => {
   const store = createStore(reducer, initialState, enhancer)
   sagaMiddleware.run(rootSaga)
   return store
-})(_app)
+}
+
+export default withRedux(configureStore)(_app)
