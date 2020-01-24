@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import proptypes from 'prop-types'
+import LoginForm from './LoginForm'
 
 // const AppLayout_Container = styled.div`
 //   display: flex;
@@ -11,6 +12,8 @@ import proptypes from 'prop-types'
 //     margin: 10px;
 //   }
 // `
+
+const loggedIn = true // true : 로그인 됨
 
 const AppLayout = ({ children }) => {
   return (
@@ -30,12 +33,8 @@ const AppLayout = ({ children }) => {
           <input />
         </div>
       </div>
-      <Link href="/signup">
-        <a>
-          <button>회원가입</button>
-        </a>
-      </Link>
-      {children}
+      {loggedIn ? <div>내 정보창</div> : <LoginForm />}
+      <div>{children}</div>
     </>
   )
 }
