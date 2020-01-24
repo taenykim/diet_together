@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import proptypes from 'prop-types'
 import LoginForm from './LoginForm'
+import UserProfile from './UserProfile'
 
 // const AppLayout_Container = styled.div`
 //   display: flex;
@@ -33,7 +34,7 @@ const AppLayout = ({ children }) => {
           <input />
         </div>
       </div>
-      {loggedIn ? <div>내 정보창</div> : <LoginForm />}
+      {loggedIn ? <UserProfile /> : <LoginForm />}
       <div>{children}</div>
     </>
   )

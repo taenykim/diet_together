@@ -1,7 +1,8 @@
 import React from 'react'
+import PostForm from '../components/PostForm'
+import PostCard from '../components/PostCard'
 
 const loggedIn = true
-const imagePaths = []
 const mainPosts = [
   {
     createAt: 1,
@@ -28,37 +29,9 @@ const mainPosts = [
 const index = () => {
   return (
     <>
-      {loggedIn && (
-        <form encType="multipart/form-data">
-          <input placeholder="글을 작성해주세요." />
-          <div>
-            <input type="file" multiple hidden />
-            <button>이미지 업로드</button>
-            <button>작성</button>
-          </div>
-          <div>
-            {imagePaths.map((v, i) => {
-              return (
-                <div key={v} style={{ display: 'inline-block' }}>
-                  <img src={'http://localhost:3065/' + v} style={{ width: '200px' }} alt={v} />
-                  <div>
-                    <button>제거</button>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
-        </form>
-      )}
+      {loggedIn && <PostForm />}
       {mainPosts.map((c, i) => {
-        return (
-          <div key={+c.createAt}>
-            <div>{c.img && <img style={{ width: '20px' }} src={c.img}></img>}</div>
-            <div> {c.User.nickname}</div>
-            <div>{c.content}</div>
-            <br />
-          </div>
-        )
+        return <PostCard key={c} post={c} />
       })}
     </>
   )
