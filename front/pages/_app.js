@@ -6,6 +6,8 @@ import { createStore, compose, applyMiddleware } from 'redux'
 import proptypes from 'prop-types'
 import { Provider } from 'react-redux'
 import reducer from '../reducer'
+import rootSaga from '../sagas'
+import createSagaMiddleware from 'redux-saga'
 
 const _app = ({ Component, store }) => {
   return (
@@ -26,13 +28,18 @@ _app.proptypes = {
 }
 
 export default withRedux((initialState, options) => {
-  const middleware = []
-  const enhancer = compose(
-    applyMiddleware(...middleware),
-    !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : f => f
-  )
+  const sagaMiddleware = createSagaMiddleware()
+  const middlewares = [sagaMiddleware]
+  const enhancer =
+    process.env.NODE_ENV === 'production'
+      ? compose(applyMiddleware(...middlewares))
+      : compose(
+          applyMiddleware(...middlewares),
+          !options.isServer && window.__REDUX_DEVTOOLS_EXTENSION__ !== 'undefined'
+            ? window.__REDUX_DEVTOOLS_EXTENSION__()
+            : f => f
+        )
   const store = createStore(reducer, initialState, enhancer)
+  sagaMiddleware.run(rootSaga)
   return store
 })(_app)
