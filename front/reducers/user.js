@@ -5,7 +5,6 @@ const dummyUser = {
 }
 
 export const initialState = {
-  isLoggedIn: false,
   logInErrorReason: '',
   isSignedUp: false,
   signUpErrorReason: '',
@@ -25,7 +24,9 @@ export const LOAD_USER_REQUEST = 'LOAD_USER_REQUEST'
 export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS'
 export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE'
 
-export const LOG_OUT = 'LOG_OUT'
+export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST'
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'
+export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -38,22 +39,30 @@ const reducer = (state = initialState, action) => {
     case LOG_IN_SUCCESS: {
       return {
         ...state,
-        isLoggedIn: true,
         me: action.data
       }
     }
     case LOG_IN_FAILURE: {
       return {
         ...state,
-        isLoggedIn: false,
         logInErrorReason: action.error,
         me: null
       }
     }
-    case LOG_OUT: {
+    case LOG_OUT_REQUEST: {
+      return {
+        ...state
+      }
+    }
+    case LOG_OUT_SUCCESS: {
       return {
         ...state,
-        isLoggedIn: false,
+        me: null
+      }
+    }
+    case LOG_OUT_FAILURE: {
+      return {
+        ...state,
         me: null
       }
     }
@@ -74,6 +83,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         signUpErrorReason: action.error
+      }
+    }
+    case LOAD_USER_REQUEST: {
+      return {
+        ...state
+      }
+    }
+    case LOAD_USER_SUCCESS: {
+      return {
+        ...state,
+        me: action.data
+      }
+    }
+    case LOAD_USER_FAILURE: {
+      return {
+        ...state
       }
     }
     default: {
