@@ -7,6 +7,7 @@ import {
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS
 } from '../reducers/user'
+import axios from 'axios'
 
 function loginAPI() {}
 
@@ -28,11 +29,13 @@ function* watchLogin() {
   yield takeLatest(LOG_IN_REQUEST, login)
 }
 
-function SignUpAPI() {}
+function SignUpAPI(signUpData) {
+  return axios.post('http://localhost:3065/api/user/', signUpData)
+}
 
-function* signUp() {
+function* signUp(action) {
   try {
-    // yield call(SignUpAPI)
+    yield call(SignUpAPI, action.data)
     yield put({
       type: SIGN_UP_SUCCESS
     })
