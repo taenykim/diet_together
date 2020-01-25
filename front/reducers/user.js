@@ -1,9 +1,3 @@
-const dummyUser = {
-  nickname: '김태은',
-  Post: [],
-  id: 1
-}
-
 export const initialState = {
   logInErrorReason: '',
   isSignedUp: false,

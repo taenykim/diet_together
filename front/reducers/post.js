@@ -1,52 +1,10 @@
 export const initialState = {
-  mainPosts: [
-    {
-      id: 1,
-      User: {
-        id: 1,
-        nickname: '김태은'
-      },
-      img:
-        'https://images.velog.io/images/kimtaeeeny/profile/17991380-0b3d-11ea-a24a-5f4ee8031413/KakaoTalk20191120112528625.jpg',
-      content: '게시글!',
-      Comments: []
-    },
-    {
-      id: 2,
-      User: {
-        id: 2,
-        nickname: '우왕왕'
-      },
-      img:
-        'https://images.velog.io/images/kimtaeeeny/profile/17991380-0b3d-11ea-a24a-5f4ee8031413/KakaoTalk20191120112528625.jpg',
-      content: '게시글2!',
-      Comments: []
-    }
-  ],
+  mainPosts: [],
   imagePaths: [], // 이미지 미리보기 경로
   addPostErrorReason: '', // 포스트 업로드 실패 사유
   postAdded: false, // 포스트 업로드 성공
   addCommentErrorReason: '',
   commentAdded: false
-}
-
-const dummyPost = {
-  id: 2,
-  User: {
-    id: 1,
-    nickname: '김태은더미'
-  },
-  content: '더미콘텐츠.',
-  Comments: []
-}
-
-const dummyComment = {
-  id: 1,
-  User: {
-    id: 1,
-    nickname: '김태은댓글더미'
-  },
-  content: '더미콘텐츠'
 }
 
 export const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST'
@@ -99,7 +57,7 @@ const reducer = (state = initialState, action) => {
     case ADD_POST_SUCCESS: {
       return {
         ...state,
-        mainPosts: [dummyPost, ...state.mainPosts],
+        mainPosts: [action.data, ...state.mainPosts],
         postAdded: true
       }
     }
@@ -132,6 +90,23 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         addCommentErrorReason: action.error
+      }
+    }
+    case LOAD_MAIN_POSTS_REQUEST: {
+      return {
+        ...state,
+        mainPosts: []
+      }
+    }
+    case LOAD_MAIN_POSTS_SUCCESS: {
+      return {
+        ...state,
+        mainPosts: action.data
+      }
+    }
+    case LOAD_MAIN_POSTS_FAILURE: {
+      return {
+        ...state
       }
     }
     default: {

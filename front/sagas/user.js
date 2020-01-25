@@ -15,8 +15,11 @@ import {
 } from '../reducers/user'
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:3065/api'
-
+/**
+ * 로그인 *
+ * server : /api/user/logout (POST)
+ * front : LOG_IN_REQUEST
+ */
 function logInAPI(logInData) {
   return axios.post('/user/login', logInData, {
     withCredentials: true
@@ -42,6 +45,11 @@ function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn)
 }
 
+/**
+ * 회원가입 *
+ * server : /api/user/ (POST)
+ * front : SIGN_UP_REQUEST
+ */
 function signUpAPI(signUpData) {
   return axios.post('/user/', signUpData)
 }
@@ -65,6 +73,11 @@ function* watchSignUp() {
   yield takeLatest(SIGN_UP_REQUEST, signUp)
 }
 
+/**
+ * 로그아웃 *
+ * server : /api/user/logout (POST)
+ * front : LOG_OUT_REQUEST
+ */
 function logOutAPI() {
   return axios.post(
     '/user/logout',
@@ -94,6 +107,11 @@ function* watchLogOut() {
   yield takeLatest(LOG_OUT_REQUEST, logOut)
 }
 
+/**
+ * 로그인유지 *
+ * server : /api/user/ (GET)
+ * front : LOG_OUT_REQUEST
+ */
 function loadUserAPI() {
   return axios.get('/user/', {
     withCredentials: true

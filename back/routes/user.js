@@ -4,6 +4,11 @@ const router = express.Router()
 const bcrypt = require('bcrypt')
 const passport = require('passport')
 
+/**
+ * 로그인유지 *
+ * server : /api/user/ (GET)
+ * front : LOG_OUT_REQUEST
+ */
 router.get('/', (req, res) => {
   if (!req.user) {
     return res.status(401).send('로그인이 필요합니다')
@@ -13,7 +18,11 @@ router.get('/', (req, res) => {
   return res.json(user)
 })
 
-/* "/api/user/" 회원가입 버튼 */
+/**
+ * 회원가입 *
+ * server : /api/user/
+ * front : SIGN_UP_REQUEST
+ */
 router.post('/', async (req, res, next) => {
   try {
     const exUser = await db.User.findOne({
@@ -39,16 +48,31 @@ router.post('/', async (req, res, next) => {
   }
 })
 
+/**
+ *  *
+ * server :  (GET)
+ * front :
+ */
 router.get('/:id/', (req, res) => {
   res.send('hello server')
 })
 
+/**
+ * 로그아웃 *
+ * server : /api/user/logout
+ * front : LOG_OUT_REQUEST
+ */
 router.post('/logout/', (req, res) => {
   req.logout()
   req.session.destroy()
   res.send('로그아웃 성공')
 })
 
+/**
+ * 로그인 *
+ * server : /api/user/logout
+ * front : LOG_IN_REQUEST
+ */
 router.post('/login/', (req, res, next) => {
   console.log('여기')
   passport.authenticate('local', (err, user, info) => {
@@ -85,6 +109,11 @@ router.post('/login/', (req, res, next) => {
   })(req, res, next)
 })
 
+/**
+ * *
+ * server :  (POST)
+ * front :
+ */
 router.post('/', (req, res) => {
   res.send('hello server')
 })
