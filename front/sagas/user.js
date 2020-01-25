@@ -9,11 +9,13 @@ import {
 } from '../reducers/user'
 import axios from 'axios'
 
-function loginAPI() {}
+function loginAPI(loginData) {
+  return axios.post('/login', loginData)
+}
 
-function* login() {
+function* login(action) {
   try {
-    // yield call(loginAPI)
+    yield call(loginAPI, action.data)
     yield put({
       type: LOG_IN_SUCCESS
     })

@@ -2,6 +2,7 @@ const express = require('express')
 const db = require('../models')
 const router = express.Router()
 const bcrypt = require('bcrypt')
+const passport = require('passport')
 
 router.get('/', (req, res) => {
   res.send('hello server')
@@ -41,8 +42,24 @@ router.post('/logout/', (req, res) => {
   res.send('hello server')
 })
 
-router.post('/login/', (req, res) => {
-  res.send('hello server')
+router.post('/login/', (req, res, next) => {
+  passport.authenticate('local', (err, user, info) => {
+    if (err) {
+      console.log(err)
+      return next(err)
+    }
+    if (info) {
+      return res.status(401).send(info.reason)
+    }
+    return req.login(user, loginErr => {
+      if (loginErr) {
+        return next(loginErr)
+      } // 거의 경우 없음
+      const filteredUser = Object.assign({}, user)
+      delete filteredUser.password
+      return res.json(filteredUser)
+    })
+  })(req, res, next)
 })
 
 router.post('/', (req, res) => {
