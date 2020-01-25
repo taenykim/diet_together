@@ -17,7 +17,12 @@ dotenv.config()
 passportConfig()
 
 app.use(morgan('dev'))
-app.use(cors())
+app.use(
+  cors({
+    origin: true,
+    credentials: true
+  })
+)
 app.use(express.json()) //json 본문 처리
 app.use(express.urlencoded({ extended: true })) //form 처리
 app.use(cookieParser(process.env.COOKIE_SECRET))
@@ -29,7 +34,8 @@ app.use(
     cookie: {
       httpOnly: true,
       secure: false //https 쓸 때 true
-    }
+    },
+    name: 'faewdp'
   })
 )
 app.use(passport.initialize())

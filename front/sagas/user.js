@@ -12,7 +12,9 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3065/api'
 
 function loginAPI(loginData) {
-  return axios.post('/user/login', loginData)
+  return axios.post('/user/login', loginData, {
+    withCredentials: true
+  })
 }
 
 function* login(action) {
