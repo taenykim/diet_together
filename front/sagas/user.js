@@ -9,15 +9,18 @@ import {
 } from '../reducers/user'
 import axios from 'axios'
 
+axios.defaults.baseURL = 'http://localhost:3065/api'
+
 function loginAPI(loginData) {
-  return axios.post('/login', loginData)
+  return axios.post('/user/login', loginData)
 }
 
 function* login(action) {
   try {
-    yield call(loginAPI, action.data)
+    const result = yield call(loginAPI, action.data)
     yield put({
-      type: LOG_IN_SUCCESS
+      type: LOG_IN_SUCCESS,
+      data: result.data
     })
   } catch (e) {
     console.error(e)
@@ -32,7 +35,7 @@ function* watchLogin() {
 }
 
 function SignUpAPI(signUpData) {
-  return axios.post('http://localhost:3065/api/user/', signUpData)
+  return axios.post('/user/', signUpData)
 }
 
 function* signUp(action) {

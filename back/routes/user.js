@@ -39,11 +39,15 @@ router.get('/:id/', (req, res) => {
 })
 
 router.post('/logout/', (req, res) => {
-  res.send('hello server')
+  req.logout()
+  req.session.destroy()
+  res.send('로그아웃 성공')
 })
 
 router.post('/login/', (req, res, next) => {
+  console.log('여기')
   passport.authenticate('local', (err, user, info) => {
+    console.log(err, user, info)
     if (err) {
       console.log(err)
       return next(err)
@@ -55,7 +59,8 @@ router.post('/login/', (req, res, next) => {
       if (loginErr) {
         return next(loginErr)
       } // 거의 경우 없음
-      const filteredUser = Object.assign({}, user)
+      console.log('dd', req.user)
+      const filteredUser = Object.assign({}, user.toJSON())
       delete filteredUser.password
       return res.json(filteredUser)
     })
