@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import proptypes from 'prop-types'
 import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
-import { useSelector, useDispatch } from 'react-redux'
-import { LOAD_USER_REQUEST } from '../reducers/user'
+import { useSelector } from 'react-redux'
 
 // const AppLayout_Container = styled.div`
 //   display: flex;
@@ -18,14 +17,7 @@ import { LOAD_USER_REQUEST } from '../reducers/user'
 
 const AppLayout = ({ children }) => {
   const { me } = useSelector(state => state.user)
-  const dispatch = useDispatch()
-  useEffect(() => {
-    if (!me) {
-      dispatch({
-        type: LOAD_USER_REQUEST
-      })
-    }
-  }, [])
+
   return (
     <>
       <div style={{ display: 'flex', margin: '10px' }}>

@@ -9,6 +9,8 @@ import { Provider } from 'react-redux'
 import reducer from '../reducers'
 import rootSaga from '../sagas'
 import createSagaMiddleware from 'redux-saga'
+import { LOAD_USER_REQUEST } from '../reducers/user'
+import axios from 'axios'
 
 const _app = ({ Component, store, pageProps }) => {
   return (
@@ -44,6 +46,17 @@ _app.getInitialProps = async context => {
   // console.log(context)
   const { ctx } = context
   let pageProps = {}
+  // 순서 신경쓰기!
+  const state = ctx.store.getState()
+  const cookie = ctx.isServer ? ctx.req.headers.cookie : '' // 클라이언트 환경에서 에러
+  if (ctx.isServer && cookie) {
+    axios.defaults.headers.Cookie = cookie
+  }
+  if (!state.user.me) {
+    ctx.store.dispatch({
+      type: LOAD_USER_REQUEST
+    })
+  }
   if (context.Component.getInitialProps) {
     pageProps = await context.Component.getInitialProps(ctx)
   }
