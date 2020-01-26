@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useCallback } from 'react'
 import NicknameEditForm from '../components/NicknameEditForm'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -14,23 +14,6 @@ const profile = () => {
   const dispatch = useDispatch()
   const { me, followingList, followerList } = useSelector(state => state.user)
   const { mainPosts } = useSelector(state => state.post)
-
-  useEffect(() => {
-    if (me) {
-      dispatch({
-        type: LOAD_FOLLOWERS_REQUEST,
-        data: me.id
-      })
-      dispatch({
-        type: LOAD_FOLLOWINGS_REQUEST,
-        data: me.id
-      })
-      dispatch({
-        type: LOAD_USER_POSTS_REQUEST,
-        data: me.id
-      })
-    }
-  }, [me && me.id])
 
   const onUnfollow = useCallback(
     userId => () => {
@@ -83,7 +66,6 @@ const profile = () => {
           })}
         </div>
         <div>
-          {console.log(mainPosts)}
           {mainPosts.map(c => (
             <PostCard key={+c.createdAt} post={c} />
           ))}
@@ -91,6 +73,22 @@ const profile = () => {
       </div>
     </>
   )
+}
+
+profile.getInitialProps = async context => {
+  const state = context.store.getState()
+  context.store.dispatch({
+    type: LOAD_FOLLOWERS_REQUEST,
+    data: state.user.me && state.user.me.id
+  })
+  context.store.dispatch({
+    type: LOAD_FOLLOWINGS_REQUEST,
+    data: state.user.me && state.user.me.id
+  })
+  context.store.dispatch({
+    type: LOAD_USER_POSTS_REQUEST,
+    data: state.user.me && state.user.me.id
+  })
 }
 
 export default profile
