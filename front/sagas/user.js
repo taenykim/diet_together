@@ -1,14 +1,18 @@
 import { all, call, fork, takeLatest, takeEvery, put } from 'redux-saga/effects'
 import {
+  // 로그인
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
+  // 회원가입
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
+  // 로그아웃
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
   LOG_OUT_REQUEST,
+  // 회원정보 불러오기
   LOAD_USER_FAILURE,
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS
@@ -108,22 +112,23 @@ function* watchLogOut() {
 }
 
 /**
- * 로그인유지 *
+ * 회원정보 불러오기 (userId / x) *
  * server : /api/user/ (GET)
  * front : LOG_OUT_REQUEST
  */
-function loadUserAPI() {
-  return axios.get('/user/', {
+function loadUserAPI(userId) {
+  return axios.get(userId ? `/user/${userId}` : '/user/', {
     withCredentials: true
   })
 }
 
-function* loadUser() {
+function* loadUser(action) {
   try {
-    const result = yield call(loadUserAPI)
+    const result = yield call(loadUserAPI, action.data)
     yield put({
       type: LOAD_USER_SUCCESS,
-      data: result.data
+      data: result.data,
+      me: !action.data
     })
   } catch (e) {
     console.error(e)

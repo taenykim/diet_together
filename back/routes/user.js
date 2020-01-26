@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 
 /**
- * 로그인유지 *
+ * 로그인유지(me) *
  * server : /api/user/ (GET)
  * front : LOG_OUT_REQUEST
  */
@@ -49,12 +49,30 @@ router.post('/', async (req, res, next) => {
 })
 
 /**
- *  *
- * server :  (GET)
- * front :
+ * 유저정보(게시글) 가져오기(click) *
+ * server : api/user/:id (GET)
+ * front : LOAD_USER_POST_REQUEST
  */
-router.get('/:id/', (req, res) => {
-  res.send('hello server')
+router.get('/:id/', async (req, res, next) => {
+  try {
+    const user = await db.User.findOne({
+      where: { id: parseInt(req.params.id, 10) },
+      include: [
+        {
+          model: db.Post,
+          as: 'Posts',
+          attributes: ['id']
+        }
+      ],
+      attributes: ['id', 'nickname']
+    })
+    const jsonUser = user.toJSON()
+    jsonUser.Posts = jsonUser.Posts ? jsonUser.Posts.length : 0
+    res.json(jsonUser)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
 })
 
 /**
@@ -111,11 +129,36 @@ router.post('/login/', (req, res, next) => {
 
 /**
  * *
- * server :  (POST)
+ * server :  (GET)
  * front :
  */
-router.post('/', (req, res) => {
-  res.send('hello server')
+router.get('/:id/posts', async (req, res, next) => {
+  try {
+    const posts = await db.Post.findAll({
+      where: {
+        UserId: parseInt(req.params.id, 10)
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ['id', 'nickname']
+        },
+        {
+          model: db.Image
+        },
+        {
+          model: db.User,
+          through: 'Like',
+          as: 'Likers',
+          attributes: ['id']
+        }
+      ]
+    })
+    res.json(posts)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
 })
 
 module.exports = router

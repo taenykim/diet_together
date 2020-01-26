@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import proptypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { ADD_COMMENT_REQUEST } from '../reducers/post'
+import Link from 'next/link'
 
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
@@ -42,7 +43,14 @@ const PostCard = ({ post }) => {
     <>
       <div key={+post.id}>
         <div>{post.img && <img style={{ width: '20px' }} src={post.img}></img>}</div>
-        <div> {post.User.nickname}</div>
+        <div>
+          <Link
+            href={{ pathname: '/user', query: { id: post.User.id } }}
+            as={`/user/${post.User.id}`}
+          >
+            <a>{post.User.nickname}</a>
+          </Link>
+        </div>
         <div>{post.content}</div>
         <br />
         <button onClick={onToggleComment}>댓글</button>

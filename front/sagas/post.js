@@ -8,7 +8,10 @@ import {
   ADD_POST_SUCCESS,
   LOAD_MAIN_POSTS_FAILURE,
   LOAD_MAIN_POSTS_REQUEST,
-  LOAD_MAIN_POSTS_SUCCESS
+  LOAD_MAIN_POSTS_SUCCESS,
+  LOAD_USER_POSTS_FAILURE,
+  LOAD_USER_POSTS_REQUEST,
+  LOAD_USER_POSTS_SUCCESS
 } from '../reducers/post'
 import axios from 'axios'
 
@@ -72,6 +75,33 @@ function* watchLoadMainPosts() {
 }
 
 /**
+ * 남의 정보 게시글 불러오기
+ *
+ */
+function loadUserPostsAPI(id) {
+  return axios.get(`/user/${id}/posts`)
+}
+
+function* loadUserPosts(action) {
+  try {
+    const result = yield call(loadUserPostsAPI, action.data)
+    yield put({
+      type: LOAD_USER_POSTS_SUCCESS,
+      data: result.data
+    })
+  } catch (e) {
+    yield put({
+      type: LOAD_USER_POSTS_FAILURE,
+      error: e
+    })
+  }
+}
+
+function* watchLoadUserPosts() {
+  yield takeLatest(LOAD_USER_POSTS_REQUEST, loadUserPosts)
+}
+
+/**
  * 댓글 작성 *
  * server :
  * front :
@@ -100,5 +130,10 @@ function* watchAddComment() {
 }
 
 export default function* postSaga() {
-  yield all([fork(watchLoadMainPosts), fork(watchAddPost), fork(watchAddComment)])
+  yield all([
+    fork(watchLoadUserPosts),
+    fork(watchLoadMainPosts),
+    fork(watchAddPost),
+    fork(watchAddComment)
+  ])
 }
