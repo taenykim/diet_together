@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Router } from 'next/router'
+import Router from 'next/router'
 import { SIGN_UP_REQUEST } from '../reducers/user'
 
 const signup = () => {
@@ -68,6 +68,10 @@ const signup = () => {
     setTermError(false)
     setTerm(e.target.checked)
   }, [])
+
+  if (me) {
+    return null
+  }
 
   return (
     <>

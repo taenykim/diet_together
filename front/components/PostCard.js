@@ -5,7 +5,8 @@ import {
   ADD_COMMENT_REQUEST,
   LOAD_COMMENTS_REQUEST,
   UNLIKE_POST_REQUEST,
-  LIKE_POST_REQUEST
+  LIKE_POST_REQUEST,
+  REMOVE_POST_REQUEST
 } from '../reducers/post'
 import Link from 'next/link'
 import PostImages from './PostImages'
@@ -91,10 +92,20 @@ const PostCard = ({ post }) => {
     []
   )
 
+  const onRemovePost = useCallback(
+    userId => () => {
+      dispatch({
+        type: REMOVE_POST_REQUEST,
+        data: userId
+      })
+    },
+    []
+  )
+
   return (
     <>
       <div key={+post.id}>
-        <div>{post.Images[0] && <PostImages images={post.Images} />}</div>
+        <div>{post.Images && post.Images[0] && <PostImages images={post.Images} />}</div>
         <div>
           <Link
             href={{ pathname: '/user', query: { id: post.User.id } }}
@@ -114,6 +125,9 @@ const PostCard = ({ post }) => {
           onClick={onToggleLike}
         >
           좋아요
+        </button>
+        <button type="button" onClick={onRemovePost(post.id)}>
+          삭제
         </button>
         {!me || post.User.id === me.id ? null : me.Followings &&
           me.Followings.find(v => v.id === post.User.id) ? (

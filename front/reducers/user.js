@@ -51,6 +51,8 @@ export const EDIT_NICKNAME_REQUEST = 'EDIT_NICKNAME_REQUEST'
 export const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS'
 export const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE'
 
+export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME'
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOG_IN_REQUEST: {
@@ -247,6 +249,15 @@ const reducer = (state = initialState, action) => {
         ...state,
         isEditingNickname: false,
         editNicknameErrorReason: action.error
+      }
+    }
+    case REMOVE_POST_OF_ME: {
+      return {
+        ...state,
+        me: {
+          ...state.me,
+          Posts: state.me.Posts.filter(v => v.id !== action.data)
+        }
       }
     }
     default: {

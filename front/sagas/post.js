@@ -23,11 +23,14 @@ import {
   LIKE_POST_SUCCESS,
   UNLIKE_POST_REQUEST,
   UNLIKE_POST_FAILURE,
-  UNLIKE_POST_SUCCESS
+  UNLIKE_POST_SUCCESS,
+  REMOVE_POST_FAILURE,
+  REMOVE_POST_REQUEST,
+  REMOVE_POST_SUCCESS
 } from '../reducers/post'
 import axios from 'axios'
 
-import { ADD_POST_TO_ME } from '../reducers/user'
+import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user'
 
 /**
  * 게시글 작성 *
@@ -274,6 +277,36 @@ function* watchUnlikePost() {
   yield takeLatest(UNLIKE_POST_REQUEST, unlikePost)
 }
 
+function removePostAPI(postId) {
+  return axios.delete(`/post/${postId}`, {
+    withCredentials: true
+  })
+}
+
+function* removePost(action) {
+  try {
+    const result = yield call(removePostAPI, action.data)
+    yield put({
+      type: REMOVE_POST_SUCCESS,
+      data: result.data
+    })
+    yield put({
+      type: REMOVE_POST_OF_ME,
+      data: result.data
+    })
+  } catch (e) {
+    console.error(e)
+    yield put({
+      type: REMOVE_POST_FAILURE,
+      error: e
+    })
+  }
+}
+
+function* watchRemovePost() {
+  yield takeLatest(REMOVE_POST_REQUEST, removePost)
+}
+
 export default function* postSaga() {
   yield all([
     fork(watchLoadUserPosts),
@@ -283,6 +316,7 @@ export default function* postSaga() {
     fork(watchLoadComments),
     fork(watchUploadImages),
     fork(watchLikePost),
-    fork(watchUnlikePost)
+    fork(watchUnlikePost),
+    fork(watchRemovePost)
   ])
 }
