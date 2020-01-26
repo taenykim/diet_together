@@ -1,25 +1,12 @@
-import React, { useEffect } from 'react'
-import proptypes from 'prop-types'
+import React from 'react'
 import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
 import { LOAD_USER_REQUEST } from '../reducers/user'
 import PostCard from '../components/PostCard'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
-const user = ({ id }) => {
-  const dispatch = useDispatch()
+const user = () => {
   const { mainPosts } = useSelector(state => state.post)
   const { userInfo } = useSelector(state => state.user)
-
-  useEffect(() => {
-    dispatch({
-      type: LOAD_USER_REQUEST,
-      data: id
-    })
-    dispatch({
-      type: LOAD_USER_POSTS_REQUEST,
-      data: id
-    })
-  }, [])
 
   return (
     <>
@@ -33,13 +20,17 @@ const user = ({ id }) => {
   )
 }
 
-user.proptypes = {
-  id: proptypes.number.isRequired
-}
-
 user.getInitialProps = async context => {
-  console.log(context.query.id)
-  return { id: parseInt(context.query.id, 10) }
+  const id = parseInt(context.query.id, 10)
+  context.store.dispatch({
+    type: LOAD_USER_REQUEST,
+    data: id
+  })
+  context.store.dispatch({
+    type: LOAD_USER_POSTS_REQUEST,
+    data: id
+  })
+  return { id }
 }
 
 export default user
