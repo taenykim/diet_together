@@ -9,12 +9,6 @@ const index = () => {
   const { mainPosts } = useSelector(state => state.post)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch({
-      type: LOAD_MAIN_POSTS_REQUEST
-    })
-  }, [])
-
   return (
     <>
       {me && <PostForm />}
@@ -23,6 +17,12 @@ const index = () => {
       })}
     </>
   )
+}
+
+index.getInitialProps = async context => {
+  context.store.dispatch({
+    type: LOAD_MAIN_POSTS_REQUEST
+  })
 }
 
 export default index

@@ -2,6 +2,7 @@ import React from 'react'
 import AppLayout from '../components/AppLayout'
 import Head from 'next/head'
 import withRedux from 'next-redux-wrapper'
+import withReduxSaga from 'next-redux-saga'
 import { createStore, compose, applyMiddleware } from 'redux'
 import proptypes from 'prop-types'
 import { Provider } from 'react-redux'
@@ -63,8 +64,8 @@ const configureStore = (initialState, options) => {
             : f => f
         )
   const store = createStore(reducer, initialState, enhancer)
-  sagaMiddleware.run(rootSaga)
+  store.sagaTask = sagaMiddleware.run(rootSaga)
   return store
 }
 
-export default withRedux(configureStore)(_app)
+export default withRedux(configureStore)(withReduxSaga(_app))
