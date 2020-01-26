@@ -2,6 +2,22 @@ const express = require('express')
 const db = require('../models')
 const router = express.Router()
 const { isLoggedIn } = require('./middleware')
+const multer = require('multer')
+const path = require('path')
+
+const upload = multer({
+  storage: multer.diskStorage({
+    destination(req, file, done) {
+      done(null, 'uploads')
+    },
+    filename(req, file, done) {
+      const ext = path.extname(file.originalname)
+      const basename = path.basename(file.originalname, ext)
+      done(null, basename + new Date().valueOf() + ext)
+    }
+  }),
+  limits: { fieldSize: 20 * 1024 * 1024 } // 20M
+})
 
 /**
  * 게시글 작성 *
@@ -29,8 +45,9 @@ router.post('/', isLoggedIn, async (req, res, next) => {
   }
 })
 
-router.post('/images', async (req, res, next) => {
+router.post('/images', upload.array('image'), (req, res, next) => {
   try {
+    res.json(req.files.map(v => v.filename))
   } catch (e) {
     console.error(e)
     next(e)

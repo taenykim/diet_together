@@ -5,3 +5,4 @@ front/.env
 back/node_modules
 back/config/config.js
 back/.env
+back/uploads/*

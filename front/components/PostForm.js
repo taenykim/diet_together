@@ -1,11 +1,12 @@
-import React, { useEffect, useCallback, useState } from 'react'
+import React, { useEffect, useCallback, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { ADD_POST_REQUEST } from '../reducers/post'
+import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST } from '../reducers/post'
 
 const PostForm = () => {
   const dispatch = useDispatch()
   const [text, setText] = useState('')
   const { imagePaths, postAdded } = useSelector(state => state.post)
+  const imageInput = useRef()
 
   useEffect(() => {
     if (postAdded) {
@@ -13,9 +14,12 @@ const PostForm = () => {
     }
   }, [postAdded])
 
-  const onSubmit = useCallback(
+  const onSubmitForm = useCallback(
     e => {
       e.preventDefault()
+      if (!text || !text.trim()) {
+        return alert('게시글을 작성하세요.')
+      }
       dispatch({
         type: ADD_POST_REQUEST,
         data: {
@@ -30,20 +34,37 @@ const PostForm = () => {
     setText(e.target.value)
   }, [])
 
+  const onChangeImages = useCallback(e => {
+    const imageFormData = new FormData()
+    ;[].forEach.call(e.target.files, f => {
+      imageFormData.append('image', f)
+    })
+    dispatch({
+      type: UPLOAD_IMAGES_REQUEST,
+      data: imageFormData
+    })
+  }, [])
+
+  const onClickImageUpload = useCallback(() => {
+    imageInput.current.click()
+  }, [imageInput.current])
+
   return (
     <>
-      <form encType="multipart/form-data" onSubmit={onSubmit}>
+      <form encType="multipart/form-data" onSubmit={onSubmitForm}>
         <input placeholder="글을 작성해주세요." value={text} onChange={onChangeText} />
         <div>
-          <input type="file" multiple hidden />
-          <button>이미지 업로드</button>
+          <input type="file" multiple hidden ref={imageInput} onChange={onChangeImages} />
+          <button type="button" onClick={onClickImageUpload}>
+            이미지 업로드
+          </button>
           <button type="submit">작성</button>
         </div>
         <div>
           {imagePaths.map((v, i) => {
             return (
               <div key={v} style={{ display: 'inline-block' }}>
-                <img src={'http://localhost:3065/' + v} style={{ width: '200px' }} alt={v} />
+                <img src={`http://localhost:3065/${v}`} style={{ width: '200px' }} alt={v} />
                 <div>
                   <button>제거</button>
                 </div>
