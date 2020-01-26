@@ -17,6 +17,11 @@ router.get('/', async (req, res, next) => {
         },
         {
           model: db.Image
+        },
+        {
+          model: db.User,
+          through: 'Like',
+          as: 'Likers'
         }
       ],
       order: [['createdAt', 'DESC']] // DESC는 내림차순, ASC는 오름차순

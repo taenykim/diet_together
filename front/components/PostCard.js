@@ -1,7 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import proptypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
-import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST } from '../reducers/post'
+import {
+  ADD_COMMENT_REQUEST,
+  LOAD_COMMENTS_REQUEST,
+  UNLIKE_POST_REQUEST,
+  LIKE_POST_REQUEST
+} from '../reducers/post'
 import Link from 'next/link'
 import PostImages from './PostImages'
 
@@ -11,6 +16,8 @@ const PostCard = ({ post }) => {
   const { me } = useSelector(state => state.user)
   const { commentAdded } = useSelector(state => state.post)
   const dispatch = useDispatch()
+
+  const liked = me && post.Likers && post.Likers.find(v => v.id === me.id)
 
   useEffect(() => {
     setCommentText('')
@@ -46,6 +53,22 @@ const PostCard = ({ post }) => {
     },
     [me && me.id, commentText]
   )
+  const onToggleLike = useCallback(() => {
+    if (!me) {
+      return alert('로그인이 필요합니다')
+    }
+    if (liked) {
+      dispatch({
+        type: UNLIKE_POST_REQUEST,
+        data: post.id
+      })
+    } else {
+      dispatch({
+        type: LIKE_POST_REQUEST,
+        data: post.id
+      })
+    }
+  }, [me && me.id, post && post.id, liked])
 
   return (
     <>
@@ -61,7 +84,16 @@ const PostCard = ({ post }) => {
         </div>
         <div>{post.content}</div>
         <br />
-        <button onClick={onToggleComment}>댓글</button>
+        <button type="button" onClick={onToggleComment}>
+          댓글
+        </button>
+        <button
+          type="button"
+          style={liked ? { color: 'red' } : { color: 'black' }}
+          onClick={onToggleLike}
+        >
+          좋아요
+        </button>
       </div>
       {commentFormOpened && (
         <>
