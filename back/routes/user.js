@@ -152,13 +152,16 @@ router.post('/login/', (req, res, next) => {
  * server :  (GET)
  * front :
  */
+
 router.get('/:id/followings', isLoggedIn, async (req, res, next) => {
   try {
     const user = await db.User.findOne({
       where: { id: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0 }
     })
     const followers = await user.getFollowings({
-      attributes: ['id', 'nickname']
+      attributes: ['id', 'nickname'],
+      limit: parseInt(req.query.limit, 10),
+      offset: parseInt(req.query.offset, 10)
     })
     res.json(followers)
   } catch (e) {
@@ -168,13 +171,14 @@ router.get('/:id/followings', isLoggedIn, async (req, res, next) => {
 })
 
 router.get('/:id/followers', isLoggedIn, async (req, res, next) => {
-  // /api/user/:id/followers
   try {
     const user = await db.User.findOne({
       where: { id: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0 }
     })
     const followers = await user.getFollowers({
-      attributes: ['id', 'nickname']
+      attributes: ['id', 'nickname'],
+      limit: parseInt(req.query.limit, 10),
+      offset: parseInt(req.query.offset, 10)
     })
     res.json(followers)
   } catch (e) {
@@ -182,6 +186,7 @@ router.get('/:id/followers', isLoggedIn, async (req, res, next) => {
     next(e)
   }
 })
+
 router.delete('/:id/follower', isLoggedIn, async (req, res, next) => {
   try {
     const me = await db.User.findOne({

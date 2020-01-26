@@ -12,7 +12,9 @@ import PostCard from '../components/PostCard'
 
 const profile = () => {
   const dispatch = useDispatch()
-  const { me, followingList, followerList } = useSelector(state => state.user)
+  const { followingList, followerList, hasMoreFollower, hasMoreFollowing } = useSelector(
+    state => state.user
+  )
   const { mainPosts } = useSelector(state => state.post)
 
   const onUnfollow = useCallback(
@@ -35,6 +37,20 @@ const profile = () => {
     []
   )
 
+  const loadMoreFollowings = useCallback(() => {
+    dispatch({
+      type: LOAD_FOLLOWINGS_REQUEST,
+      offset: followingList.length
+    })
+  }, [followingList.length])
+
+  const loadMoreFollowers = useCallback(() => {
+    dispatch({
+      type: LOAD_FOLLOWERS_REQUEST,
+      offset: followerList.length
+    })
+  }, [followerList.length])
+
   return (
     <>
       <NicknameEditForm />
@@ -44,7 +60,7 @@ const profile = () => {
           {followingList.map(item => {
             return (
               <>
-                {item.nickname}{' '}
+                {item.nickname}
                 <button type="button" onClick={onUnfollow(item.id)}>
                   삭제
                 </button>
@@ -52,12 +68,17 @@ const profile = () => {
             )
           })}
         </div>
+        {hasMoreFollowing && (
+          <button type="button" style={{ width: '200px' }} onClick={loadMoreFollowings}>
+            더보기
+          </button>
+        )}
         <div>팔로워목록</div>
         <div>
           {followerList.map(item => {
             return (
               <>
-                {item.nickname}{' '}
+                {item.nickname}
                 <button type="button" onClick={onRemoveFollower(item.id)}>
                   삭제
                 </button>
@@ -65,6 +86,11 @@ const profile = () => {
             )
           })}
         </div>
+        {hasMoreFollower && (
+          <button type="button" style={{ width: '200px' }} onClick={loadMoreFollowers}>
+            더보기
+          </button>
+        )}
         <div>
           {mainPosts.map(c => (
             <PostCard key={+c.createdAt} post={c} />
