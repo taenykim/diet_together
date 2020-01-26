@@ -3,6 +3,7 @@ import proptypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST } from '../reducers/post'
 import Link from 'next/link'
+import PostImages from './PostImages'
 
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
@@ -49,14 +50,7 @@ const PostCard = ({ post }) => {
   return (
     <>
       <div key={+post.id}>
-        <div>
-          {post.Images[0] && (
-            <img
-              style={{ width: '100px' }}
-              src={'http://localhost:3065/' + post.Images[0].src}
-            ></img>
-          )}
-        </div>
+        <div>{post.Images[0] && <PostImages images={post.Images} />}</div>
         <div>
           <Link
             href={{ pathname: '/user', query: { id: post.User.id } }}
