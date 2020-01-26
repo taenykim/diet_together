@@ -1,13 +1,14 @@
 const express = require('express')
 const db = require('../models')
 const router = express.Router()
+const { isLoggedIn } = require('./middleware')
 
 /**
  * 게시글 작성 *
  * server : /api/post/ (POST)
  * front : ADD_POST_REQUEST
  */
-router.post('/', async (req, res, next) => {
+router.post('/', isLoggedIn, async (req, res, next) => {
   try {
     const newPost = await db.Post.create({
       content: req.body.content,
@@ -61,7 +62,7 @@ router.get('/:id/comments', async (req, res, next) => {
   }
 })
 
-router.post('/:id/comment', async (req, res, next) => {
+router.post('/:id/comment', isLoggedIn, async (req, res, next) => {
   try {
     const post = await db.Post.findOne({ where: { id: req.params.id } })
     if (!post) {

@@ -3,16 +3,14 @@ const db = require('../models')
 const router = express.Router()
 const bcrypt = require('bcrypt')
 const passport = require('passport')
+const { isLoggedIn } = require('./middleware')
 
 /**
  * 로그인유지(me) *
  * server : /api/user/ (GET)
  * front : LOG_OUT_REQUEST
  */
-router.get('/', (req, res) => {
-  if (!req.user) {
-    return res.status(401).send('로그인이 필요합니다')
-  }
+router.get('/', isLoggedIn, (req, res) => {
   const user = Object.assign({}, req.user.toJSON())
   delete user.password
   return res.json(user)
@@ -92,9 +90,8 @@ router.post('/logout/', (req, res) => {
  * front : LOG_IN_REQUEST
  */
 router.post('/login/', (req, res, next) => {
-  console.log('여기')
   passport.authenticate('local', (err, user, info) => {
-    console.log(err, user, info)
+    // console.log(err, user, info)
     if (err) {
       console.log(err)
       return next(err)
