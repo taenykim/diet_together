@@ -40,7 +40,7 @@ _app.proptypes = {
 }
 
 _app.getInitialProps = async context => {
-  console.log(context)
+  // console.log(context)
   const { ctx } = context
   let pageProps = {}
   if (context.Component.getInitialProps) {

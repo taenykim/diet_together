@@ -83,6 +83,7 @@ const profile = () => {
           })}
         </div>
         <div>
+          {console.log(mainPosts)}
           {mainPosts.map(c => (
             <PostCard key={+c.createdAt} post={c} />
           ))}

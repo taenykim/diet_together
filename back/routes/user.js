@@ -225,8 +225,7 @@ router.get('/:id/posts', async (req, res, next) => {
   try {
     const posts = await db.Post.findAll({
       where: {
-        UserId: parseInt(req.params.id, 10),
-        RetweetId: null
+        UserId: parseInt(req.params.id, 10)
       },
       include: [
         {
