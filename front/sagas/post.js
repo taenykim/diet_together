@@ -27,6 +27,8 @@ import {
 } from '../reducers/post'
 import axios from 'axios'
 
+import { ADD_POST_TO_ME } from '../reducers/user'
+
 /**
  * 게시글 작성 *
  * server : /api/post/ (POST)
@@ -41,9 +43,15 @@ function addPostAPI(postData) {
 function* addPost(action) {
   try {
     const result = yield call(addPostAPI, action.data)
+    // Post Reducer 의 데이터수정
     yield put({
       type: ADD_POST_SUCCESS,
       data: result.data
+    })
+    // User Reducer 의 데이터수정
+    yield put({
+      type: ADD_POST_TO_ME,
+      data: result.data.id
     })
   } catch (e) {
     console.log(e)

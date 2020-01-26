@@ -13,6 +13,10 @@ const UserProfile = () => {
   return (
     <>
       <div>내 이름 : {me.nickname}</div>
+      {/* <div>게시물 수 : {me.Posts.length}</div> */}
+      {/* <div>팔로잉 수 : {me.Followings.length}</div> */}
+      {/* <div>팔로워 수 : {me.Follwers.length}</div> */}
+      {console.log(me)}
       <button onClick={onLogout}>로그아웃</button>
     </>
   )

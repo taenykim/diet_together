@@ -51,7 +51,8 @@ router.post('/', async (req, res, next) => {
  * server : api/user/:id (GET)
  * front : LOAD_USER_POST_REQUEST
  */
-router.get('/:id/', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
+  // 남의 정보 가져오는 것 ex) /api/user/123
   try {
     const user = await db.User.findOne({
       where: { id: parseInt(req.params.id, 10) },
@@ -62,13 +63,22 @@ router.get('/:id/', async (req, res, next) => {
           attributes: ['id']
         },
         {
-          model: db.Image
+          model: db.User,
+          as: 'Followings',
+          attributes: ['id']
+        },
+        {
+          model: db.User,
+          as: 'Followers',
+          attributes: ['id']
         }
       ],
       attributes: ['id', 'nickname']
     })
     const jsonUser = user.toJSON()
     jsonUser.Posts = jsonUser.Posts ? jsonUser.Posts.length : 0
+    jsonUser.Followings = jsonUser.Followings ? jsonUser.Followings.length : 0
+    jsonUser.Followers = jsonUser.Followers ? jsonUser.Followers.length : 0
     res.json(jsonUser)
   } catch (e) {
     console.error(e)
@@ -114,6 +124,16 @@ router.post('/login/', (req, res, next) => {
               model: db.Post,
               as: 'Posts',
               attributes: ['id']
+            },
+            {
+              model: db.User,
+              as: 'Followings',
+              attributes: ['id']
+            },
+            {
+              model: db.User,
+              as: 'Followers',
+              attributes: ['id']
             }
           ],
           attributes: ['id', 'nickname', 'userId']
@@ -132,11 +152,81 @@ router.post('/login/', (req, res, next) => {
  * server :  (GET)
  * front :
  */
+router.get('/:id/followings', isLoggedIn, async (req, res, next) => {
+  try {
+    const user = await db.User.findOne({
+      where: { id: parseInt(req.params.id, 10) }
+    })
+    const followers = await user.getFollowings({
+      attributes: ['id', 'nickname']
+    })
+    res.json(followers)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
+})
+
+router.get('/:id/followers', isLoggedIn, async (req, res, next) => {
+  // /api/user/:id/followers
+  try {
+    const user = await db.User.findOne({
+      where: { id: parseInt(req.params.id, 10) }
+    })
+    const followers = await user.getFollowers({
+      attributes: ['id', 'nickname']
+    })
+    res.json(followers)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
+})
+router.delete('/:id/follower', isLoggedIn, async (req, res, next) => {
+  try {
+    const me = await db.User.findOne({
+      where: { id: req.user.id }
+    })
+    await me.removeFollower(req.params.id)
+    res.send(req.params.id)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
+})
+
+router.post('/:id/follow', isLoggedIn, async (req, res, next) => {
+  try {
+    const me = await db.User.findOne({
+      where: { id: req.user.id }
+    })
+    await me.addFollowing(req.params.id)
+    res.send(req.params.id)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
+})
+
+router.delete('/:id/follow', isLoggedIn, async (req, res, next) => {
+  try {
+    const me = await db.User.findOne({
+      where: { id: req.user.id }
+    })
+    await me.removeFollowing(req.params.id)
+    res.send(req.params.id)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
+})
+
 router.get('/:id/posts', async (req, res, next) => {
   try {
     const posts = await db.Post.findAll({
       where: {
-        UserId: parseInt(req.params.id, 10)
+        UserId: parseInt(req.params.id, 10),
+        RetweetId: null
       },
       include: [
         {

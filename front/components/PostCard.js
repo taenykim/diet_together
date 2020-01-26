@@ -9,6 +9,7 @@ import {
 } from '../reducers/post'
 import Link from 'next/link'
 import PostImages from './PostImages'
+import { FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST } from '../reducers/user'
 
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
@@ -70,6 +71,26 @@ const PostCard = ({ post }) => {
     }
   }, [me && me.id, post && post.id, liked])
 
+  const onFollow = useCallback(
+    userId => () => {
+      dispatch({
+        type: FOLLOW_USER_REQUEST,
+        data: userId
+      })
+    },
+    []
+  )
+
+  const onUnfollow = useCallback(
+    userId => () => {
+      dispatch({
+        type: UNFOLLOW_USER_REQUEST,
+        data: userId
+      })
+    },
+    []
+  )
+
   return (
     <>
       <div key={+post.id}>
@@ -94,6 +115,12 @@ const PostCard = ({ post }) => {
         >
           좋아요
         </button>
+        {!me || post.User.id === me.id ? null : me.Followings &&
+          me.Followings.find(v => v.id === post.User.id) ? (
+          <button onClick={onUnfollow(post.User.id)}>언팔로우</button>
+        ) : (
+          <button onClick={onFollow(post.User.id)}>팔로우</button>
+        )}
       </div>
       {commentFormOpened && (
         <>
