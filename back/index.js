@@ -40,6 +40,8 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use('/', express.static('uploads'))
+
 app.use('/api/user', userAPIRouter)
 app.use('/api/post', postAPIRouter)
 app.use('/api/posts', postsAPIRouter)
