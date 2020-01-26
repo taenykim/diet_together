@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import proptypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
-import { ADD_COMMENT_REQUEST } from '../reducers/post'
+import { ADD_COMMENT_REQUEST, LOAD_COMMENTS_REQUEST } from '../reducers/post'
 import Link from 'next/link'
 
 const PostCard = ({ post }) => {
@@ -17,6 +17,12 @@ const PostCard = ({ post }) => {
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpened(prev => !prev)
+    if (!commentFormOpened) {
+      dispatch({
+        type: LOAD_COMMENTS_REQUEST,
+        data: post.id
+      })
+    }
   }, [])
 
   const onChangeCommentText = useCallback(e => {
@@ -32,11 +38,12 @@ const PostCard = ({ post }) => {
       dispatch({
         type: ADD_COMMENT_REQUEST,
         data: {
-          postId: post.id
+          postId: post.id,
+          content: commentText
         }
       })
     },
-    [me && me.id]
+    [me && me.id, commentText]
   )
 
   return (
@@ -65,7 +72,20 @@ const PostCard = ({ post }) => {
           </div>
           <div>
             <div>{post.Comments ? post.Comments.length : 0}개의 댓글</div>
-            <div>{post.Comments.length !== 0 ? post.Comments[0].content : '없음'}></div>
+            <div>
+              {/* {console.log(post.Comments)} */}
+              {post.Comments &&
+                post.Comments.map(item => {
+                  return (
+                    <>
+                      <br />
+                      <div>닉네임 : {item.User.nickname}</div>
+                      <div>댓글내용 : {item.content}</div>
+                      <br />
+                    </>
+                  )
+                })}
+            </div>
           </div>
         </>
       )}
