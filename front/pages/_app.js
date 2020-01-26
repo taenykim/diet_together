@@ -9,14 +9,14 @@ import reducer from '../reducers'
 import rootSaga from '../sagas'
 import createSagaMiddleware from 'redux-saga'
 
-const _app = ({ Component, store }) => {
+const _app = ({ Component, store, pageProps }) => {
   return (
     <Provider store={store}>
       <Head>
         <title>DietTogether</title>
       </Head>
       <AppLayout>
-        <Component />
+        <Component {...pageProps} />
       </AppLayout>
     </Provider>
   )
@@ -24,7 +24,19 @@ const _app = ({ Component, store }) => {
 
 _app.proptypes = {
   Component: proptypes.elementType,
-  store: proptypes.object
+  store: proptypes.object,
+  pageProps: proptypes.object.isRequired
+}
+
+_app.getInitialProps = async context => {
+  console.log(context)
+  const { ctx } = context
+  let pageProps = {}
+  if (context.Component.getInitialProps) {
+    pageProps = await context.Component.getInitialProps(ctx)
+  }
+  // pageProps : 컴포넌트(page)들 의 props
+  return { pageProps }
 }
 
 const configureStore = (initialState, options) => {
