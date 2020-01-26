@@ -45,6 +45,10 @@ export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST'
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS'
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE'
 
+export const LOAD_POST_REQUEST = 'LOAD_POST_REQUEST'
+export const LOAD_POST_SUCCESS = 'LOAD_POST_SUCCESS'
+export const LOAD_POST_FAILURE = 'LOAD_POST_FAILURE'
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST_REQUEST: {
@@ -97,14 +101,16 @@ const reducer = (state = initialState, action) => {
     case LOAD_USER_POSTS_REQUEST: {
       return {
         ...state,
-        mainPosts: []
+        mainPosts: action.lastId === 0 ? [] : state.mainPosts,
+        hasMorePost: action.lastId ? state.hasMorePost : true
       }
     }
     case LOAD_MAIN_POSTS_SUCCESS:
     case LOAD_USER_POSTS_SUCCESS: {
       return {
         ...state,
-        mainPosts: action.data
+        mainPosts: state.mainPosts.concat(action.data),
+        hasMorePost: action.data.length === 10
       }
     }
     case LOAD_MAIN_POSTS_FAILURE:

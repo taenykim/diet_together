@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeLatest } from 'redux-saga/effects'
+import { all, call, fork, put, takeLatest, throttle } from 'redux-saga/effects'
 import {
   ADD_COMMENT_FAILURE,
   ADD_COMMENT_REQUEST,
@@ -26,7 +26,10 @@ import {
   UNLIKE_POST_SUCCESS,
   REMOVE_POST_FAILURE,
   REMOVE_POST_REQUEST,
-  REMOVE_POST_SUCCESS
+  REMOVE_POST_SUCCESS,
+  LOAD_POST_FAILURE,
+  LOAD_POST_REQUEST,
+  LOAD_POST_SUCCESS
 } from '../reducers/post'
 import axios from 'axios'
 
@@ -74,13 +77,13 @@ function* watchAddPost() {
  * server : /api/posts/ (GET)
  * front : LOAD_MAIN_POSTS_REQUEST
  */
-function loadMainPostsAPI() {
-  return axios.get('/posts')
+function loadMainPostsAPI(lastId = 0, limit = 10) {
+  return axios.get(`/posts?lastId=${lastId}&limit=${limit}`)
 }
 
-function* loadMainPosts() {
+function* loadMainPosts(action) {
   try {
-    const result = yield call(loadMainPostsAPI)
+    const result = yield call(loadMainPostsAPI, action.lastId)
     yield put({
       type: LOAD_MAIN_POSTS_SUCCESS,
       data: result.data
@@ -94,7 +97,7 @@ function* loadMainPosts() {
 }
 
 function* watchLoadMainPosts() {
-  yield takeLatest(LOAD_MAIN_POSTS_REQUEST, loadMainPosts)
+  yield throttle(1000, LOAD_MAIN_POSTS_REQUEST, loadMainPosts)
 }
 
 /**
@@ -303,6 +306,30 @@ function* removePost(action) {
   }
 }
 
+function loadPostAPI(postId) {
+  return axios.get(`/post/${postId}`)
+}
+
+function* loadPost(action) {
+  try {
+    const result = yield call(loadPostAPI, action.data)
+    yield put({
+      type: LOAD_POST_SUCCESS,
+      data: result.data
+    })
+  } catch (e) {
+    console.error(e)
+    yield put({
+      type: LOAD_POST_FAILURE,
+      error: e
+    })
+  }
+}
+
+function* watchLoadPost() {
+  yield takeLatest(LOAD_POST_REQUEST, loadPost)
+}
+
 function* watchRemovePost() {
   yield takeLatest(REMOVE_POST_REQUEST, removePost)
 }
@@ -317,6 +344,7 @@ export default function* postSaga() {
     fork(watchUploadImages),
     fork(watchLikePost),
     fork(watchUnlikePost),
-    fork(watchRemovePost)
+    fork(watchRemovePost),
+    fork(watchLoadPost)
   ])
 }
