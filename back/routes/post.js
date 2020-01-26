@@ -24,17 +24,33 @@ const upload = multer({
  * server : /api/post/ (POST)
  * front : ADD_POST_REQUEST
  */
-router.post('/', isLoggedIn, async (req, res, next) => {
+router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
     const newPost = await db.Post.create({
       content: req.body.content,
       UserId: req.user.id
     })
+    if (req.body.image) {
+      if (Array.isArray(req.body.image)) {
+        const images = await Promise.all(
+          req.body.image.map(image => {
+            return db.Image.create({ src: image })
+          })
+        )
+        await newPost.addImage(images)
+      } else {
+        const image = await db.Image.create({ src: req.body.image })
+        await newPost.addImage(image)
+      }
+    }
     const fullPost = await db.Post.findOne({
       where: { id: newPost.id },
       include: [
         {
           model: db.User
+        },
+        {
+          model: db.Image
         }
       ]
     })

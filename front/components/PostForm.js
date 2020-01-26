@@ -20,14 +20,17 @@ const PostForm = () => {
       if (!text || !text.trim()) {
         return alert('게시글을 작성하세요.')
       }
+      const formData = new FormData()
+      imagePaths.forEach(i => {
+        formData.append('image', i)
+      })
+      formData.append('content', text)
       dispatch({
         type: ADD_POST_REQUEST,
-        data: {
-          content: text
-        }
+        data: formData
       })
     },
-    [text]
+    [text, imagePaths]
   )
 
   const onChangeText = useCallback(e => {

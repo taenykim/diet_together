@@ -49,7 +49,14 @@ const PostCard = ({ post }) => {
   return (
     <>
       <div key={+post.id}>
-        <div>{post.img && <img style={{ width: '20px' }} src={post.img}></img>}</div>
+        <div>
+          {post.Images[0] && (
+            <img
+              style={{ width: '100px' }}
+              src={'http://localhost:3065/' + post.Images[0].src}
+            ></img>
+          )}
+        </div>
         <div>
           <Link
             href={{ pathname: '/user', query: { id: post.User.id } }}

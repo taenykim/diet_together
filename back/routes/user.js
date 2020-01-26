@@ -60,6 +60,9 @@ router.get('/:id/', async (req, res, next) => {
           model: db.Post,
           as: 'Posts',
           attributes: ['id']
+        },
+        {
+          model: db.Image
         }
       ],
       attributes: ['id', 'nickname']
