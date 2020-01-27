@@ -40,6 +40,10 @@ app.prepare().then(() => {
     return app.render(req, res, '/post', { id: req.params.id })
   })
 
+  server.get('/search/:keyword', (req, res) => {
+    return app.render(req, res, '/search', { keyword: req.params.id })
+  })
+
   server.get('*', (req, res) => {
     return handler(req, res)
   })
