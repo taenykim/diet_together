@@ -6,21 +6,21 @@ import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
 import { useSelector } from 'react-redux'
 
-// const AppLayout_Container = styled.div`
-//   display: flex;
-//   color: blue;
-//   margin: 10px;
-//   div {
-//     margin: 10px;
-//   }
-// `
+const AppLayout_Container = styled.div`
+  display: flex;
+  color: blue;
+  margin: 10px;
+  div {
+    margin: 10px;
+  }
+`
 
 const AppLayout = ({ children }) => {
   const { me } = useSelector(state => state.user)
 
   return (
     <>
-      <div style={{ display: 'flex', margin: '10px' }}>
+      <AppLayout_Container>
         <div key="home" style={{ marginRight: '10px' }}>
           <Link href="/">
             <a>홈</a>
@@ -34,7 +34,7 @@ const AppLayout = ({ children }) => {
         <div key="search">
           <input />
         </div>
-      </div>
+      </AppLayout_Container>
       {me ? <UserProfile /> : <LoginForm />}
       <div>{children}</div>
     </>
