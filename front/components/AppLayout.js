@@ -5,7 +5,6 @@ import proptypes from 'prop-types'
 import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
 import { useSelector } from 'react-redux'
-import { Router } from 'next/router'
 import SearchingForm from './SearchingForm'
 
 const AppLayout_Container = styled.div`

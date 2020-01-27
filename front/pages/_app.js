@@ -77,12 +77,12 @@ _app.proptypes = {
 }
 
 _app.getInitialProps = async context => {
-  // console.log(context)
-  const { ctx } = context
+  const { ctx, Component } = context
   let pageProps = {}
   // 순서 신경쓰기!
   const state = ctx.store.getState()
   const cookie = ctx.isServer ? ctx.req.headers.cookie : '' // 클라이언트 환경에서 에러
+  axios.defaults.headers.Cookie = ''
   if (ctx.isServer && cookie) {
     axios.defaults.headers.Cookie = cookie
   }
@@ -91,8 +91,8 @@ _app.getInitialProps = async context => {
       type: LOAD_USER_REQUEST
     })
   }
-  if (context.Component.getInitialProps) {
-    pageProps = await context.Component.getInitialProps(ctx)
+  if (Component.getInitialProps) {
+    pageProps = (await Component.getInitialProps(ctx)) || {}
   }
   // pageProps : 컴포넌트(page)들 의 props
   return { pageProps }
