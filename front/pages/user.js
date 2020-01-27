@@ -10,10 +10,14 @@ const user = () => {
 
   return (
     <>
-      <div>{userInfo ? userInfo.nickname : null}</div>
+      {console.log(userInfo)}
+      <div>{userInfo ? <div>닉넴 : {userInfo.nickname}</div> : null}</div>
+      <div>{userInfo ? <div>포슽 : {userInfo.Posts}</div> : null}</div>
+      <div>{userInfo ? <div>팔로잉ㅇ : {userInfo.following}</div> : null}</div>
+      <div>{userInfo ? <div>팔로웡 : {userInfo.follower}</div> : null}</div>
       <div>
         {mainPosts.map(c => (
-          <PostCard key={+c.createdAt} post={c} />
+          <PostCard key={c.id} post={c} />
         ))}
       </div>
     </>

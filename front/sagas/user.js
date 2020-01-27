@@ -1,4 +1,4 @@
-import { all, call, fork, takeLatest, takeEvery, put } from 'redux-saga/effects'
+import { all, call, fork, takeEvery, put } from 'redux-saga/effects'
 import {
   // 로그인
   LOG_IN_FAILURE,
@@ -51,7 +51,7 @@ function logInAPI(logInData) {
 function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data)
-    console.log(result)
+    // console.log(result)
     yield put({
       type: LOG_IN_SUCCESS,
       data: result.data
@@ -65,7 +65,7 @@ function* logIn(action) {
 }
 
 function* watchLogIn() {
-  yield takeLatest(LOG_IN_REQUEST, logIn)
+  yield takeEvery(LOG_IN_REQUEST, logIn)
 }
 
 /**
@@ -93,7 +93,7 @@ function* signUp(action) {
 }
 
 function* watchSignUp() {
-  yield takeLatest(SIGN_UP_REQUEST, signUp)
+  yield takeEvery(SIGN_UP_REQUEST, signUp)
 }
 
 /**
@@ -127,7 +127,7 @@ function* logOut() {
 }
 
 function* watchLogOut() {
-  yield takeLatest(LOG_OUT_REQUEST, logOut)
+  yield takeEvery(LOG_OUT_REQUEST, logOut)
 }
 
 /**

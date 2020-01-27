@@ -55,10 +55,10 @@ function* addPost(action) {
       data: result.data
     })
     // User Reducer 의 데이터수정
-    // yield put({
-    //   type: ADD_POST_TO_ME,
-    //   data: result.data.id
-    // })
+    yield put({
+      type: ADD_POST_TO_ME,
+      data: result.data.id
+    })
   } catch (e) {
     console.error(e)
     yield put({
@@ -306,6 +306,10 @@ function* removePost(action) {
   }
 }
 
+function* watchRemovePost() {
+  yield takeLatest(REMOVE_POST_REQUEST, removePost)
+}
+
 function loadPostAPI(postId) {
   return axios.get(`/post/${postId}`)
 }
@@ -328,10 +332,6 @@ function* loadPost(action) {
 
 function* watchLoadPost() {
   yield takeLatest(LOAD_POST_REQUEST, loadPost)
-}
-
-function* watchRemovePost() {
-  yield takeLatest(REMOVE_POST_REQUEST, removePost)
 }
 
 export default function* postSaga() {
