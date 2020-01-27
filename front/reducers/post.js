@@ -4,7 +4,8 @@ export const initialState = {
   addPostErrorReason: '', // 포스트 업로드 실패 사유
   postAdded: false, // 포스트 업로드 성공
   addCommentErrorReason: '',
-  commentAdded: false
+  commentAdded: false,
+  singlePost: null
 }
 
 export const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST'
@@ -208,6 +209,12 @@ const reducer = (state = initialState, action) => {
     case REMOVE_POST_FAILURE: {
       return {
         ...state
+      }
+    }
+    case LOAD_POST_SUCCESS: {
+      return {
+        ...state,
+        singlePost: action.data
       }
     }
     default: {

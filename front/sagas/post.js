@@ -55,12 +55,12 @@ function* addPost(action) {
       data: result.data
     })
     // User Reducer 의 데이터수정
-    yield put({
-      type: ADD_POST_TO_ME,
-      data: result.data.id
-    })
+    // yield put({
+    //   type: ADD_POST_TO_ME,
+    //   data: result.data.id
+    // })
   } catch (e) {
-    console.log(e)
+    console.error(e)
     yield put({
       type: ADD_POST_FAILURE,
       error: e
