@@ -1,8 +1,7 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback } from 'react'
 import proptypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import {
-  ADD_COMMENT_REQUEST,
   LOAD_COMMENTS_REQUEST,
   UNLIKE_POST_REQUEST,
   LIKE_POST_REQUEST,
@@ -11,19 +10,14 @@ import {
 import Link from 'next/link'
 import PostImages from './PostImages'
 import { FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST } from '../reducers/user'
+import CommentForm from './CommentForm'
 
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
-  const [commentText, setCommentText] = useState('')
   const { me } = useSelector(state => state.user)
-  const { commentAdded } = useSelector(state => state.post)
   const dispatch = useDispatch()
 
   const liked = me && post.Likers && post.Likers.find(v => v.id === me.id)
-
-  useEffect(() => {
-    setCommentText('')
-  }, [commentAdded === true])
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpened(prev => !prev)
@@ -35,26 +29,6 @@ const PostCard = ({ post }) => {
     }
   }, [])
 
-  const onChangeCommentText = useCallback(e => {
-    setCommentText(e.target.value)
-  }, [])
-
-  const onSubmitComment = useCallback(
-    e => {
-      e.preventDefault()
-      if (!me) {
-        return alert('로그인이 필요합니다')
-      }
-      dispatch({
-        type: ADD_COMMENT_REQUEST,
-        data: {
-          postId: post.id,
-          content: commentText
-        }
-      })
-    },
-    [me && me.id, commentText]
-  )
   const onToggleLike = useCallback(() => {
     if (!me) {
       return alert('로그인이 필요합니다')
@@ -139,10 +113,7 @@ const PostCard = ({ post }) => {
       {commentFormOpened && (
         <>
           <div>
-            <form onSubmit={onSubmitComment}>
-              <input value={commentText} onChange={onChangeCommentText} />
-              <button type="submit">작성</button>
-            </form>
+            <CommentForm post={post} />
           </div>
           <div>
             <div>{post.Comments ? post.Comments.length : 0}개의 댓글</div>
