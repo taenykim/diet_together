@@ -82,7 +82,9 @@ _app.getInitialProps = async context => {
   // 순서 신경쓰기!
   const state = ctx.store.getState()
   const cookie = ctx.isServer ? ctx.req.headers.cookie : '' // 클라이언트 환경에서 에러
-  axios.defaults.headers.Cookie = ''
+  if (ctx.isServer && cookie) {
+    axios.defaults.headers.Cookie = ''
+  }
   if (ctx.isServer && cookie) {
     axios.defaults.headers.Cookie = cookie
   }
