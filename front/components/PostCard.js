@@ -17,15 +17,15 @@ const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
   const id = useSelector(state => state.user.me && state.user.me.id)
   const dispatch = useDispatch()
-
-  const postMemory = useRef(id)
+  ////////////////////////////////////
+  // const postMemory = useRef(id)
 
   // console.log(post)
 
-  useEffect(() => {
-    console.log(postMemory.current, id, postMemory === id)
-  }, [id])
-
+  // useEffect(() => {
+  //   console.log(postMemory.current, id, postMemory === id)
+  // }, [id])
+  ////////////////////////////////////
   const liked = id && post.Likers && post.Likers.find(v => v.id === id)
 
   const onToggleComment = useCallback(() => {
