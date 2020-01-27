@@ -4,11 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LOG_IN_REQUEST } from '../reducers/user'
 import styled from 'styled-components'
 
+const LoginError = styled.div`
+  color: red;
+`
+
 const LoginForm = () => {
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
-  const { loginErrorReason } = useSelector(state => state.user)
+  const { logInErrorReason } = useSelector(state => state.user)
 
   const onChangeId = useCallback(e => {
     setId(e.target.value)
@@ -51,7 +55,8 @@ const LoginForm = () => {
             required
           />
         </div>
-        <loginError>{loginErrorReason}</loginError>
+        {console.log(logInErrorReason)}
+        <LoginError>{logInErrorReason}</LoginError>
         <div>
           <button type="submit">로그인</button>
         </div>
