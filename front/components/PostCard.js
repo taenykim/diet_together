@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect, useRef } from 'react'
 import proptypes from 'prop-types'
 import { useSelector, useDispatch } from 'react-redux'
 import {
@@ -11,13 +11,22 @@ import Link from 'next/link'
 import PostImages from './PostImages'
 import { FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST } from '../reducers/user'
 import CommentForm from './CommentForm'
+import FollowButton from './FollowButton'
 
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
-  const { me } = useSelector(state => state.user)
+  const id = useSelector(state => state.user.me && state.user.me.id)
   const dispatch = useDispatch()
 
-  const liked = me && post.Likers && post.Likers.find(v => v.id === me.id)
+  const postMemory = useRef(id)
+
+  // console.log(post)
+
+  useEffect(() => {
+    console.log(postMemory.current, id, postMemory === id)
+  }, [id])
+
+  const liked = id && post.Likers && post.Likers.find(v => v.id === id)
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpened(prev => !prev)
@@ -30,7 +39,7 @@ const PostCard = ({ post }) => {
   }, [])
 
   const onToggleLike = useCallback(() => {
-    if (!me) {
+    if (!id) {
       return alert('로그인이 필요합니다')
     }
     if (liked) {
@@ -44,7 +53,7 @@ const PostCard = ({ post }) => {
         data: post.id
       })
     }
-  }, [me && me.id, post && post.id, liked])
+  }, [id, post && post.id, liked])
 
   const onFollow = useCallback(
     userId => () => {
@@ -103,12 +112,7 @@ const PostCard = ({ post }) => {
         <button type="button" onClick={onRemovePost(post.id)}>
           삭제
         </button>
-        {!me || post.User.id === me.id ? null : me.Followings &&
-          me.Followings.find(v => v.id === post.User.id) ? (
-          <button onClick={onUnfollow(post.User.id)}>언팔로우</button>
-        ) : (
-          <button onClick={onFollow(post.User.id)}>팔로우</button>
-        )}
+        {<FollowButton post={post} onUnfollow={onUnfollow} onFollow={onFollow} />}
       </div>
       {commentFormOpened && (
         <>
