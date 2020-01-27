@@ -13,7 +13,7 @@ const UserProfile = () => {
   }, [])
   return (
     <>
-      <Link href="/profile">
+      <Link href="/profile" prefetch>
         <a>
           <div>내 이름 : {me.nickname}</div>
         </a>

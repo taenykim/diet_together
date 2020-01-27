@@ -28,7 +28,7 @@ const AppLayout = ({ children }) => {
           </Link>
         </div>
         <div key="profile">
-          <Link href="/profile">
+          <Link href="/profile" prefetch>
             <a>프로필</a>
           </Link>
         </div>
