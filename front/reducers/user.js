@@ -171,6 +171,7 @@ const reducer = (state = initialState, action) => {
     case LOAD_FOLLOWERS_REQUEST: {
       return {
         ...state,
+        followerList: !action.offset ? [] : state.followerList,
         hasMoreFollower: action.offset ? state.hasMoreFollower : true
       }
     }
@@ -189,6 +190,7 @@ const reducer = (state = initialState, action) => {
     case LOAD_FOLLOWINGS_REQUEST: {
       return {
         ...state,
+        followingList: !action.offset ? [] : state.followingList,
         hasMoreFollowing: action.offset ? state.hasMoreFollowing : true
       }
     }

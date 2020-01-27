@@ -57,11 +57,11 @@ const profile = () => {
       <div>
         <div>팔로잉목록</div>
         <div>
-          {followingList.map(item => {
+          {followingList.map((item, i) => {
             return (
               <>
                 {item.nickname}
-                <button type="button" onClick={onUnfollow(item.id)}>
+                <button key={i} type="button" onClick={onUnfollow(item.id)}>
                   삭제
                 </button>
               </>
@@ -75,11 +75,11 @@ const profile = () => {
         )}
         <div>팔로워목록</div>
         <div>
-          {followerList.map(item => {
+          {followerList.map((item, i) => {
             return (
               <>
                 {item.nickname}
-                <button type="button" onClick={onRemoveFollower(item.id)}>
+                <button key={i} type="button" onClick={onRemoveFollower(item.id)}>
                   삭제
                 </button>
               </>
@@ -92,8 +92,8 @@ const profile = () => {
           </button>
         )}
         <div>
-          {mainPosts.map(c => (
-            <PostCard key={+c.createdAt} post={c} />
+          {mainPosts.map((c, i) => (
+            <PostCard key={i} post={c} />
           ))}
         </div>
       </div>

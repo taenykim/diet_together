@@ -104,7 +104,7 @@ const PostCard = ({ post }) => {
 
   return (
     <>
-      <div key={+post.id}>
+      <div>
         <div>{post.Images && post.Images[0] && <PostImages images={post.Images} />}</div>
         <div>
           <Link

@@ -39,7 +39,7 @@ const index = () => {
     <>
       {me && <PostForm />}
       {mainPosts.map((c, i) => {
-        return <PostCard key={c.id} post={c} />
+        return <PostCard key={i} post={c} />
       })}
     </>
   )
