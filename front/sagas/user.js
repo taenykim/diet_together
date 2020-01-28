@@ -33,7 +33,10 @@ import {
   REMOVE_FOLLOWER_REQUEST,
   EDIT_NICKNAME_FAILURE,
   EDIT_NICKNAME_REQUEST,
-  EDIT_NICKNAME_SUCCESS
+  EDIT_NICKNAME_SUCCESS,
+  WEIGHT_POST_FAILURE,
+  WEIGHT_POST_REQUEST,
+  WEIGHT_POST_SUCCESS
 } from '../reducers/user'
 import axios from 'axios'
 
@@ -95,6 +98,30 @@ function* signUp(action) {
 
 function* watchSignUp() {
   yield takeEvery(SIGN_UP_REQUEST, signUp)
+}
+
+function weightPostAPI(weight) {
+  return axios.patch('/user/weight', { weight }, { withCredentials: true })
+}
+
+function* weightPost(action) {
+  try {
+    const result = yield call(weightPostAPI, action.data)
+    yield put({
+      type: WEIGHT_POST_SUCCESS,
+      data: result.data
+    })
+  } catch (e) {
+    console.error(e)
+    yield put({
+      type: WEIGHT_POST_FAILURE,
+      error: e
+    })
+  }
+}
+
+function* watchWeightPost() {
+  yield takeEvery(WEIGHT_POST_REQUEST, weightPost)
 }
 
 /**
@@ -337,6 +364,7 @@ export default function* userSaga() {
     fork(watchLoadFollowers),
     fork(watchLoadFollowings),
     fork(watchRemoveFollower),
-    fork(watchEditNickname)
+    fork(watchEditNickname),
+    fork(watchWeightPost)
   ])
 }

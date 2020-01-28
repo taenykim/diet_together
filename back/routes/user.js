@@ -35,13 +35,31 @@ router.post('/', async (req, res, next) => {
     const newUser = await db.User.create({
       userId: req.body.userId,
       nickname: req.body.nickname,
-      password: hashedPassword
+      password: hashedPassword,
+      weight: '디폴트'
     })
-    // console.log(newUser)
+    console.log(newUser)
     return res.status(200).json(newUser)
   } catch (e) {
     console.error(e)
     //에러처리
+    return next(e)
+  }
+})
+
+router.patch('/weight', isLoggedIn, async (req, res, next) => {
+  try {
+    await db.User.update(
+      {
+        weight: req.body.weight
+      },
+      {
+        where: { id: req.user.id }
+      }
+    )
+    res.send(req.body.weight)
+  } catch (e) {
+    console.error(e)
     return next(e)
   }
 })

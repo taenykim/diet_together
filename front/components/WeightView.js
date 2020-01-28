@@ -1,11 +1,24 @@
 import React, { useState, useCallback } from 'react'
+import { useDispatch } from 'react-redux'
+import { WEIGHT_POST_REQUEST } from '../reducers/user'
 
 const WeightView = () => {
   const [weight, setWeight] = useState('')
+  const dispatch = useDispatch()
+
   const onChangeWeight = useCallback(e => {
     setWeight(e.target.value)
   }, [])
-  const onSubmitWeight = () => {}
+  const onSubmitWeight = useCallback(
+    e => {
+      e.preventDefault()
+      dispatch({
+        type: WEIGHT_POST_REQUEST,
+        data: weight
+      })
+    },
+    [weight]
+  )
   return (
     <>
       <form onSubmit={onSubmitWeight}>

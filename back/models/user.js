@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING(100),
         allowNull: false
+      },
+      weight: {
+        // type: DataTypes.ARRAY(DataTypes.DECIMAL)
+        type: DataTypes.STRING(20)
       }
     },
     {

@@ -17,6 +17,10 @@ export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS'
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'
 
+export const WEIGHT_POST_FAILURE = 'WEIGHT_POST_FAILURE'
+export const WEIGHT_POST_SUCCESS = 'WEIGHT_POST_SUCCESS'
+export const WEIGHT_POST_REQUEST = 'WEIGHT_POST_REQUEST'
+
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'
 export const LOG_IN_FAILURE = 'LOG_IN_FAILURE'
@@ -100,6 +104,15 @@ export default (state = initialState, action) => {
       case SIGN_UP_FAILURE: {
         draft.isSigningUp = false
         draft.signUpErrorReason = action.error
+        break
+      }
+      case WEIGHT_POST_REQUEST: {
+        break
+      }
+      case WEIGHT_POST_SUCCESS: {
+        break
+      }
+      case WEIGHT_POST_FAILURE: {
         break
       }
       case LOAD_USER_REQUEST: {
