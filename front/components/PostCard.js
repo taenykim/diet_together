@@ -12,7 +12,11 @@ import PostImages from './PostImages'
 import { FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST } from '../reducers/user'
 import CommentForm from './CommentForm'
 import FollowButton from './FollowButton'
+import styled from 'styled-components'
 
+const PostCardContainer = styled.div`
+  border: 1px solid black;
+`
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
   const id = useSelector(state => state.user.me && state.user.me.id)
@@ -87,7 +91,7 @@ const PostCard = ({ post }) => {
 
   return (
     <>
-      <div>
+      <PostCardContainer>
         <div>{post.Images && post.Images[0] && <PostImages images={post.Images} />}</div>
         <div>
           <Link
@@ -113,7 +117,7 @@ const PostCard = ({ post }) => {
           삭제
         </button>
         {<FollowButton post={post} onUnfollow={onUnfollow} onFollow={onFollow} />}
-      </div>
+      </PostCardContainer>
       {commentFormOpened && (
         <>
           <div>

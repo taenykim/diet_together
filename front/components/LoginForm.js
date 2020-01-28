@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { LOG_IN_REQUEST } from '../reducers/user'
 import styled from 'styled-components'
 
+const LoginFormContainer = styled.form`
+  border: 1px solid black;
+`
 const LoginError = styled.div`
   color: red;
 `
@@ -38,7 +41,7 @@ const LoginForm = () => {
 
   return (
     <>
-      <form onSubmit={onSubmitForm}>
+      <LoginFormContainer onSubmit={onSubmitForm}>
         <div>
           <label htmlFor="user-id">아이디</label>
           <br />
@@ -65,7 +68,7 @@ const LoginForm = () => {
             <button>회원가입</button>
           </a>
         </Link>
-      </form>
+      </LoginFormContainer>
     </>
   )
 }

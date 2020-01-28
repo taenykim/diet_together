@@ -1,7 +1,11 @@
 import React, { useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { EDIT_NICKNAME_REQUEST } from '../reducers/user'
+import styled from 'styled-components'
 
+const NicknameEditFormContainer = styled.form`
+  border: 1px solid black;
+`
 const NicknameEditForm = () => {
   const [editedName, setEditedName] = useState('')
   const dispatch = useDispatch()
@@ -24,7 +28,7 @@ const NicknameEditForm = () => {
 
   return (
     <>
-      <form onSubmit={onEditNickname}>
+      <NicknameEditFormContainer onSubmit={onEditNickname}>
         <label htmlFor="nickname">닉네임</label>
         <input
           name="nickname"
@@ -32,7 +36,7 @@ const NicknameEditForm = () => {
           onChange={onChangeNickname}
         />
         <button type="submit">수정</button>
-      </form>
+      </NicknameEditFormContainer>
     </>
   )
 }

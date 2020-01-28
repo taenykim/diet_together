@@ -2,7 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { ADD_COMMENT_REQUEST } from '../reducers/post'
 import { useSelector, useDispatch } from 'react-redux'
 import proptypes from 'prop-types'
+import styled from 'styled-components'
 
+const CommentFormContainer = styled.form`
+  border: 1px solid black;
+`
 const CommentForm = ({ post }) => {
   const { commentAdded } = useSelector(state => state.post)
   const { me } = useSelector(state => state.user)
@@ -36,10 +40,10 @@ const CommentForm = ({ post }) => {
 
   return (
     <>
-      <form onSubmit={onSubmitComment}>
+      <CommentFormContainer onSubmit={onSubmitComment}>
         <input value={commentText} onChange={onChangeCommentText} />
         <button type="submit">작성</button>
-      </form>
+      </CommentFormContainer>
     </>
   )
 }

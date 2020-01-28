@@ -1,7 +1,11 @@
 import React, { useEffect, useCallback, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/post'
+import styled from 'styled-components'
 
+const PostFormContainer = styled.form`
+  border: 1px solid black;
+`
 const PostForm = () => {
   const dispatch = useDispatch()
   const [text, setText] = useState('')
@@ -64,7 +68,7 @@ const PostForm = () => {
 
   return (
     <>
-      <form encType="multipart/form-data" onSubmit={onSubmitForm}>
+      <PostFormContainer encType="multipart/form-data" onSubmit={onSubmitForm}>
         <input placeholder="글을 작성해주세요." value={text} onChange={onChangeText} />
         <div>
           <input type="file" multiple hidden ref={imageInput} onChange={onChangeImages} />
@@ -87,7 +91,7 @@ const PostForm = () => {
             )
           })}
         </div>
-      </form>
+      </PostFormContainer>
     </>
   )
 }

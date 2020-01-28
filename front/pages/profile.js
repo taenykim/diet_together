@@ -9,6 +9,7 @@ import {
 } from '../reducers/user'
 import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
 import PostCard from '../components/PostCard'
+import WeightView from '../components/WeightView'
 
 const profile = () => {
   const dispatch = useDispatch()
@@ -91,6 +92,9 @@ const profile = () => {
             더보기
           </button>
         )}
+        <div>
+          <WeightView />
+        </div>
         <div>
           {mainPosts.map((c, i) => (
             <PostCard key={i} post={c} />
