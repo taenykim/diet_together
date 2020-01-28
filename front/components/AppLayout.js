@@ -9,11 +9,10 @@ import SearchingForm from './SearchingForm'
 
 const AppLayout_Container = styled.div`
   display: flex;
-  color: blue;
-  margin: 10px;
   div {
-    margin: 10px;
+    padding: 10px;
   }
+  border: 2px solid #444;
 `
 
 const AppLayout = ({ children }) => {
