@@ -1,11 +1,11 @@
-import React from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
-import proptypes from 'prop-types'
 import LoginForm from './LoginForm'
 import UserProfile from './UserProfile'
 import { useSelector } from 'react-redux'
 import SearchingForm from './SearchingForm'
+import { RootState } from '../reducers'
 
 const AppLayout_Container = styled.div`
   display: flex;
@@ -16,7 +16,7 @@ const AppLayout_Container = styled.div`
 `
 
 const AppLayout = ({ children }) => {
-  const { me } = useSelector(state => state.user)
+  const { me } = useSelector((state: RootState) => state.user)
 
   return (
     <>
@@ -39,10 +39,6 @@ const AppLayout = ({ children }) => {
       <div>{children}</div>
     </>
   )
-}
-
-AppLayout.proptypes = {
-  children: proptypes.node
 }
 
 export default AppLayout

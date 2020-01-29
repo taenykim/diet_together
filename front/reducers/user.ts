@@ -13,55 +13,55 @@ export const initialState = {
   hasMoreFollowing: false
 }
 
-export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST'
-export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS'
-export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE'
+export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST' as const
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS' as const
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE' as const
 
-export const WEIGHT_POST_FAILURE = 'WEIGHT_POST_FAILURE'
-export const WEIGHT_POST_SUCCESS = 'WEIGHT_POST_SUCCESS'
-export const WEIGHT_POST_REQUEST = 'WEIGHT_POST_REQUEST'
+export const WEIGHT_POST_FAILURE = 'WEIGHT_POST_FAILURE' as const
+export const WEIGHT_POST_SUCCESS = 'WEIGHT_POST_SUCCESS' as const
+export const WEIGHT_POST_REQUEST = 'WEIGHT_POST_REQUEST' as const
 
-export const LOG_IN_REQUEST = 'LOG_IN_REQUEST'
-export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS'
-export const LOG_IN_FAILURE = 'LOG_IN_FAILURE'
+export const LOG_IN_REQUEST = 'LOG_IN_REQUEST' as const
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS' as const
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE' as const
 
-export const LOAD_USER_REQUEST = 'LOAD_USER_REQUEST'
-export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS'
-export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE'
+export const LOAD_USER_REQUEST = 'LOAD_USER_REQUEST' as const
+export const LOAD_USER_SUCCESS = 'LOAD_USER_SUCCESS' as const
+export const LOAD_USER_FAILURE = 'LOAD_USER_FAILURE' as const
 
-export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST'
-export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS'
-export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE'
+export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST' as const
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS' as const
+export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE' as const
 
-export const FOLLOW_USER_REQUEST = 'FOLLOW_USER_REQUEST'
-export const FOLLOW_USER_SUCCESS = 'FOLLOW_USER_SUCCESS'
-export const FOLLOW_USER_FAILURE = 'FOLLOW_USER_FAILURE'
+export const FOLLOW_USER_REQUEST = 'FOLLOW_USER_REQUEST' as const
+export const FOLLOW_USER_SUCCESS = 'FOLLOW_USER_SUCCESS' as const
+export const FOLLOW_USER_FAILURE = 'FOLLOW_USER_FAILURE' as const
 
-export const UNFOLLOW_USER_REQUEST = 'UNFOLLOW_USER_REQUEST'
-export const UNFOLLOW_USER_SUCCESS = 'UNFOLLOW_USER_SUCCESS'
-export const UNFOLLOW_USER_FAILURE = 'UNFOLLOW_USER_FAILURE'
+export const UNFOLLOW_USER_REQUEST = 'UNFOLLOW_USER_REQUEST' as const
+export const UNFOLLOW_USER_SUCCESS = 'UNFOLLOW_USER_SUCCESS' as const
+export const UNFOLLOW_USER_FAILURE = 'UNFOLLOW_USER_FAILURE' as const
 
-export const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST'
-export const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS'
-export const LOAD_FOLLOWERS_FAILURE = 'LOAD_FOLLOWERS_FAILURE'
+export const LOAD_FOLLOWERS_REQUEST = 'LOAD_FOLLOWERS_REQUEST' as const
+export const LOAD_FOLLOWERS_SUCCESS = 'LOAD_FOLLOWERS_SUCCESS' as const
+export const LOAD_FOLLOWERS_FAILURE = 'LOAD_FOLLOWERS_FAILURE' as const
 
-export const LOAD_FOLLOWINGS_REQUEST = 'LOAD_FOLLOWINGS_REQUEST'
-export const LOAD_FOLLOWINGS_SUCCESS = 'LOAD_FOLLOWINGS_SUCCESS'
-export const LOAD_FOLLOWINGS_FAILURE = 'LOAD_FOLLOWINGS_FAILURE'
+export const LOAD_FOLLOWINGS_REQUEST = 'LOAD_FOLLOWINGS_REQUEST' as const
+export const LOAD_FOLLOWINGS_SUCCESS = 'LOAD_FOLLOWINGS_SUCCESS' as const
+export const LOAD_FOLLOWINGS_FAILURE = 'LOAD_FOLLOWINGS_FAILURE' as const
 
-export const REMOVE_FOLLOWER_REQUEST = 'REMOVE_FOLLOWER_REQUEST'
-export const REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS'
-export const REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE'
+export const REMOVE_FOLLOWER_REQUEST = 'REMOVE_FOLLOWER_REQUEST' as const
+export const REMOVE_FOLLOWER_SUCCESS = 'REMOVE_FOLLOWER_SUCCESS' as const
+export const REMOVE_FOLLOWER_FAILURE = 'REMOVE_FOLLOWER_FAILURE' as const
 
-export const ADD_POST_TO_ME = 'ADD_POST_TO_ME'
+export const ADD_POST_TO_ME = 'ADD_POST_TO_ME' as const
 
-export const EDIT_NICKNAME_REQUEST = 'EDIT_NICKNAME_REQUEST'
-export const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS'
-export const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE'
+export const EDIT_NICKNAME_REQUEST = 'EDIT_NICKNAME_REQUEST' as const
+export const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS' as const
+export const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE' as const
 
-export const WEIGHT_DELETE_REQUEST = 'WEIGHT_DELETE_REQUEST'
-export const WEIGHT_DELETE_SUCCESS = 'WEIGHT_DELETE_SUCCESS'
-export const WEIGHT_DELETE_FAILURE = 'WEIGHT_DELETE_FAILURE'
+export const WEIGHT_DELETE_REQUEST = 'WEIGHT_DELETE_REQUEST' as const
+export const WEIGHT_DELETE_SUCCESS = 'WEIGHT_DELETE_SUCCESS' as const
+export const WEIGHT_DELETE_FAILURE = 'WEIGHT_DELETE_FAILURE' as const
 
 export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME'
 
@@ -69,44 +69,36 @@ export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
       case LOG_IN_REQUEST: {
-        draft.isLoggingIn = true
         draft.logInErrorReason = ''
         break
       }
       case LOG_IN_SUCCESS: {
-        draft.isLoggingIn = false
         draft.logInErrorReason = ''
         draft.me = action.data
         break
       }
       case LOG_IN_FAILURE: {
-        draft.isLoggingIn = false
         draft.logInErrorReason = action.reason
         draft.me = null
         break
       }
       case LOG_OUT_REQUEST: {
-        draft.isLoggingOut = true
         break
       }
       case LOG_OUT_SUCCESS: {
-        draft.isLoggingOut = false
         draft.me = null
         break
       }
       case SIGN_UP_REQUEST: {
         draft.isSignedUp = false
-        draft.isSigningUp = true
         draft.signUpErrorReason = ''
         break
       }
       case SIGN_UP_SUCCESS: {
-        draft.isSigningUp = false
         draft.isSignedUp = true
         break
       }
       case SIGN_UP_FAILURE: {
-        draft.isSigningUp = false
         draft.signUpErrorReason = action.error
         break
       }
@@ -128,7 +120,7 @@ export default (state = initialState, action) => {
           draft.me = action.data
           break
         }
-        draft.useInfo = action.data
+        draft.userInfo = action.data
         break
       }
       case LOAD_USER_FAILURE: {
@@ -210,17 +202,14 @@ export default (state = initialState, action) => {
         break
       }
       case EDIT_NICKNAME_REQUEST: {
-        draft.isEditingNickname = true
         draft.editNicknameErrorReason = ''
         break
       }
       case EDIT_NICKNAME_SUCCESS: {
-        draft.isEditingNickname = false
         draft.me.nickname = action.data
         break
       }
       case EDIT_NICKNAME_FAILURE: {
-        draft.isEditingNickname = false
         draft.editNicknameErrorReason = action.error
         break
       }

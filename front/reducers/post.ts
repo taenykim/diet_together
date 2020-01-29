@@ -73,25 +73,20 @@ export default (state = initialState, action) => {
         break
       }
       case ADD_POST_REQUEST: {
-        draft.isAddingPost = true
-        draft.addingPostErrorReason = ''
         draft.postAdded = false
         break
       }
       case ADD_POST_SUCCESS: {
-        draft.isAddingPost = false
         draft.mainPosts.unshift(action.data)
         draft.postAdded = true
         draft.imagePaths = []
         break
       }
       case ADD_POST_FAILURE: {
-        draft.isAddingPost = false
         draft.addPostErrorReason = action.error
         break
       }
       case ADD_COMMENT_REQUEST: {
-        draft.isAddingComment = true
         draft.addCommentErrorReason = ''
         draft.commentAdded = false
         break
@@ -99,13 +94,10 @@ export default (state = initialState, action) => {
       case ADD_COMMENT_SUCCESS: {
         const postIndex = draft.mainPosts.findIndex(v => v.id === action.data.postId)
         draft.mainPosts[postIndex].Comments.push(action.data.comment)
-        draft.isAddingComment = false
         draft.commentAdded = true
         break
       }
       case ADD_COMMENT_FAILURE: {
-        draft.isAddingComment = false
-        draft.addingPostErrorReason = action.error
         break
       }
       case LOAD_COMMENTS_SUCCESS: {
@@ -116,7 +108,6 @@ export default (state = initialState, action) => {
       case LOAD_MAIN_POSTS_REQUEST:
       case LOAD_USER_POSTS_REQUEST: {
         draft.mainPosts = !action.lastId ? [] : draft.mainPosts
-        draft.hasMorePost = action.lastId ? draft.hasMorePost : true
         break
       }
       case LOAD_MAIN_POSTS_SUCCESS:
@@ -124,7 +115,6 @@ export default (state = initialState, action) => {
         action.data.forEach(d => {
           draft.mainPosts.push(d)
         })
-        draft.hasMorePost = action.data.length === 10
         break
       }
       case LOAD_MAIN_POSTS_FAILURE:
