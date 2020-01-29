@@ -52,6 +52,7 @@ router.post('/weight', isLoggedIn, async (req, res, next) => {
       weight: req.body.weight,
       UserId: req.user.id
     })
+    return res.json(req.body.weight)
     console.log('wwwwwwww', req.user)
   } catch (e) {
     console.error(e)
@@ -147,6 +148,10 @@ router.post('/login/', (req, res, next) => {
               model: db.User,
               as: 'Followers',
               attributes: ['id']
+            },
+            {
+              model: db.Weight,
+              as: 'Weights'
             }
           ],
           attributes: ['id', 'nickname', 'userId']
