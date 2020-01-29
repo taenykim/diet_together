@@ -1,4 +1,4 @@
-import { all, call, fork, takeEvery, put } from 'redux-saga/effects'
+import { all, call, fork, takeEvery, put, takeLatest } from 'redux-saga/effects'
 import {
   // 로그인
   LOG_IN_FAILURE,
@@ -36,7 +36,10 @@ import {
   EDIT_NICKNAME_SUCCESS,
   WEIGHT_POST_FAILURE,
   WEIGHT_POST_REQUEST,
-  WEIGHT_POST_SUCCESS
+  WEIGHT_POST_SUCCESS,
+  WEIGHT_DELETE_FAILURE,
+  WEIGHT_DELETE_SUCCESS,
+  WEIGHT_DELETE_REQUEST
 } from '../reducers/user'
 import axios from 'axios'
 
@@ -354,6 +357,30 @@ function* watchEditNickname() {
   yield takeEvery(EDIT_NICKNAME_REQUEST, editNickname)
 }
 
+function weightDeleteAPI(index) {
+  return axios.delete(`/user/weight/${index}`, { withCredentials: true })
+}
+
+function* weightDelete(action) {
+  try {
+    const result = yield call(weightDeleteAPI, action.data)
+    yield put({
+      type: WEIGHT_DELETE_SUCCESS,
+      data: result.data
+    })
+  } catch (e) {
+    console.error(e)
+    yield put({
+      type: WEIGHT_DELETE_FAILURE,
+      error: e
+    })
+  }
+}
+
+function* watchWeightDelete() {
+  yield takeLatest(WEIGHT_DELETE_REQUEST, weightDelete)
+}
+
 export default function* userSaga() {
   yield all([
     fork(watchLogIn),
@@ -366,6 +393,7 @@ export default function* userSaga() {
     fork(watchLoadFollowings),
     fork(watchRemoveFollower),
     fork(watchEditNickname),
-    fork(watchWeightPost)
+    fork(watchWeightPost),
+    fork(watchWeightDelete)
   ])
 }

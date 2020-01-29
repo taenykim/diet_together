@@ -13,7 +13,7 @@ import WeightView from '../components/WeightView'
 
 const profile = () => {
   const dispatch = useDispatch()
-  const { Weights } = useSelector(state => state.user.me)
+  const Weights = useSelector(state => state.user.me && state.user.me.Weights)
   const { followingList, followerList, hasMoreFollower, hasMoreFollowing } = useSelector(
     state => state.user
   )

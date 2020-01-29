@@ -59,6 +59,10 @@ export const EDIT_NICKNAME_REQUEST = 'EDIT_NICKNAME_REQUEST'
 export const EDIT_NICKNAME_SUCCESS = 'EDIT_NICKNAME_SUCCESS'
 export const EDIT_NICKNAME_FAILURE = 'EDIT_NICKNAME_FAILURE'
 
+export const WEIGHT_DELETE_REQUEST = 'WEIGHT_DELETE_REQUEST'
+export const WEIGHT_DELETE_SUCCESS = 'WEIGHT_DELETE_SUCCESS'
+export const WEIGHT_DELETE_FAILURE = 'WEIGHT_DELETE_FAILURE'
+
 export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME'
 
 export default (state = initialState, action) => {
@@ -218,6 +222,18 @@ export default (state = initialState, action) => {
       case EDIT_NICKNAME_FAILURE: {
         draft.isEditingNickname = false
         draft.editNicknameErrorReason = action.error
+        break
+      }
+      case WEIGHT_DELETE_REQUEST: {
+        break
+      }
+      case WEIGHT_DELETE_SUCCESS: {
+        const index = draft.me.Weights.findIndex(v => v.id === action.data)
+        draft.me.Weights.splice(index, 1)
+        break
+        break
+      }
+      case WEIGHT_DELETE_FAILURE: {
         break
       }
       default: {

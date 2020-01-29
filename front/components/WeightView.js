@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { WEIGHT_POST_REQUEST } from '../reducers/user'
+import { WEIGHT_POST_REQUEST, WEIGHT_DELETE_REQUEST } from '../reducers/user'
 
 const WeightView = ({ weights }) => {
   const [weight, setWeight] = useState('')
@@ -19,6 +19,15 @@ const WeightView = ({ weights }) => {
     },
     [weight]
   )
+  const onRemoveWeight = useCallback(
+    weight => () => {
+      dispatch({
+        type: WEIGHT_DELETE_REQUEST,
+        data: weight
+      })
+    },
+    []
+  )
   return (
     <>
       <form onSubmit={onSubmitWeight}>
@@ -27,9 +36,15 @@ const WeightView = ({ weights }) => {
         <button type="submit">추가</button>
       </form>
       <div>
-        {weights.map(v => {
-          return <div>{v.weight}</div>
-        })}
+        {weights &&
+          weights.map(v => {
+            return (
+              <span>
+                {v.weight}
+                <button type="button" onClick={onRemoveWeight(v.id)}></button>
+              </span>
+            )
+          })}
       </div>
     </>
   )

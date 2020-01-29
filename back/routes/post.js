@@ -183,6 +183,7 @@ router.delete('/:id/like', isLoggedIn, async (req, res, next) => {
 
 router.delete('/:id', isLoggedIn, async (req, res, next) => {
   try {
+    console.log('req.params', req.params)
     const post = await db.Post.findOne({ where: { id: req.params.id } })
     if (!post) {
       return res.status(404).send('포스트가 존재하지 않습니다.')

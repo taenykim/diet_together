@@ -290,4 +290,18 @@ router.patch('/nickname', isLoggedIn, async (req, res, next) => {
   }
 })
 
+router.delete('/weight/:id', isLoggedIn, async (req, res, next) => {
+  try {
+    const deletedWeight = await db.Weight.findOne({ where: { id: req.params.id } })
+    if (!deletedWeight) {
+      return res.status(404).send('포스트가 존재하지 않습니다.')
+    }
+    await db.Weight.destroy({ where: { id: req.params.id } })
+    res.send(req.params.id)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
+})
+
 module.exports = router
