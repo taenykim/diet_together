@@ -1,7 +1,9 @@
-import React, { useEffect, useCallback, useState, useRef } from 'react'
+import * as React from 'react'
+import { useEffect, useCallback, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/post'
 import styled from 'styled-components'
+import { RootState } from '../reducers'
 
 const PostFormContainer = styled.form`
   border: 1px solid black;
@@ -9,8 +11,8 @@ const PostFormContainer = styled.form`
 const PostForm = () => {
   const dispatch = useDispatch()
   const [text, setText] = useState('')
-  const { imagePaths, postAdded } = useSelector(state => state.post)
-  const imageInput = useRef()
+  const { imagePaths, postAdded } = useSelector((state: RootState) => state.post)
+  const imageInput = useRef<HTMLInputElement>()
 
   useEffect(() => {
     if (postAdded) {
