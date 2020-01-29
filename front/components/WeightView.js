@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
 import { WEIGHT_POST_REQUEST } from '../reducers/user'
 
-const WeightView = () => {
+const WeightView = ({ weights }) => {
   const [weight, setWeight] = useState('')
   const dispatch = useDispatch()
 
@@ -26,7 +26,11 @@ const WeightView = () => {
         <input name="weight" value={weight} onChange={onChangeWeight} />
         <button type="submit">추가</button>
       </form>
-      <div>여기몸무게</div>
+      <div>
+        {weights.map(v => {
+          return <div>{v.weight}</div>
+        })}
+      </div>
     </>
   )
 }

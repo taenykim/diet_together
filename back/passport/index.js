@@ -28,6 +28,10 @@ module.exports = () => {
             model: db.User,
             as: 'Followers',
             attributes: ['id']
+          },
+          {
+            model: db.Weight,
+            as: 'Weights'
           }
         ]
       })

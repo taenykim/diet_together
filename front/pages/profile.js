@@ -13,6 +13,7 @@ import WeightView from '../components/WeightView'
 
 const profile = () => {
   const dispatch = useDispatch()
+  const { Weights } = useSelector(state => state.user.me)
   const { followingList, followerList, hasMoreFollower, hasMoreFollowing } = useSelector(
     state => state.user
   )
@@ -93,7 +94,7 @@ const profile = () => {
           </button>
         )}
         <div>
-          <WeightView />
+          <WeightView weights={Weights} />
         </div>
         <div>
           {mainPosts.map((c, i) => (
