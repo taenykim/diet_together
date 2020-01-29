@@ -110,7 +110,7 @@ export default (state = initialState, action) => {
         break
       }
       case WEIGHT_POST_SUCCESS: {
-        draft.me.weight.unshift(action.data)
+        draft.me.Weights.push(action.data)
         break
       }
       case WEIGHT_POST_FAILURE: {

@@ -48,11 +48,11 @@ router.post('/', async (req, res, next) => {
 
 router.post('/weight', isLoggedIn, async (req, res, next) => {
   try {
-    await db.Weight.create({
+    const weight_info = await db.Weight.create({
       weight: req.body.weight,
       UserId: req.user.id
     })
-    return res.json(req.body.weight)
+    return res.json(weight_info)
     console.log('wwwwwwww', req.user)
   } catch (e) {
     console.error(e)

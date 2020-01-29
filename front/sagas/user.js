@@ -106,9 +106,8 @@ function weightPostAPI(weight) {
 
 function* weightPost(action) {
   try {
-    console.log(action.data)
     const result = yield call(weightPostAPI, action.data)
-    console.log('hear')
+    console.log('result', result)
     yield put({
       type: WEIGHT_POST_SUCCESS,
       data: result.data
