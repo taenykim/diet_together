@@ -101,11 +101,12 @@ function* watchSignUp() {
 }
 
 function weightPostAPI(weight) {
-  return axios.post('/user/weight', weight, { withCredentials: true })
+  return axios.post('/user/weight', { weight }, { withCredentials: true })
 }
 
 function* weightPost(action) {
   try {
+    console.log(action.data)
     const result = yield call(weightPostAPI, action.data)
     yield put({
       type: WEIGHT_POST_SUCCESS,

@@ -26,6 +26,7 @@ const upload = multer({
  */
 router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
+    // console.log('hear', req)
     const newPost = await db.Post.create({
       content: req.body.content,
       UserId: req.user.id

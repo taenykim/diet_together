@@ -37,7 +37,7 @@ router.post('/', async (req, res, next) => {
       nickname: req.body.nickname,
       password: hashedPassword
     })
-    console.log(newUser)
+    // console.log(newUser)
     return res.status(200).json(newUser)
   } catch (e) {
     console.error(e)
@@ -48,19 +48,11 @@ router.post('/', async (req, res, next) => {
 
 router.post('/weight', isLoggedIn, async (req, res, next) => {
   try {
-    const newWeight = await db.Weight.create({
-      weight: req.body.weight
+    await db.Weight.create({
+      weight: req.body.weight,
+      UserId: req.user.id
     })
-    const fullWeight = await db.Weight.findOne({
-      where: { id: newWeight.id },
-      include: [
-        {
-          model: db.User,
-          attributes: ['id', 'nickname']
-        }
-      ]
-    })
-    res.json(fullWeight)
+    console.log('wwwwwwww', req.user)
   } catch (e) {
     console.error(e)
     return next(e)
@@ -127,7 +119,7 @@ router.post('/login/', (req, res, next) => {
   passport.authenticate('local', (err, user, info) => {
     // console.log(err, user, info)
     if (err) {
-      console.log(err)
+      console.error(err)
       return next(err)
     }
     if (info) {

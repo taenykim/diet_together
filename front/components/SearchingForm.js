@@ -10,7 +10,7 @@ const SearchingForm = () => {
 
   const onSubmitKeyword = e => {
     e.preventDefault()
-    console.log('keyword', keyword, 'e', e)
+    // console.log('keyword', keyword, 'e', e)
     Router.push(
       {
         pathname: '/search',
