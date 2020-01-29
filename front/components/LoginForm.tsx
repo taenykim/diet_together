@@ -1,8 +1,10 @@
-import React, { useState, useCallback } from 'react'
+import * as React from 'react'
+import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
 import { LOG_IN_REQUEST } from '../reducers/user'
 import styled from 'styled-components'
+import { RootState } from '../reducers'
 
 const LoginFormContainer = styled.form`
   border: 1px solid black;
@@ -15,7 +17,7 @@ const LoginForm = () => {
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
-  const { logInErrorReason } = useSelector(state => state.user)
+  const { logInErrorReason } = useSelector((state: RootState) => state.user)
 
   const onChangeId = useCallback(e => {
     setId(e.target.value)

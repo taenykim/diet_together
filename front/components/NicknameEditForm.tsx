@@ -1,7 +1,9 @@
-import React, { useState, useCallback } from 'react'
+import * as React from 'react'
+import { useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { EDIT_NICKNAME_REQUEST } from '../reducers/user'
 import styled from 'styled-components'
+import { RootState } from '../reducers'
 
 const NicknameEditFormContainer = styled.form`
   border: 1px solid black;
@@ -9,7 +11,7 @@ const NicknameEditFormContainer = styled.form`
 const NicknameEditForm = () => {
   const [editedName, setEditedName] = useState('')
   const dispatch = useDispatch()
-  const { me } = useSelector(state => state.user)
+  const { me } = useSelector((state: RootState) => state.user)
 
   const onChangeNickname = useCallback(e => {
     setEditedName(e.target.value)

@@ -1,15 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import * as React from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { ADD_COMMENT_REQUEST } from '../reducers/post'
 import { useSelector, useDispatch } from 'react-redux'
-import proptypes from 'prop-types'
 import styled from 'styled-components'
+import { RootState } from '../reducers'
 
 const CommentFormContainer = styled.form`
   border: 1px solid black;
 `
 const CommentForm = ({ post }) => {
-  const { commentAdded } = useSelector(state => state.post)
-  const { me } = useSelector(state => state.user)
+  const { commentAdded } = useSelector((state: RootState) => state.post)
+  const { me } = useSelector((state: RootState) => state.user)
   const [commentText, setCommentText] = useState('')
   const dispatch = useDispatch()
 
@@ -46,10 +47,6 @@ const CommentForm = ({ post }) => {
       </CommentFormContainer>
     </>
   )
-}
-
-CommentForm.proptypes = {
-  post: proptypes.object.isRequired
 }
 
 export default CommentForm

@@ -1,5 +1,5 @@
-import React, { useState, useCallback, useEffect, useRef } from 'react'
-import proptypes from 'prop-types'
+import * as React from 'react'
+import { useState, useCallback, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   LOAD_COMMENTS_REQUEST,
@@ -13,13 +13,14 @@ import { FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST } from '../reducers/user'
 import CommentForm from './CommentForm'
 import FollowButton from './FollowButton'
 import styled from 'styled-components'
+import { RootState } from '../reducers'
 
 const PostCardContainer = styled.div`
   border: 1px solid black;
 `
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
-  const id = useSelector(state => state.user.me && state.user.me.id)
+  const id = useSelector((state: RootState) => state.user.me && state.user.me.id)
   const dispatch = useDispatch()
   ////////////////////////////////////
   // const postMemory = useRef(id)
@@ -144,15 +145,6 @@ const PostCard = ({ post }) => {
       )}
     </>
   )
-}
-
-PostCard.proptypes = {
-  post: proptypes.shape({
-    User: proptypes.object,
-    content: proptypes.string,
-    img: proptypes.string,
-    createdAt: proptypes.object
-  })
 }
 
 export default PostCard
