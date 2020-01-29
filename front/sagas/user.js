@@ -101,7 +101,7 @@ function* watchSignUp() {
 }
 
 function weightPostAPI(weight) {
-  return axios.patch('/user/weight', { weight }, { withCredentials: true })
+  return axios.post('/user/weight', weight, { withCredentials: true })
 }
 
 function* weightPost(action) {

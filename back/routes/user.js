@@ -35,8 +35,7 @@ router.post('/', async (req, res, next) => {
     const newUser = await db.User.create({
       userId: req.body.userId,
       nickname: req.body.nickname,
-      password: hashedPassword,
-      weight: '디폴트'
+      password: hashedPassword
     })
     console.log(newUser)
     return res.status(200).json(newUser)
@@ -47,17 +46,21 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.patch('/weight', isLoggedIn, async (req, res, next) => {
+router.post('/weight', isLoggedIn, async (req, res, next) => {
   try {
-    await db.User.update(
-      {
-        weight: req.body.weight
-      },
-      {
-        where: { id: req.user.id }
-      }
-    )
-    res.send(req.body.weight)
+    const newWeight = await db.Weight.create({
+      weight: req.body.weight
+    })
+    const fullWeight = await db.Weight.findOne({
+      where: { id: newWeight.id },
+      include: [
+        {
+          model: db.User,
+          attributes: ['id', 'nickname']
+        }
+      ]
+    })
+    res.json(fullWeight)
   } catch (e) {
     console.error(e)
     return next(e)
