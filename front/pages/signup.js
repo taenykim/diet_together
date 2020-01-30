@@ -2,7 +2,11 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import Router from 'next/router'
 import { SIGN_UP_REQUEST } from '../reducers/user'
+import styled from 'styled-components'
 
+const MainPage = styled.div`
+  margin-top: 19px;
+`
 const signup = () => {
   const [id, setId] = useState('')
   const [nickname, setNickname] = useState('')
@@ -74,7 +78,7 @@ const signup = () => {
   }
 
   return (
-    <>
+    <MainPage>
       <form onSubmit={onSubmit}>
         <div>
           <label htmlFor="user-id">아이디</label>
@@ -118,7 +122,7 @@ const signup = () => {
           <button type="submit">가입하기</button>
         </div>
       </form>
-    </>
+    </MainPage>
   )
 }
 

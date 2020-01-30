@@ -1,7 +1,11 @@
 import React from 'react'
+import styled from 'styled-components'
 
+const MainPage = styled.div`
+  margin-top: 19px;
+`
 const search = () => {
-  return <div>검색페이지임다</div>
+  return <MainPage>검색페이지임다</MainPage>
 }
 
 export default search
