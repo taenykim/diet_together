@@ -100,23 +100,16 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
-/**
- * 로그아웃 *
- * server : /api/user/logout
- * front : LOG_OUT_REQUEST
- */
+// 로그아웃 // LOG_OUT_REQUEST // api/user/logout
 router.post('/logout/', (req, res) => {
   req.logout()
   req.session.destroy()
   res.send('로그아웃 성공')
 })
 
-/**
- * 로그인 *
- * server : /api/user/logout
- * front : LOG_IN_REQUEST
- */
+// 로그인 // LOG_IN_REQUEST // api/user/login
 router.post('/login/', (req, res, next) => {
+  // console.log('reqinfo', req)
   passport.authenticate('local', (err, user, info) => {
     // console.log(err, user, info)
     if (err) {
@@ -151,12 +144,13 @@ router.post('/login/', (req, res, next) => {
             },
             {
               model: db.Weight,
-              as: 'Weights'
+              as: 'Weights',
+              attrigutes: ['weight']
             }
           ],
           attributes: ['id', 'nickname', 'userId']
         })
-        // console.log(fullUser)
+        // console.log('fulluserinfo', fullUser.toJSON())
         return res.json(fullUser)
       } catch (e) {
         next(e)

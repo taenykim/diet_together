@@ -6,7 +6,6 @@ import UserProfile from './UserProfile'
 import { useSelector } from 'react-redux'
 import SearchingForm from './SearchingForm'
 import { RootState } from '../reducers'
-import Router from 'next/router'
 
 const Menu_Container = styled.div`
   margin-top: 19px;
@@ -26,8 +25,8 @@ const SearchBar = styled.div`
 const HomeIcon = styled.img`
   position: fixed;
 `
-
-const MENU = ({ children }) => {
+// children 은 Menu의 props 인 페이지들!
+const Menu = ({ children }) => {
   const { me } = useSelector((state: RootState) => state.user)
 
   return (
@@ -35,7 +34,7 @@ const MENU = ({ children }) => {
       <SearchBar key="search">
         <Link href="/">
           <a>
-            <HomeIcon src="localhost:3060/favicon.ico" />
+            <HomeIcon src="localhost:3060/favicon.ico" /> {/*아직못불러옴*/}
           </a>
         </Link>
         <SearchingForm />
@@ -63,4 +62,5 @@ const MENU = ({ children }) => {
   )
 }
 
-export default MENU
+export default Menu
+//

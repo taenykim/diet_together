@@ -29,6 +29,7 @@ const LoginForm = () => {
 
   const onSubmitForm = useCallback(
     e => {
+      // 리액트 state에서 리덕스 store로 전달!
       e.preventDefault()
       dispatch({
         type: LOG_IN_REQUEST,
@@ -76,3 +77,4 @@ const LoginForm = () => {
 }
 
 export default LoginForm
+//

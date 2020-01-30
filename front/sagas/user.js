@@ -1,18 +1,14 @@
 import { all, call, fork, takeEvery, put, takeLatest } from 'redux-saga/effects'
 import {
-  // 로그인
   LOG_IN_FAILURE,
   LOG_IN_REQUEST,
   LOG_IN_SUCCESS,
-  // 회원가입
   SIGN_UP_FAILURE,
   SIGN_UP_REQUEST,
   SIGN_UP_SUCCESS,
-  // 로그아웃
   LOG_OUT_SUCCESS,
   LOG_OUT_FAILURE,
   LOG_OUT_REQUEST,
-  // 회원정보 불러오기
   LOAD_USER_FAILURE,
   LOAD_USER_REQUEST,
   LOAD_USER_SUCCESS,
@@ -43,17 +39,12 @@ import {
 } from '../reducers/user'
 import axios from 'axios'
 
-/**
- * 로그인 *
- * server : /api/user/logout (POST)
- * front : LOG_IN_REQUEST
- */
+// 로그인 // LOG_IN_REQUEST // api/user/login
 function logInAPI(logInData) {
   return axios.post('/user/login', logInData, {
     withCredentials: true
   })
 }
-
 function* logIn(action) {
   try {
     const result = yield call(logInAPI, action.data)
@@ -70,9 +61,8 @@ function* logIn(action) {
     })
   }
 }
-
 function* watchLogIn() {
-  yield takeEvery(LOG_IN_REQUEST, logIn)
+  yield takeLatest(LOG_IN_REQUEST, logIn)
 }
 
 /**
@@ -128,11 +118,7 @@ function* watchWeightPost() {
   yield takeEvery(WEIGHT_POST_REQUEST, weightPost)
 }
 
-/**
- * 로그아웃 *
- * server : /api/user/logout (POST)
- * front : LOG_OUT_REQUEST
- */
+// 로그아웃 // LOG_OUT_REQUEST // api/user/logout
 function logOutAPI() {
   return axios.post(
     '/user/logout',
@@ -142,7 +128,6 @@ function logOutAPI() {
     }
   )
 }
-
 function* logOut() {
   try {
     yield call(logOutAPI)
@@ -157,9 +142,8 @@ function* logOut() {
     })
   }
 }
-
 function* watchLogOut() {
-  yield takeEvery(LOG_OUT_REQUEST, logOut)
+  yield takeLatest(LOG_OUT_REQUEST, logOut)
 }
 
 /**

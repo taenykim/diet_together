@@ -1,10 +1,9 @@
 import React from 'react'
-import AppLayout from '../components/Menu'
+import Menu from '../components/Menu'
 import Helmet from 'react-helmet'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
 import { createStore, compose, applyMiddleware } from 'redux'
-import proptypes from 'prop-types'
 import { Provider } from 'react-redux'
 import reducer from '../reducers'
 import rootSaga from '../sagas'
@@ -79,22 +78,18 @@ const _app = ({ Component, store, pageProps }) => {
               }
             ]}
           />
-          <AppLayout>
+          <Menu>
             <Component {...pageProps} />
-          </AppLayout>
+            {/* 컴포넌트가 페이지들! */}
+          </Menu>
         </Provider>
       </Container>
     </FullContainer>
   )
 }
 
-_app.proptypes = {
-  Component: proptypes.elementType,
-  store: proptypes.object,
-  pageProps: proptypes.object.isRequired
-}
-
 _app.getInitialProps = async context => {
+  console.log('contextinfo', context)
   const { ctx, Component } = context
   let pageProps = {}
   // 순서 신경쓰기!
@@ -136,3 +131,4 @@ const configureStore = (initialState, options) => {
 }
 
 export default withRedux(configureStore)(withReduxSaga(_app))
+//

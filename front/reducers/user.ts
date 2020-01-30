@@ -68,6 +68,7 @@ export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME'
 export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
+      // 로그인 // LOG_IN_REQUEST
       case LOG_IN_REQUEST: {
         draft.logInErrorReason = ''
         break
@@ -82,11 +83,15 @@ export default (state = initialState, action) => {
         draft.me = null
         break
       }
+      // 로그아웃 // LOG_OUT_REQUEST
       case LOG_OUT_REQUEST: {
         break
       }
       case LOG_OUT_SUCCESS: {
         draft.me = null
+        break
+      }
+      case LOG_OUT_FAILURE: {
         break
       }
       case SIGN_UP_REQUEST: {
