@@ -6,6 +6,7 @@ import UserProfile from './UserProfile'
 import { useSelector } from 'react-redux'
 import SearchingForm from './SearchingForm'
 import { RootState } from '../reducers'
+import Router from 'next/router'
 
 const Menu_Container = styled.div`
   margin-top: 19px;
@@ -22,12 +23,21 @@ const SearchBar = styled.div`
   border: 2px solid #444;
 `
 
+const HomeIcon = styled.img`
+  position: fixed;
+`
+
 const MENU = ({ children }) => {
   const { me } = useSelector((state: RootState) => state.user)
 
   return (
     <>
       <SearchBar key="search">
+        <Link href="/">
+          <a>
+            <HomeIcon src="localhost:3060/favicon.ico" />
+          </a>
+        </Link>
         <SearchingForm />
       </SearchBar>
       <Menu_Container>
@@ -42,6 +52,11 @@ const MENU = ({ children }) => {
           </Link>
         </div>
         <div> {me ? <UserProfile /> : <LoginForm />}</div>
+        <div key="like">
+          <Link href="/like" prefetch>
+            <a>좋아요</a>
+          </Link>
+        </div>
       </Menu_Container>
       <div>{children}</div>
     </>

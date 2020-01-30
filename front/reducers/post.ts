@@ -7,7 +7,8 @@ export const initialState = {
   postAdded: false, // 포스트 업로드 성공
   addCommentErrorReason: '',
   commentAdded: false,
-  singlePost: null
+  singlePost: null,
+  hasMorePost: false
 }
 
 export const LOAD_MAIN_POSTS_REQUEST = 'LOAD_MAIN_POSTS_REQUEST'
@@ -108,6 +109,8 @@ export default (state = initialState, action) => {
       case LOAD_MAIN_POSTS_REQUEST:
       case LOAD_USER_POSTS_REQUEST: {
         draft.mainPosts = !action.lastId ? [] : draft.mainPosts
+        draft.hasMorePost = action.lastId ? draft.hasMorePost : true
+
         break
       }
       case LOAD_MAIN_POSTS_SUCCESS:
@@ -115,6 +118,8 @@ export default (state = initialState, action) => {
         action.data.forEach(d => {
           draft.mainPosts.push(d)
         })
+        draft.hasMorePost = action.data.length === 10
+
         break
       }
       case LOAD_MAIN_POSTS_FAILURE:
