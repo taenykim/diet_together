@@ -2,13 +2,8 @@ const express = require('express')
 const db = require('../models')
 const router = express.Router()
 
-/**
- * 게시글 불러오기(HOME) *
- * server : /api/posts/ (GET)
- * front : LOAD_MAIN_POSTS_REQUEST
- */
+// 모든 게시글 불러오기 // LOAD_MAIN_POSTS_REQUEST // api/posts?lastID=''&limit=''
 router.get('/', async (req, res, next) => {
-  // GET /api/posts
   try {
     let where = {}
     if (parseInt(req.query.lastId, 10)) {
@@ -44,4 +39,6 @@ router.get('/', async (req, res, next) => {
     next(e)
   }
 })
+
 module.exports = router
+//

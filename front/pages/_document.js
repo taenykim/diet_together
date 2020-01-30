@@ -1,10 +1,10 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import PropTypes from 'prop-types'
 import Document, { Main, NextScript } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
 
 class _document extends Document {
+  // styled-components , helmet SSR, not working( 정보는 가져오는 거 같은데.. )
   static getInitialProps(context) {
     const sheet = new ServerStyleSheet()
     const page = context.renderPage(App => props => sheet.collectStyles(<App {...props} />))
@@ -35,9 +35,5 @@ class _document extends Document {
   }
 }
 
-_document.propTypes = {
-  helmet: PropTypes.object.isRequired,
-  styleTags: PropTypes.object.isRequired
-}
-
 export default _document
+//

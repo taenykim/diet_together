@@ -89,7 +89,7 @@ const _app = ({ Component, store, pageProps }) => {
 }
 
 _app.getInitialProps = async context => {
-  console.log('contextinfo', context)
+  // console.log('contextinfo', context)
   const { ctx, Component } = context
   let pageProps = {}
   // 순서 신경쓰기!

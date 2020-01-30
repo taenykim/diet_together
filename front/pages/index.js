@@ -12,19 +12,18 @@ const index = () => {
   const { me } = useSelector(state => state.user)
   const { mainPosts, hasMorePost } = useSelector(state => state.post)
   const dispatch = useDispatch()
-  const countRef = useRef([])
+  const countRef = useRef([]) // 다시
 
   const onScroll = useCallback(() => {
-    console.log(
-      window.scrollY,
-      document.documentElement.clientHeight,
-      document.documentElement.scrollHeight - 300
-    )
+    // console.log(
+    //   window.scrollY, // 현재 스크롤 위치
+    //   document.documentElement.clientHeight, // 브라우저 화면 높이
+    //   document.documentElement.scrollHeight - 300 // 현재 페이지 총 길이
+    // )
     if (
       window.scrollY + document.documentElement.clientHeight >
       document.documentElement.scrollHeight - 300
     ) {
-      console.log('hear')
       if (hasMorePost) {
         const lastId = mainPosts[mainPosts.length - 1].id
         if (!countRef.current.includes(lastId)) {
@@ -62,3 +61,4 @@ index.getInitialProps = async context => {
 }
 
 export default index
+// 여기서부터

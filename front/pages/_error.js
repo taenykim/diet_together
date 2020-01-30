@@ -1,10 +1,8 @@
 import React from 'react'
-import Error from 'next/error'
 const MyError = ({ statusCode }) => {
   return (
     <div>
       <h1>{statusCode} 에러 발생</h1>
-      <Error statusCode={statusCode} />
     </div>
   )
 }
@@ -23,3 +21,4 @@ MyError.getInitialProps = async context => {
 }
 
 export default MyError
+//

@@ -106,11 +106,11 @@ export default (state = initialState, action) => {
         draft.mainPosts[postIndex].Comments = action.data.comments
         break
       }
+      // 모든 게시글 불러오기
       case LOAD_MAIN_POSTS_REQUEST:
       case LOAD_USER_POSTS_REQUEST: {
         draft.mainPosts = !action.lastId ? [] : draft.mainPosts
         draft.hasMorePost = action.lastId ? draft.hasMorePost : true
-
         break
       }
       case LOAD_MAIN_POSTS_SUCCESS:

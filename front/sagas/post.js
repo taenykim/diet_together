@@ -73,11 +73,7 @@ function* watchAddPost() {
   yield takeLatest(ADD_POST_REQUEST, addPost)
 }
 
-/**
- * 게시글 불러오기(HOME) *
- * server : /api/posts/ (GET)
- * front : LOAD_MAIN_POSTS_REQUEST
- */
+// 모든 게시글 불러오기 // LOAD_MAIN_POSTS_REQUEST // api/posts?lastID=''&limit=''
 function loadMainPostsAPI(lastId = 0, limit = 10) {
   return axios.get(`/posts?lastId=${lastId}&limit=${limit}`)
 }
