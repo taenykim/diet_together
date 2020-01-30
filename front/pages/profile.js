@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react'
-import NicknameEditForm from '../components/NicknameEditForm'
+import NicknameEditForm from '../components/profile/NicknameEditForm'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   LOAD_FOLLOWERS_REQUEST,
@@ -9,7 +9,7 @@ import {
 } from '../reducers/user'
 import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
 import PostCard from '../components/PostCard'
-import WeightView from '../components/WeightView'
+import WeightView from '../components/profile/WeightView'
 
 const profile = () => {
   const dispatch = useDispatch()

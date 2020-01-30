@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useSelector } from 'react-redux'
-import { RootState } from '../reducers'
+import { RootState } from '../../reducers'
 
 const FollowButton = ({ post, onUnfollow, onFollow }) => {
   const { me } = useSelector((state: RootState) => state.user)

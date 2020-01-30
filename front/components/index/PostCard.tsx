@@ -6,14 +6,14 @@ import {
   UNLIKE_POST_REQUEST,
   LIKE_POST_REQUEST,
   REMOVE_POST_REQUEST
-} from '../reducers/post'
+} from '../../reducers/post'
 import Link from 'next/link'
-import PostImages from './PostImages'
-import { FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST } from '../reducers/user'
-import CommentForm from './CommentForm'
-import FollowButton from './FollowButton'
+import PostImages from '../postCard/PostImages'
+import { FOLLOW_USER_REQUEST, UNFOLLOW_USER_REQUEST } from '../../reducers/user'
+import CommentForm from '../postCard/CommentForm'
+import FollowButton from '../postCard/FollowButton'
 import styled from 'styled-components'
-import { RootState } from '../reducers'
+import { RootState } from '../../reducers'
 
 const PostCardContainer = styled.div`
   border: 1px solid black;

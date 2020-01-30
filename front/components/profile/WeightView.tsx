@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useState, useCallback } from 'react'
 import { useDispatch } from 'react-redux'
-import { WEIGHT_POST_REQUEST, WEIGHT_DELETE_REQUEST } from '../reducers/user'
+import { WEIGHT_POST_REQUEST, WEIGHT_DELETE_REQUEST } from '../../reducers/user'
 
 const WeightView = ({ weights }) => {
   const [weight, setWeight] = useState('')

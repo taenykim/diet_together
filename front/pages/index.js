@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback, useRef } from 'react'
-import PostForm from '../components/PostForm'
+import PostForm from '../components/index/PostForm'
 import PostCard from '../components/PostCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post'

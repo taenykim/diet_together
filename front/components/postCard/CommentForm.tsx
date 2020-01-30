@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useCallback, useEffect, useState } from 'react'
-import { ADD_COMMENT_REQUEST } from '../reducers/post'
+import { ADD_COMMENT_REQUEST } from '../../reducers/post'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { RootState } from '../reducers'
+import { RootState } from '../../reducers'
 
 const CommentFormContainer = styled.form`
   border: 1px solid black;

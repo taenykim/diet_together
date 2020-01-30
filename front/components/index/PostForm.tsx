@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useEffect, useCallback, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../reducers/post'
+import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../../reducers/post'
 import styled from 'styled-components'
-import { RootState } from '../reducers'
+import { RootState } from '../../reducers'
 
 const PostFormContainer = styled.form`
   border: 1px solid black;

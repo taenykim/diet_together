@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { EDIT_NICKNAME_REQUEST } from '../reducers/user'
+import { EDIT_NICKNAME_REQUEST } from '../../reducers/user'
 import styled from 'styled-components'
-import { RootState } from '../reducers'
+import { RootState } from '../../reducers'
 
 const NicknameEditFormContainer = styled.form`
   border: 1px solid black;
