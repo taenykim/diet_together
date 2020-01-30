@@ -51,5 +51,37 @@
     "nodemon": "^2.0.2",
     "ts-node": "^8.6.2",
     "webpack": "^4.41.5"
+  },
+  "babel": {
+    "env": {
+      "development": {
+        "presets": [
+          "next/babel"
+        ],
+        "plugins": [
+          [
+            "styled-components",
+            {
+              "ssr": true,
+              "displayName": true
+            }
+          ]
+        ]
+      },
+      "production": {
+        "presets": [
+          "next/babel"
+        ],
+        "plugins": [
+          [
+            "styled-components",
+            {
+              "ssr": true,
+              "displayName": false
+            }
+          ]
+        ]
+      }
+    }
   }
 }

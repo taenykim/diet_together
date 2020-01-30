@@ -7,6 +7,8 @@ import styled from 'styled-components'
 import { RootState } from '../reducers'
 
 const UserProfileContainer = styled.div`
+  color: skyblue;
+  display: flex;
   border: 1px solid black;
 `
 
