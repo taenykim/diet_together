@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Error from 'next/error'
 const MyError = ({ statusCode }) => {
   return (
@@ -8,10 +7,6 @@ const MyError = ({ statusCode }) => {
       <Error statusCode={statusCode} />
     </div>
   )
-}
-
-MyError.propTypes = {
-  statusCode: PropTypes.number
 }
 
 MyError.defaultProps = {

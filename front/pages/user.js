@@ -1,7 +1,7 @@
 import React from 'react'
 import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
 import { LOAD_USER_REQUEST } from '../reducers/user'
-import PostCard from '../components/PostCard'
+import PostCard from '../components/index/PostCard'
 import { useSelector } from 'react-redux'
 
 const user = () => {

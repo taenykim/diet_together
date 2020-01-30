@@ -8,7 +8,7 @@ import {
   UNFOLLOW_USER_REQUEST
 } from '../reducers/user'
 import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
-import PostCard from '../components/PostCard'
+import PostCard from '../components/index/PostCard'
 import WeightView from '../components/profile/WeightView'
 
 const profile = () => {
