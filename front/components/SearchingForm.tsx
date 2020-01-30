@@ -1,6 +1,13 @@
 import * as React from 'react'
 import { useState, useCallback } from 'react'
 import Router from 'next/router'
+import styled from 'styled-components'
+
+const SearchingFormContainer = styled.form`
+  display: flex;
+  justify-content: center;
+  background-color: white;
+`
 
 const SearchingForm = () => {
   const [keyword, setKeyword] = useState('')
@@ -23,10 +30,10 @@ const SearchingForm = () => {
 
   return (
     <>
-      <form onSubmit={onSubmitKeyword}>
+      <SearchingFormContainer onSubmit={onSubmitKeyword}>
         <input name="keyword" value={keyword} onChange={onChangeKeyword} />
         <button type="submit">검색</button>
-      </form>
+      </SearchingFormContainer>
     </>
   )
 }

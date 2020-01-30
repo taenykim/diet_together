@@ -7,20 +7,30 @@ import { useSelector } from 'react-redux'
 import SearchingForm from './SearchingForm'
 import { RootState } from '../reducers'
 
-const AppLayout_Container = styled.div`
+const Menu_Container = styled.div`
+  margin-top: 19px;
   display: flex;
+  flex-direction: column;
   div {
     padding: 10px;
   }
   border: 2px solid #444;
 `
+const SearchBar = styled.div`
+  position: fixed;
+  width: 100vw;
+  border: 2px solid #444;
+`
 
-const AppLayout = ({ children }) => {
+const MENU = ({ children }) => {
   const { me } = useSelector((state: RootState) => state.user)
 
   return (
     <>
-      <AppLayout_Container>
+      <SearchBar key="search">
+        <SearchingForm />
+      </SearchBar>
+      <Menu_Container>
         <div key="home" style={{ marginRight: '10px' }}>
           <Link href="/">
             <a>홈</a>
@@ -31,14 +41,11 @@ const AppLayout = ({ children }) => {
             <a>프로필</a>
           </Link>
         </div>
-        <div key="search">
-          <SearchingForm />
-        </div>
-      </AppLayout_Container>
-      {me ? <UserProfile /> : <LoginForm />}
+        <div> {me ? <UserProfile /> : <LoginForm />}</div>
+      </Menu_Container>
       <div>{children}</div>
     </>
   )
 }
 
-export default AppLayout
+export default MENU

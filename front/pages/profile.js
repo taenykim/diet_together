@@ -10,6 +10,11 @@ import {
 import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
 import PostCard from '../components/index/PostCard'
 import WeightView from '../components/profile/WeightView'
+import styled from 'styled-components'
+
+const MainPage = styled.div`
+  margin-top: 19px;
+`
 
 const profile = () => {
   const dispatch = useDispatch()
@@ -54,7 +59,7 @@ const profile = () => {
   }, [followerList.length])
 
   return (
-    <>
+    <MainPage>
       <NicknameEditForm />
       <div>
         <div>팔로잉목록</div>
@@ -102,7 +107,7 @@ const profile = () => {
           ))}
         </div>
       </div>
-    </>
+    </MainPage>
   )
 }
 

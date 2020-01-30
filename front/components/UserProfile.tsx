@@ -9,6 +9,7 @@ import { RootState } from '../reducers'
 const UserProfileContainer = styled.div`
   color: skyblue;
   display: flex;
+  flex-direction: column;
   border: 1px solid black;
 `
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import AppLayout from '../components/AppLayout'
+import AppLayout from '../components/Menu'
 import Helmet from 'react-helmet'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
@@ -14,88 +14,77 @@ import axios from 'axios'
 import { Container } from 'next/app'
 import styled from 'styled-components'
 
-const Root = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`
 const FullContainer = styled.div`
-  background: rgb(227, 244, 255);
   display: flex;
-  width: 70%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 20px;
+  justify-content: stretch;
+  align-items: stretch;
 `
 
 const _app = ({ Component, store, pageProps }) => {
   return (
-    <Root>
-      <FullContainer>
-        <Container>
-          <Provider store={store}>
-            <Helmet
-              title="DietTogether"
-              htmlAttributes={{ lang: 'ko' }}
-              meta={[
-                {
-                  charset: 'UTF-8'
-                },
-                {
-                  name: 'viewport',
-                  content:
-                    'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover'
-                },
-                {
-                  'http-equiv': 'X-UA-Compatible',
-                  content: 'IE=edge'
-                },
-                {
-                  name: 'description',
-                  content: 'DietTogether'
-                },
-                {
-                  name: 'og:title',
-                  content: 'DietTogether'
-                },
-                {
-                  name: 'og:description',
-                  content: 'DietTogether'
-                },
-                {
-                  property: 'og:type',
-                  content: 'website'
-                },
-                {
-                  property: 'og:image',
-                  content: 'http://localhost:3060/favicon.ico'
-                }
-              ]}
-              link={[
-                {
-                  rel: 'shortcut icon',
-                  href: '/favicon.ico'
-                },
+    <FullContainer>
+      <Container>
+        <Provider store={store}>
+          <Helmet
+            title="DietTogether"
+            htmlAttributes={{ lang: 'ko' }}
+            meta={[
+              {
+                charset: 'UTF-8'
+              },
+              {
+                name: 'viewport',
+                content:
+                  'width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=yes,viewport-fit=cover'
+              },
+              {
+                'http-equiv': 'X-UA-Compatible',
+                content: 'IE=edge'
+              },
+              {
+                name: 'description',
+                content: 'DietTogether'
+              },
+              {
+                name: 'og:title',
+                content: 'DietTogether'
+              },
+              {
+                name: 'og:description',
+                content: 'DietTogether'
+              },
+              {
+                property: 'og:type',
+                content: 'website'
+              },
+              {
+                property: 'og:image',
+                content: 'http://localhost:3060/favicon.ico'
+              }
+            ]}
+            link={[
+              {
+                rel: 'shortcut icon',
+                href: '/favicon.ico'
+              },
 
-                {
-                  rel: 'stylesheet',
-                  href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
-                },
-                {
-                  rel: 'stylesheet',
-                  href:
-                    'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
-                }
-              ]}
-            />
-            <AppLayout>
-              <Component {...pageProps} />
-            </AppLayout>
-          </Provider>
-        </Container>
-      </FullContainer>
-    </Root>
+              {
+                rel: 'stylesheet',
+                href: 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css'
+              },
+              {
+                rel: 'stylesheet',
+                href:
+                  'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css'
+              }
+            ]}
+          />
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
+        </Provider>
+      </Container>
+    </FullContainer>
   )
 }
 

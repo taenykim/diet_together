@@ -3,7 +3,11 @@ import PostForm from '../components/index/PostForm'
 import PostCard from '../components/index/PostCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post'
+import styled from 'styled-components'
 
+const MainPage = styled.div`
+  margin-top: 19px;
+`
 const index = () => {
   const { me } = useSelector(state => state.user)
   const { mainPosts, hasMorePost } = useSelector(state => state.post)
@@ -36,12 +40,12 @@ const index = () => {
   }, [mainPosts.length])
 
   return (
-    <>
+    <MainPage>
       {me && <PostForm />}
       {mainPosts.map((c, i) => {
         return <PostCard key={c.id} post={c} />
       })}
-    </>
+    </MainPage>
   )
 }
 
