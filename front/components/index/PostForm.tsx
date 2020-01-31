@@ -100,5 +100,4 @@ const PostForm = () => {
 }
 
 export default PostForm
-// 이미지 업로드 원리 multer
 //

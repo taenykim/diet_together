@@ -9,6 +9,7 @@
   "author": "taenykim",
   "license": "MIT",
   "dependencies": {
+    "@types/sequelize": "^4.28.8",
     "axios": "^0.19.2",
     "bcrypt": "^3.0.7",
     "cookie-parser": "^1.4.4",
