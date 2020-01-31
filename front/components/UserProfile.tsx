@@ -31,8 +31,16 @@ const UserProfile = () => {
         </Link>
       </div>
       <div>게시물 수 : {me.Posts.length}</div>
-      <div>팔로잉 수 : {me.Followings.length}</div>
-      <div>팔로워 수 : {me.Followers.length}</div>
+      <div>
+        <Link href="/followings">
+          <a>팔로잉 수 : {me.Followings.length}</a>
+        </Link>
+      </div>
+      <div>
+        <Link href="/followers">
+          <a>팔로워 수 : {me.Followers.length}</a>
+        </Link>
+      </div>
       <button onClick={onLogout}>로그아웃</button>
     </UserProfileContainer>
   )
