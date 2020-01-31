@@ -9,3 +9,4 @@ const like = () => {
 }
 
 export default like
+//

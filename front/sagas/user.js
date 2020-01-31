@@ -100,7 +100,7 @@ function weightPostAPI(weight) {
 function* weightPost(action) {
   try {
     const result = yield call(weightPostAPI, action.data)
-    console.log('result', result)
+    // console.log('result', result)
     yield put({
       type: WEIGHT_POST_SUCCESS,
       data: result.data
@@ -311,7 +311,9 @@ function* watchRemoveFollower() {
   yield takeEvery(REMOVE_FOLLOWER_REQUEST, removeFollower)
 }
 
+// 닉네임 수정 // EDIT_NICKNAME_REQUSET // api/user/nickname
 function editNicknameAPI(nickname) {
+  // console.log('nicknameinfo', nickname)
   return axios.patch(
     '/user/nickname',
     { nickname },

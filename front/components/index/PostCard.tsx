@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { useState, useCallback, useEffect, useRef } from 'react'
+import { useState, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import {
   LOAD_COMMENTS_REQUEST,

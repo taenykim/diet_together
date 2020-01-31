@@ -46,7 +46,7 @@ function* addPost(action) {
   try {
     // console.log('action.data.info', action.data)
     const result = yield call(addPostAPI, action.data)
-    console.log(result)
+    // console.log(result)
     // Post Reducer 의 데이터수정
     yield put({
       type: ADD_POST_SUCCESS,

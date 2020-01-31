@@ -266,7 +266,7 @@ router.get('/:id/posts', async (req, res, next) => {
     next(e)
   }
 })
-
+// 닉네임 수정 // EDIT_NICKNAME_REQUEST // api/user/nickname
 router.patch('/nickname', isLoggedIn, async (req, res, next) => {
   try {
     await db.User.update(

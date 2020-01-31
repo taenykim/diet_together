@@ -207,6 +207,7 @@ export default (state = initialState, action) => {
       case REMOVE_FOLLOWER_FAILURE: {
         break
       }
+      // 닉네임 수정 // EDIT_NICKNAME_REQUEST // api/user/nickname
       case EDIT_NICKNAME_REQUEST: {
         draft.editNicknameErrorReason = ''
         break
