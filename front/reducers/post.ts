@@ -137,6 +137,7 @@ export default (state = initialState, action) => {
       case LOAD_USER_POSTS_FAILURE: {
         break
       }
+      // 게시글 좋아요 // LIKE_POST_REQUEST // api/post/:id/like
       case LIKE_POST_REQUEST: {
         break
       }
@@ -148,6 +149,7 @@ export default (state = initialState, action) => {
       case LIKE_POST_FAILURE: {
         break
       }
+      // 게시글 좋아요 취소 // UNLIKE_POST_REQUEST // api/post/:id/like
       case UNLIKE_POST_REQUEST: {
         break
       }
@@ -162,6 +164,7 @@ export default (state = initialState, action) => {
       case UNLIKE_POST_FAILURE: {
         break
       }
+      // 게시글 삭제 // REMOVE_POST_REQUEST // api/post/:id
       case REMOVE_POST_REQUEST: {
         break
       }

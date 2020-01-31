@@ -177,7 +177,7 @@ function* loadUser(action) {
 function* watchLoadUser() {
   yield takeEvery(LOAD_USER_REQUEST, loadUser)
 }
-
+// 팔로우 // FOLLOW_USER_REQUEST // api/user/:id/follow
 function followAPI(userId) {
   return axios.post(
     `/user/${userId}/follow`,
@@ -207,7 +207,7 @@ function* follow(action) {
 function* watchFollow() {
   yield takeEvery(FOLLOW_USER_REQUEST, follow)
 }
-
+// 언팔로우 // UNFOLLOW_USER_REQUEST // api/user/:id/follow
 function unfollowAPI(userId) {
   return axios.delete(`/user/${userId}/follow`, {
     withCredentials: true

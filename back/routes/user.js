@@ -211,7 +211,7 @@ router.delete('/:id/follower', isLoggedIn, async (req, res, next) => {
     next(e)
   }
 })
-
+// 팔로우 // FOLLOW_USER_REQUEST // api/user/:id/follow
 router.post('/:id/follow', isLoggedIn, async (req, res, next) => {
   try {
     const me = await db.User.findOne({
@@ -224,7 +224,7 @@ router.post('/:id/follow', isLoggedIn, async (req, res, next) => {
     next(e)
   }
 })
-
+// 언팔로우 // UNFOLLOW_USER_REQUEST // api/user/:id/follow
 router.delete('/:id/follow', isLoggedIn, async (req, res, next) => {
   try {
     const me = await db.User.findOne({

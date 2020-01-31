@@ -209,6 +209,7 @@ function* watchUploadImages() {
   yield takeLatest(UPLOAD_IMAGES_REQUEST, uploadImages)
 }
 
+// 게시글 좋아요 // LIKE_POST_REQUEST // api/post/:id/like
 function likePostAPI(postId) {
   return axios.post(
     `/post/${postId}/like`,
@@ -218,7 +219,6 @@ function likePostAPI(postId) {
     }
   )
 }
-
 function* likePost(action) {
   try {
     const result = yield call(likePostAPI, action.data)
@@ -241,7 +241,7 @@ function* likePost(action) {
 function* watchLikePost() {
   yield takeLatest(LIKE_POST_REQUEST, likePost)
 }
-
+// 게시글 좋아요 취소 // UNLIKE_POST_REQUEST // api/post/:id/like
 function unlikePostAPI(postId) {
   return axios.delete(`/post/${postId}/like`, {
     withCredentials: true
@@ -271,6 +271,7 @@ function* watchUnlikePost() {
   yield takeLatest(UNLIKE_POST_REQUEST, unlikePost)
 }
 
+// 게시글 삭제 // REMOVE_POST_REQUEST // api/post/:id
 function removePostAPI(postId) {
   return axios.delete(`/post/${postId}`, {
     withCredentials: true

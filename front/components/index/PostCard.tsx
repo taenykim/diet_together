@@ -108,7 +108,8 @@ const PostCard = ({ post }) => {
         <button type="button" onClick={onToggleComment}>
           댓글
         </button>
-        <button
+        {post.Likers ? post.Likers.length : 0}개의
+        <button // 나중에 스타일드 컴포넌트 스타일링 할 때, props 이용할 것.
           type="button"
           style={liked ? { color: 'red' } : { color: 'black' }}
           onClick={onToggleLike}
@@ -149,3 +150,4 @@ const PostCard = ({ post }) => {
 }
 
 export default PostCard
+//

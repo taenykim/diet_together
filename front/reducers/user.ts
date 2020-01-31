@@ -131,6 +131,7 @@ export default (state = initialState, action) => {
       case LOAD_USER_FAILURE: {
         break
       }
+      // 팔로우 // FOLLOW_USER_REQUEST // api/user/:id/follow
       case FOLLOW_USER_REQUEST: {
         break
       }
@@ -141,13 +142,14 @@ export default (state = initialState, action) => {
       case FOLLOW_USER_FAILURE: {
         break
       }
+      // 언팔로우 // UNFOLLOW_USER_REQUEST // api/user/:id/follow
       case UNFOLLOW_USER_REQUEST: {
         break
       }
       case UNFOLLOW_USER_SUCCESS: {
-        const index = draft.me.Followings.findIndex(v => v.id === action.data)
+        const index = draft.me.Followings.indexOf(action.data)
         draft.me.Followings.splice(index, 1)
-        const index2 = draft.followingList.findIndex(v => v.id === action.data)
+        const index2 = draft.followingList.indexOf(action.data)
         draft.followingList.splice(index2, 1)
         break
       }
@@ -159,6 +161,7 @@ export default (state = initialState, action) => {
         draft.me.Posts.unshift({ id: action.data })
         break
       }
+      // 게시글 삭제시 내 게시글 작성 수 업데이트
       case REMOVE_POST_OF_ME: {
         const index = draft.me.Posts.findIndex(v => v.id === action.data)
         draft.me.Posts.splice(index, 1)

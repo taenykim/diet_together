@@ -151,7 +151,7 @@ router.post('/:id/comment', isLoggedIn, async (req, res, next) => {
     return next(e)
   }
 })
-
+// 게시글 좋아요 // LIKE_POST_REQUEST // api/post/:id/like
 router.post('/:id/like', isLoggedIn, async (req, res, next) => {
   try {
     const post = await db.Post.findOne({ where: { id: req.params.id } })
@@ -165,7 +165,7 @@ router.post('/:id/like', isLoggedIn, async (req, res, next) => {
     next(e)
   }
 })
-
+// 게시글 좋아요 취소 // UNLIKE_POST_REQUEST // api/post/:id/like
 router.delete('/:id/like', isLoggedIn, async (req, res, next) => {
   try {
     const post = await db.Post.findOne({ where: { id: req.params.id } })
@@ -180,9 +180,10 @@ router.delete('/:id/like', isLoggedIn, async (req, res, next) => {
   }
 })
 
+// 게시글 삭제 // REMOVE_POST_REQUEST // api/post/:id
 router.delete('/:id', isLoggedIn, async (req, res, next) => {
   try {
-    console.log('req.params', req.params)
+    // console.log('req.params', req.params)
     const post = await db.Post.findOne({ where: { id: req.params.id } })
     if (!post) {
       return res.status(404).send('포스트가 존재하지 않습니다.')
