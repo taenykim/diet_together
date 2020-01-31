@@ -95,6 +95,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 
+// 댓글 불러오기 // LOAD_COMMENTS_REQUEST // api/post/:id/comments
 router.get('/:id/comments', async (req, res, next) => {
   try {
     const post = await db.Post.findOne({ where: { id: req.params.id } })
@@ -120,6 +121,7 @@ router.get('/:id/comments', async (req, res, next) => {
   }
 })
 
+// 댓글 작성 // ADD_COMMENT_REQUEST // api/post/:id/comment
 router.post('/:id/comment', isLoggedIn, async (req, res, next) => {
   try {
     const post = await db.Post.findOne({ where: { id: req.params.id } })

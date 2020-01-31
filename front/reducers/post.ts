@@ -69,7 +69,7 @@ export default (state = initialState, action) => {
       case UPLOAD_IMAGES_FAILURE: {
         break
       }
-      // 미리보기 이미지 삭제 // REMOVE_IMAGE
+      // 미리보기 이미지 삭제 // REMOVE_IMAGE // 사가없음
       case REMOVE_IMAGE: {
         const index = draft.imagePaths.findIndex((v, i) => i === action.index)
         draft.imagePaths.splice(index, 1)
@@ -90,6 +90,7 @@ export default (state = initialState, action) => {
         draft.addPostErrorReason = action.error
         break
       }
+      // 댓글 작성 // ADD_COMMENT_REQUEST // api/post/:id/comment
       case ADD_COMMENT_REQUEST: {
         draft.addCommentErrorReason = ''
         draft.commentAdded = false
@@ -104,12 +105,19 @@ export default (state = initialState, action) => {
       case ADD_COMMENT_FAILURE: {
         break
       }
+      // 댓글 불러오기 // ADD_COMMENT_REQUEST // api/post/:id/comments
+      case LOAD_COMMENTS_REQUEST: {
+        break
+      }
       case LOAD_COMMENTS_SUCCESS: {
         const postIndex = draft.mainPosts.findIndex(v => v.id === action.data.postId)
         draft.mainPosts[postIndex].Comments = action.data.comments
         break
       }
-      // 모든 게시글 불러오기
+      case LOAD_COMMENTS_FAILURE: {
+        break
+      }
+      // 모든 게시글 불러오기 // LOAD_MAIN_POSTS_REQUEST // api/posts?lastID=''&limit=''
       case LOAD_MAIN_POSTS_REQUEST:
       case LOAD_USER_POSTS_REQUEST: {
         draft.mainPosts = !action.lastId ? [] : draft.mainPosts

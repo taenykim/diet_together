@@ -104,6 +104,7 @@ const PostCard = ({ post }) => {
         </div>
         <div>{post.content}</div>
         <br />
+        {post.Comments ? post.Comments.length : 0}개의
         <button type="button" onClick={onToggleComment}>
           댓글
         </button>
@@ -133,7 +134,7 @@ const PostCard = ({ post }) => {
                   return (
                     <>
                       <br />
-                      <div>닉네임 : {item.User.nickname}</div>
+                      <div>닉네임 : {item.User && item.User.nickname}</div>
                       <div>댓글내용 : {item.content}</div>
                       <br />
                     </>

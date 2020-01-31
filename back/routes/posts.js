@@ -28,6 +28,10 @@ router.get('/', async (req, res, next) => {
           through: 'Like',
           as: 'Likers',
           attributes: ['id']
+        },
+        {
+          model: db.Comment,
+          attributes: ['id']
         }
       ],
       order: [['createdAt', 'DESC']], // DESC는 내림차순, ASC는 오름차순

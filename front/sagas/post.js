@@ -121,11 +121,7 @@ function* watchLoadUserPosts() {
   yield takeLatest(LOAD_USER_POSTS_REQUEST, loadUserPosts)
 }
 
-/**
- * 댓글 작성 *
- * server :
- * front :
- */
+// 댓글 작성 // ADD_COMMENT_REQUEST // api/post/:id/comment
 function addCommentAPI(data) {
   return axios.post(
     `/post/${data.postId}/comment`,
@@ -159,6 +155,7 @@ function* watchAddComment() {
   yield takeLatest(ADD_COMMENT_REQUEST, addComment)
 }
 
+// 댓글 불러오기 // LOAD_COMMENTS_REQUEST // api/post/:id/comments
 function loadCommentsAPI(postId) {
   return axios.get(`/post/${postId}/comments`)
 }
