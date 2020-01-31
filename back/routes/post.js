@@ -19,17 +19,13 @@ const upload = multer({
   limits: { fieldSize: 20 * 1024 * 1024 } // 20M
 })
 
-/**
- * 게시글 작성 *
- * server : /api/post/ (POST)
- * front : ADD_POST_REQUEST
- */
+// 게시글 작성 // ADD_POST_REQUEST // api/post/
 router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
   try {
-    // console.log('hear', req)
+    // console.log('req.body', req.body, 'req.user', req.user, 'hearhear')
     const newPost = await db.Post.create({
       content: req.body.content,
-      UserId: req.user.id
+      UserId: req.user.id // 이거의 정체..
     })
     if (req.body.image) {
       if (Array.isArray(req.body.image)) {
@@ -67,9 +63,10 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
     next(e)
   }
 })
-
+// 이미지 미리보기 업로드 // UPLOAD_IMAGES_REQUEST // api/post/images
 router.post('/images', upload.array('image'), (req, res, next) => {
   try {
+    // console.log('req.filesinfo', req.files)
     res.json(req.files.map(v => v.filename))
   } catch (e) {
     console.error(e)

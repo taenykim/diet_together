@@ -154,6 +154,7 @@ export default (state = initialState, action) => {
       case UNFOLLOW_USER_FAILURE: {
         break
       }
+      // 게시글 작성시 내 게시글 작성 수 업데이트
       case ADD_POST_TO_ME: {
         draft.me.Posts.unshift({ id: action.data })
         break

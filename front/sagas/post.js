@@ -35,11 +35,7 @@ import axios from 'axios'
 
 import { ADD_POST_TO_ME, REMOVE_POST_OF_ME } from '../reducers/user'
 
-/**
- * 게시글 작성 *
- * server : /api/post/ (POST)
- * front : ADD_POST_REQUEST
- */
+// 게시글 작성 // ADD_POST_REQUEST // api/post/
 function addPostAPI(postData) {
   return axios.post('/post/', postData, {
     withCredentials: true
@@ -48,8 +44,9 @@ function addPostAPI(postData) {
 
 function* addPost(action) {
   try {
-    console.log(action.data)
+    // console.log('action.data.info', action.data)
     const result = yield call(addPostAPI, action.data)
+    console.log(result)
     // Post Reducer 의 데이터수정
     yield put({
       type: ADD_POST_SUCCESS,
@@ -188,7 +185,7 @@ function* loadComments(action) {
 function* watchLoadComments() {
   yield takeLatest(LOAD_COMMENTS_REQUEST, loadComments)
 }
-
+// 이미지 미리보기 업로드 // UPLOAD_IMAGES_REQUEST // api/post/images
 function uploadImagesAPI(formData) {
   return axios.post('/post/images', formData, {
     withCredentials: true

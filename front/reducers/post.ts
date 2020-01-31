@@ -56,6 +56,7 @@ export const LOAD_POST_FAILURE = 'LOAD_POST_FAILURE'
 export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
+      // 이미지 미리보기 업로드 // UPLOAD_IMAGES_REQUEST // api/post/images
       case UPLOAD_IMAGES_REQUEST: {
         break
       }
@@ -68,11 +69,13 @@ export default (state = initialState, action) => {
       case UPLOAD_IMAGES_FAILURE: {
         break
       }
+      // 미리보기 이미지 삭제 // REMOVE_IMAGE
       case REMOVE_IMAGE: {
         const index = draft.imagePaths.findIndex((v, i) => i === action.index)
         draft.imagePaths.splice(index, 1)
         break
       }
+      // 게시물 작성 // ADD_POST_REQUSET // api/post/
       case ADD_POST_REQUEST: {
         draft.postAdded = false
         break
