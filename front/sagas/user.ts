@@ -92,7 +92,7 @@ function* signUp(action) {
 function* watchSignUp() {
   yield takeEvery(SIGN_UP_REQUEST, signUp)
 }
-
+// 몸무게 추가 // WEIGHT_POST_REQUEUST // api/user/weight
 function weightPostAPI(weight) {
   return axios.post('/user/weight', { weight }, { withCredentials: true })
 }
@@ -100,7 +100,6 @@ function weightPostAPI(weight) {
 function* weightPost(action) {
   try {
     const result = yield call(weightPostAPI, action.data)
-    // console.log('result', result)
     yield put({
       type: WEIGHT_POST_SUCCESS,
       data: result.data
@@ -342,7 +341,7 @@ function* editNickname(action) {
 function* watchEditNickname() {
   yield takeEvery(EDIT_NICKNAME_REQUEST, editNickname)
 }
-
+// 몸무게 삭제 // WEIGHT_DELETE_REQUEST // api/user/wieght/:id
 function weightDeleteAPI(index) {
   return axios.delete(`/user/weight/${index}`, { withCredentials: true })
 }

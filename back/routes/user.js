@@ -45,7 +45,7 @@ router.post('/', async (req, res, next) => {
     return next(e)
   }
 })
-
+// 몸무게 추가 // WEIGHT_POST_REQUEST // api/user/weight
 router.post('/weight', isLoggedIn, async (req, res, next) => {
   try {
     const weight_info = await db.Weight.create({
@@ -53,7 +53,6 @@ router.post('/weight', isLoggedIn, async (req, res, next) => {
       UserId: req.user.id
     })
     return res.json(weight_info)
-    console.log('wwwwwwww', req.user)
   } catch (e) {
     console.error(e)
     return next(e)
@@ -283,13 +282,9 @@ router.patch('/nickname', isLoggedIn, async (req, res, next) => {
     next(e)
   }
 })
-
+// 몸무게 삭제 // WEIGHT_DELETE_REQUEST // api/user/weight/:id
 router.delete('/weight/:id', isLoggedIn, async (req, res, next) => {
   try {
-    const deletedWeight = await db.Weight.findOne({ where: { id: req.params.id } })
-    if (!deletedWeight) {
-      return res.status(404).send('포스트가 존재하지 않습니다.')
-    }
     await db.Weight.destroy({ where: { id: req.params.id } })
     res.send(req.params.id)
   } catch (e) {

@@ -107,6 +107,7 @@ export default (state = initialState, action) => {
         draft.signUpErrorReason = action.error
         break
       }
+      // 몸무게 추가 // WEIGHT_POST_REQUEST // api/user/weight
       case WEIGHT_POST_REQUEST: {
         break
       }
@@ -223,13 +224,13 @@ export default (state = initialState, action) => {
         draft.editNicknameErrorReason = action.error
         break
       }
+      // 몸무게 삭제 // WEIGHT_DELETE_REQUEST // api/user/weight/:id
       case WEIGHT_DELETE_REQUEST: {
         break
       }
       case WEIGHT_DELETE_SUCCESS: {
-        const index = draft.me.Weights.findIndex(v => v.id === action.data)
+        const index = draft.me.Weights.indexOf(action.data)
         draft.me.Weights.splice(index, 1)
-        break
         break
       }
       case WEIGHT_DELETE_FAILURE: {
