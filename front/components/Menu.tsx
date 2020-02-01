@@ -25,12 +25,19 @@ const SearchBar = styled.div`
 const HomeIcon = styled.img`
   position: fixed;
 `
+
+const FullContainer = styled.div`
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+`
+
 // children 은 Menu의 props 인 페이지들!
 const Menu = ({ children }) => {
   const { me } = useSelector((state: RootState) => state.user)
 
   return (
-    <>
+    <FullContainer>
       <SearchBar key="search">
         <Link href="/">
           <a>
@@ -68,7 +75,7 @@ const Menu = ({ children }) => {
         </div>
       </Menu_Container>
       <div>{children}</div>
-    </>
+    </FullContainer>
   )
 }
 

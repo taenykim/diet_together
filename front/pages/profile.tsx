@@ -5,6 +5,7 @@ import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
 import PostCard from '../components/index/PostCard'
 import styled from 'styled-components'
 import { RootState } from '../reducers'
+import Menu from '../components/Menu'
 
 const MainPage = styled.div`
   margin-top: 19px;
@@ -14,16 +15,18 @@ const profile = () => {
   const { mainPosts } = useSelector((state: RootState) => state.post)
 
   return (
-    <MainPage>
-      <NicknameEditForm />
-      <div>
+    <Menu>
+      <MainPage>
+        <NicknameEditForm />
         <div>
-          {mainPosts.map((c, i) => (
-            <PostCard key={i} post={c} />
-          ))}
+          <div>
+            {mainPosts.map((c, i) => (
+              <PostCard key={i} post={c} />
+            ))}
+          </div>
         </div>
-      </div>
-    </MainPage>
+      </MainPage>
+    </Menu>
   )
 }
 

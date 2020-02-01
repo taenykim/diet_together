@@ -4,6 +4,7 @@ import { LOAD_POST_REQUEST } from '../reducers/post'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
 import { RootState } from '../reducers'
+import Menu from '../components/Menu'
 
 const MainPage = styled.div`
   margin-top: 19px;
@@ -39,15 +40,17 @@ const Post = ({ id }) => {
           }
         ]}
       />
-      <MainPage>
-        <div>{singlePost.content}</div>
-        <div>{singlePost.User.nickname}</div>
-        <div>
-          {singlePost.Images[0] && (
-            <img src={`http://localhost:3065/${singlePost.Images[0].src}`} />
-          )}
-        </div>
-      </MainPage>
+      <Menu>
+        <MainPage>
+          <div>{singlePost.content}</div>
+          <div>{singlePost.User.nickname}</div>
+          <div>
+            {singlePost.Images[0] && (
+              <img src={`http://localhost:3065/${singlePost.Images[0].src}`} />
+            )}
+          </div>
+        </MainPage>
+      </Menu>
     </>
   )
 }

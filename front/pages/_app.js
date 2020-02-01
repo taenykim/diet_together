@@ -1,5 +1,4 @@
 import React from 'react'
-import Menu from '../components/Menu'
 import Helmet from 'react-helmet'
 import withRedux from 'next-redux-wrapper'
 import withReduxSaga from 'next-redux-saga'
@@ -11,18 +10,11 @@ import createSagaMiddleware from 'redux-saga'
 import { LOAD_USER_REQUEST } from '../reducers/user'
 import axios from 'axios'
 import { Container } from 'next/app'
-import styled from 'styled-components'
-import { GlobalStyle } from '../reset.css.js'
-
-const FullContainer = styled.div`
-  display: flex;
-  justify-content: stretch;
-  align-items: stretch;
-`
+import { GlobalStyle } from '../reset.css.ts'
 
 const _app = ({ Component, store, pageProps }) => {
   return (
-    <FullContainer>
+    <>
       <GlobalStyle />
       <Container>
         <Provider store={store}>
@@ -80,13 +72,11 @@ const _app = ({ Component, store, pageProps }) => {
               }
             ]}
           />
-          <Menu>
-            <Component {...pageProps} />
-            {/* 컴포넌트가 페이지들! */}
-          </Menu>
+          <Component {...pageProps} />
+          {/* 컴포넌트가 페이지들! */}
         </Provider>
       </Container>
-    </FullContainer>
+    </>
   )
 }
 

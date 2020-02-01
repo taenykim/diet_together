@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post'
 import styled from 'styled-components'
 import { RootState } from '../reducers'
+import Menu from '../components/Menu'
 
 const MainPage = styled.div`
   margin-top: 19px;
@@ -46,12 +47,14 @@ const index = () => {
   }, [mainPosts.length])
 
   return (
-    <MainPage>
-      {me && <PostForm />}
-      {mainPosts.map((c, i) => {
-        return <PostCard key={c.id} post={c} />
-      })}
-    </MainPage>
+    <Menu>
+      <MainPage>
+        {me && <PostForm />}
+        {mainPosts.map((c, i) => {
+          return <PostCard key={c.id} post={c} />
+        })}
+      </MainPage>{' '}
+    </Menu>
   )
 }
 

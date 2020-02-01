@@ -4,6 +4,7 @@ import SignUpForm from '../components/signup/SignUpForm'
 import { useSelector } from 'react-redux'
 import Router from 'next/router'
 import { RootState } from '../reducers'
+import Menu from '../components/Menu'
 
 const MainPage = styled.div`
   margin-top: 19px;
@@ -19,9 +20,11 @@ const signup = () => {
   }, [isSignedUp])
 
   return (
-    <MainPage>
-      <SignUpForm />
-    </MainPage>
+    <Menu>
+      <MainPage>
+        <SignUpForm />
+      </MainPage>
+    </Menu>
   )
 }
 

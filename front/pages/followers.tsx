@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { LOAD_FOLLOWERS_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../reducers'
+import Menu from '../components/Menu'
 
 const MainPage = styled.div`
   margin-top: 19px;
@@ -30,26 +31,28 @@ const followers = () => {
   )
 
   return (
-    <MainPage>
-      <div>팔로워목록</div>
-      <div>
-        {followerList.map((item, i) => {
-          return (
-            <>
-              {item.nickname}
-              <button key={i} type="button" onClick={onRemoveFollower(item.id)}>
-                삭제
-              </button>
-            </>
-          )
-        })}
-      </div>
-      {hasMoreFollower && (
-        <button type="button" style={{ width: '200px' }} onClick={loadMoreFollowers}>
-          더보기
-        </button>
-      )}
-    </MainPage>
+    <Menu>
+      <MainPage>
+        <div>팔로워목록</div>
+        <div>
+          {followerList.map((item, i) => {
+            return (
+              <>
+                {item.nickname}
+                <button key={i} type="button" onClick={onRemoveFollower(item.id)}>
+                  삭제
+                </button>
+              </>
+            )
+          })}
+        </div>
+        {hasMoreFollower && (
+          <button type="button" style={{ width: '200px' }} onClick={loadMoreFollowers}>
+            더보기
+          </button>
+        )}
+      </MainPage>{' '}
+    </Menu>
   )
 }
 

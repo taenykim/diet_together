@@ -4,13 +4,14 @@ import { LOAD_USER_REQUEST } from '../reducers/user'
 import PostCard from '../components/index/PostCard'
 import { useSelector } from 'react-redux'
 import { RootState } from '../reducers'
+import Menu from '../components/Menu'
 
 const user = () => {
   const { mainPosts } = useSelector((state: RootState) => state.post)
   const { userInfo } = useSelector((state: RootState) => state.user)
 
   return (
-    <>
+    <Menu>
       {console.log(userInfo)}
       <div>{userInfo ? <div>닉넴 : {userInfo.nickname}</div> : null}</div>
       <div>{userInfo ? <div>포슽 : {userInfo.Posts}</div> : null}</div>
@@ -21,7 +22,7 @@ const user = () => {
           <PostCard key={c.id} post={c} />
         ))}
       </div>
-    </>
+    </Menu>
   )
 }
 
