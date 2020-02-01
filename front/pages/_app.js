@@ -12,6 +12,7 @@ import { LOAD_USER_REQUEST } from '../reducers/user'
 import axios from 'axios'
 import { Container } from 'next/app'
 import styled from 'styled-components'
+import { GlobalStyle } from '../reset.css.js'
 
 const FullContainer = styled.div`
   display: flex;
@@ -22,6 +23,7 @@ const FullContainer = styled.div`
 const _app = ({ Component, store, pageProps }) => {
   return (
     <FullContainer>
+      <GlobalStyle />
       <Container>
         <Provider store={store}>
           <Helmet
