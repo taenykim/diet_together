@@ -24,7 +24,7 @@ const index = () => {
     // )
     if (
       window.scrollY + document.documentElement.clientHeight >
-      document.documentElement.scrollHeight - 300
+      document.documentElement.scrollHeight - 260
     ) {
       if (hasMorePost) {
         const lastId = mainPosts[mainPosts.length - 1].id

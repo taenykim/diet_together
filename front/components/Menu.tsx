@@ -14,7 +14,9 @@ const FullContainer = styled.div`
 `
 
 const Menu_Container = styled.div`
-  margin-top: 19px;
+  position: sticky;
+  top: 19px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   div {
