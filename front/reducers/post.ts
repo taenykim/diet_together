@@ -3,10 +3,10 @@ import produce from 'immer'
 export const initialState = {
   mainPosts: [],
   imagePaths: [], // 이미지 미리보기 경로
-  addPostErrorReason: '', // 포스트 업로드 실패 사유
-  postAdded: false, // 포스트 업로드 성공
-  addCommentErrorReason: '',
+
+  postAdded: false,
   commentAdded: false,
+
   singlePost: null,
   hasMorePost: false
 }
@@ -87,12 +87,10 @@ export default (state = initialState, action) => {
         break
       }
       case ADD_POST_FAILURE: {
-        draft.addPostErrorReason = action.error
         break
       }
       // 댓글 작성 // ADD_COMMENT_REQUEST // api/post/:id/comment
       case ADD_COMMENT_REQUEST: {
-        draft.addCommentErrorReason = ''
         draft.commentAdded = false
         break
       }
@@ -177,6 +175,7 @@ export default (state = initialState, action) => {
       case REMOVE_POST_FAILURE: {
         break
       }
+      // 싱글 게시글 정보 불러오기 // LOAD_POST_REQUEST // api/post/:id
       case LOAD_POST_REQUEST: {
         break
       }
@@ -193,3 +192,4 @@ export default (state = initialState, action) => {
     }
   })
 }
+//

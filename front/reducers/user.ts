@@ -1,14 +1,16 @@
 import produce from 'immer'
 
 export const initialState = {
-  logInErrorReason: '',
-  isSignedUp: false,
-  signUpErrorReason: '',
   me: null, // 내 정보
   userInfo: null, // 남의 정보
-  followingList: [], // 팔로잉 리스트
-  followerList: [], // 팔로워 리스트
-  editNicknameErrorReason: '', // 이름 변경 실패 사유
+
+  followingList: [],
+  followerList: [],
+
+  logInErrorReason: '',
+  signUpErrorReason: '',
+  isSignedUp: false,
+
   hasMoreFollower: false,
   hasMoreFollowing: false
 }
@@ -216,7 +218,6 @@ export default (state = initialState, action) => {
       }
       // 닉네임 수정 // EDIT_NICKNAME_REQUEST // api/user/nickname
       case EDIT_NICKNAME_REQUEST: {
-        draft.editNicknameErrorReason = ''
         break
       }
       case EDIT_NICKNAME_SUCCESS: {
@@ -224,7 +225,6 @@ export default (state = initialState, action) => {
         break
       }
       case EDIT_NICKNAME_FAILURE: {
-        draft.editNicknameErrorReason = action.error
         break
       }
       // 몸무게 삭제 // WEIGHT_DELETE_REQUEST // api/user/weight/:id
@@ -245,3 +245,5 @@ export default (state = initialState, action) => {
     }
   })
 }
+// offset 부분..
+//

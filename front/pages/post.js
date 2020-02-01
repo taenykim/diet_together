@@ -60,3 +60,4 @@ Post.getInitialProps = async context => {
 }
 
 export default Post
+//
