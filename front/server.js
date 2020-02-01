@@ -50,7 +50,7 @@ app.prepare().then(() => {
     return handler(req, res)
   })
 
-  server.listen(3060, () => {
+  server.listen(prod ? process.env.PORT : 3060, () => {
     console.log('next+express running on http://localhost:3060')
   })
 })
