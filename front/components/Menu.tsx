@@ -15,16 +15,20 @@ const FullContainer = styled.div`
 
 const Menu_Container = styled.div`
   position: sticky;
-  top: 19px;
+  top: 0px;
   height: 100%;
   display: flex;
   flex-direction: column;
   div {
     padding: 10px;
   }
+  div:nth-child(1) {
+    margin-top: 30px;
+  }
   border: 2px solid #444;
 `
 const SearchBar = styled.div`
+  z-index: 5;
   position: fixed;
   width: 100vw;
   border: 2px solid #444;
@@ -55,6 +59,11 @@ const Menu = ({ children }) => {
         <SearchingForm />
       </SearchBar>
       <Menu_Container>
+        <div key="tutorial">
+          <Link href="/tutorial" prefetch>
+            <a>튜토리얼</a>
+          </Link>
+        </div>
         <div key="home" style={{ marginRight: '10px' }}>
           <Link href="/">
             <a>홈</a>
@@ -74,11 +83,6 @@ const Menu = ({ children }) => {
         <div key="appinfo">
           <Link href="/appinfo" prefetch>
             <a>앱 정보</a>
-          </Link>
-        </div>
-        <div key="tutorial">
-          <Link href="/tutorial" prefetch>
-            <a>튜토리얼</a>
           </Link>
         </div>
       </Menu_Container>
