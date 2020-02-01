@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { ADD_POST_REQUEST, UPLOAD_IMAGES_REQUEST, REMOVE_IMAGE } from '../../reducers/post'
 import styled from 'styled-components'
 import { RootState } from '../../reducers'
+import { backUrl } from '../../config/config'
 
 const PostFormContainer = styled.form`
   border: 1px solid black;
@@ -84,7 +85,7 @@ const PostForm = () => {
           {imagePaths.map((v, i) => {
             return (
               <div key={v} style={{ display: 'inline-block' }}>
-                <img src={`http://localhost:3065/${v}`} style={{ width: '200px' }} alt={v} />
+                <img src={`${backUrl}/${v}`} style={{ width: '200px' }} alt={v} />
                 <div>
                   <button type="button" onClick={onRemoveImage(i)}>
                     제거

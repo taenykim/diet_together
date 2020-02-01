@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Slick from 'react-slick'
+import { backUrl } from '../../config/config'
 
 const ImagesZoom = ({ images, onClose }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -45,10 +46,7 @@ const ImagesZoom = ({ images, onClose }) => {
             {images.map(v => {
               return (
                 <div style={{ padding: 32, textAlign: 'center' }}>
-                  <img
-                    src={`http://localhost:3065/${v.src}`}
-                    style={{ margin: '0 auto', maxHeight: 750 }}
-                  />
+                  <img src={`${backUrl}/${v.src}`} style={{ margin: '0 auto', maxHeight: 750 }} />
                 </div>
               )
             })}

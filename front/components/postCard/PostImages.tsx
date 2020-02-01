@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { useCallback, useState } from 'react'
 import ImagesZoom from './ImagesZoom'
+import { backUrl } from '../../config/config'
 
 const PostImages = ({ images }) => {
   const [showImagesZoom, setShowImagesZoom] = useState(false)
@@ -16,7 +17,7 @@ const PostImages = ({ images }) => {
   if (images.length === 1) {
     return (
       <>
-        <img src={`http://localhost:3065/${images[0].src}`} width="200px" onClick={onZoom} />
+        <img src={`${backUrl}/${images[0].src}`} width="200px" onClick={onZoom} />
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>
     )
@@ -25,8 +26,8 @@ const PostImages = ({ images }) => {
     return (
       <>
         <div>
-          <img src={`http://localhost:3065/${images[0].src}`} width="100px" onClick={onZoom} />
-          <img src={`http://localhost:3065/${images[1].src}`} width="100px" onClick={onZoom} />
+          <img src={`${backUrl}/${images[0].src}`} width="100px" onClick={onZoom} />
+          <img src={`${backUrl}/${images[1].src}`} width="100px" onClick={onZoom} />
         </div>
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>
@@ -35,7 +36,7 @@ const PostImages = ({ images }) => {
   return (
     <>
       <div>
-        <img src={`http://localhost:3065/${images[0].src}`} width="100px" onClick={onZoom} />
+        <img src={`${backUrl}/${images[0].src}`} width="100px" onClick={onZoom} />
         <div
           style={{
             display: 'inline-block',
