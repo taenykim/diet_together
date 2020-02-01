@@ -61,6 +61,11 @@ const Menu = ({ children }) => {
             <a>앱 정보</a>
           </Link>
         </div>
+        <div key="tutorial">
+          <Link href="/tutorial" prefetch>
+            <a>튜토리얼</a>
+          </Link>
+        </div>
       </Menu_Container>
       <div>{children}</div>
     </>

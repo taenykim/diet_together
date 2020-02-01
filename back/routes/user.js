@@ -16,11 +16,7 @@ router.get('/', isLoggedIn, (req, res) => {
   return res.json(user)
 })
 
-/**
- * 회원가입 *
- * server : /api/user/
- * front : SIGN_UP_REQUEST
- */
+// 회원가입 // SIGN_UP_REQUEST // api/user
 router.post('/', async (req, res, next) => {
   try {
     const exUser = await db.User.findOne({
@@ -41,7 +37,6 @@ router.post('/', async (req, res, next) => {
     return res.status(200).json(newUser)
   } catch (e) {
     console.error(e)
-    //에러처리
     return next(e)
   }
 })

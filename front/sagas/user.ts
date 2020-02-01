@@ -64,11 +64,8 @@ function* logIn(action) {
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn)
 }
-/**
- * 회원가입 *
- * server : /api/user/ (POST)
- * front : SIGN_UP_REQUEST
- */
+
+// 회원가입 // SIGN_UP_REQUEST // api/user
 function signUpAPI(signUpData) {
   return axios.post('/user/', signUpData)
 }

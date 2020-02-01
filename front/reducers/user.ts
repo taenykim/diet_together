@@ -94,6 +94,7 @@ export default (state = initialState, action) => {
       case LOG_OUT_FAILURE: {
         break
       }
+      // 회원가입 // SIGN_UP_REQUEST // api/user
       case SIGN_UP_REQUEST: {
         draft.isSignedUp = false
         draft.signUpErrorReason = ''

@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import Router from 'next/router'
 import { SIGN_UP_REQUEST } from '../../reducers/user'
 import { RootState } from '../../reducers'
 
@@ -16,13 +15,6 @@ const SignUpForm = () => {
 
   const dispatch = useDispatch()
   const { me } = useSelector((state: RootState) => state.user)
-
-  useEffect(() => {
-    if (me) {
-      alert('로그인했으니 메인페이지로 이동')
-      Router.push('/')
-    }
-  }, [me && me.id])
 
   const onSubmit = useCallback(
     e => {
