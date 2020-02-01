@@ -17,23 +17,31 @@ const Menu_Container = styled.div`
   position: sticky;
   top: 0px;
   width: 280px;
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  background-color: rgb(231, 231, 231);
   & > div {
+    background-color: white;
     display: flex;
     justify-content: flex-start;
-    padding-left: 80px;
-    padding-right: 60px;
-    font-size: 16px;
-    font-family: 'escore7';
+    padding: 20px 20px 16px 36px;
+    margin: 0px 40px 8px 60px;
+    font-size: 18px;
+    font-family: 'escore3';
+    box-shadow: inset -3px -3px 7px #ffffffb0, inset 3px 3px 5px rgba(94, 104, 121, 0.692);
+    border-radius: 5px;
+    a {
+      color: rgb(94, 94, 94);
+      text-decoration: none;
+    }
   }
   div:nth-child(1) {
-    margin-top: 30px;
+    margin-top: 40px;
   }
-  border-right: 2px solid #444;
-  border-top: 2px solid #444;
+  border-right: 1px solid rgb(148, 148, 148);
+  border-top: 1px solid rgb(148, 148, 148);
   border-collapse: collapse;
   z-index: 10;
 `
@@ -42,8 +50,8 @@ const SearchBar = styled.div`
   position: fixed;
   left: 280px;
   width: 100vw;
-  border-bottom: 2px solid #444;
-  border-top: 2px solid #444;
+  border-bottom: 1px solid rgb(148, 148, 148);
+  border-top: 1px solid rgb(148, 148, 148);
 `
 
 const HomeIcon = styled.img`
@@ -76,7 +84,7 @@ const Menu = ({ children }) => {
             <a>튜토리얼</a>
           </Link>
         </div>
-        <div key="home" style={{ marginRight: '10px' }}>
+        <div key="home">
           <Link href="/">
             <a>홈</a>
           </Link>
