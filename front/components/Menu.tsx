@@ -21,7 +21,7 @@ const Menu_Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: rgb(231, 231, 231);
+  background-color: #fff;
   & > div {
     background-color: white;
     display: flex;
@@ -48,20 +48,19 @@ const Menu_Container = styled.div`
 const SearchBar = styled.div`
   z-index: 5;
   position: fixed;
+  display: flex;
+  justify-content: flex-end;
   left: 280px;
-  width: 100vw;
+  height: 40px;
   border-bottom: 1px solid rgb(148, 148, 148);
   border-top: 1px solid rgb(148, 148, 148);
 `
-
-const HomeIcon = styled.img`
-  position: fixed;
-  width: 19px;
-  height: 19px;
-`
+// props 로 서칭바랑 컨텐츠 조절해보기!
 
 const Content_Container = styled.div`
   margin-top: 50px;
+  width: 50vw;
+  margin-left: 20px;
 `
 
 // children 은 Menu의 props 인 페이지들!
@@ -71,11 +70,6 @@ const Menu = ({ children }) => {
   return (
     <FullContainer>
       <SearchBar key="search">
-        <Link href="/">
-          <a>
-            <HomeIcon src="https://image.flaticon.com/icons/svg/2502/2502945.svg" />
-          </a>
-        </Link>
         <SearchingForm />
       </SearchBar>
       <Menu_Container>
