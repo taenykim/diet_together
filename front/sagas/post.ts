@@ -94,12 +94,9 @@ function* watchLoadMainPosts() {
   yield throttle(1000, LOAD_MAIN_POSTS_REQUEST, loadMainPosts)
 }
 
-/**
- * 남의 정보 게시글 불러오기
- *
- */
+// 남의 게시글 불러오기 // LOAD_USER_POSTS_REQUEST // api/posts/user/:id
 function loadUserPostsAPI(id) {
-  return axios.get(`/user/${id || 0}/posts`)
+  return axios.get(`/posts/user/${id}`)
 }
 
 function* loadUserPosts(action) {
@@ -302,6 +299,7 @@ function* watchRemovePost() {
   yield takeLatest(REMOVE_POST_REQUEST, removePost)
 }
 
+// 싱글 게시글 정보 불러오기 // LOAD_POST_REQUEST // api/post/:id
 function loadPostAPI(postId) {
   return axios.get(`/post/${postId}`)
 }
@@ -340,3 +338,4 @@ export default function* postSaga() {
     fork(watchLoadPost)
   ])
 }
+//

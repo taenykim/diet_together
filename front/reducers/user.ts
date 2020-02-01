@@ -68,7 +68,7 @@ export const REMOVE_POST_OF_ME = 'REMOVE_POST_OF_ME'
 export default (state = initialState, action) => {
   return produce(state, draft => {
     switch (action.type) {
-      // 로그인 // LOG_IN_REQUEST
+      // 로그인 // LOG_IN_REQUEST // api/user/login
       case LOG_IN_REQUEST: {
         draft.logInErrorReason = ''
         break
@@ -83,7 +83,7 @@ export default (state = initialState, action) => {
         draft.me = null
         break
       }
-      // 로그아웃 // LOG_OUT_REQUEST
+      // 로그아웃 // LOG_OUT_REQUEST // api/user/logout
       case LOG_OUT_REQUEST: {
         break
       }
@@ -119,6 +119,7 @@ export default (state = initialState, action) => {
       case WEIGHT_POST_FAILURE: {
         break
       }
+      // 회원정보 불러오기 // LOAD_USER_REQUEST // api/user/:id
       case LOAD_USER_REQUEST: {
         break
       }
@@ -199,6 +200,7 @@ export default (state = initialState, action) => {
       case LOAD_FOLLOWINGS_FAILURE: {
         break
       }
+      // 팔로워 삭제 // REMOVE_FOLLOWER_REQUEST // api/user/:id/follower
       case REMOVE_FOLLOWER_REQUEST: {
         break
       }

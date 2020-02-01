@@ -88,6 +88,7 @@ function* signUp(action) {
 function* watchSignUp() {
   yield takeEvery(SIGN_UP_REQUEST, signUp)
 }
+
 // 몸무게 추가 // WEIGHT_POST_REQUEUST // api/user/weight
 function weightPostAPI(weight) {
   return axios.post('/user/weight', { weight }, { withCredentials: true })
@@ -141,11 +142,7 @@ function* watchLogOut() {
   yield takeLatest(LOG_OUT_REQUEST, logOut)
 }
 
-/**
- * 회원정보 불러오기 (userId / x) *
- * server : /api/user/ (GET)
- * front : LOG_OUT_REQUEST
- */
+// 회원정보 불러오기 // LOAD_USER_REQUEST // api/user/:id
 function loadUserAPI(userId) {
   return axios.get(userId ? `/user/${userId}` : '/user/', {
     withCredentials: true
@@ -158,7 +155,7 @@ function* loadUser(action) {
     yield put({
       type: LOAD_USER_SUCCESS,
       data: result.data,
-      me: !action.data
+      me: !action.data // 내 정보일 시 데이터가 없으므로 true, 남의 정보일 시 id 정보가 있으므로 false
     })
   } catch (e) {
     console.error(e)
@@ -172,6 +169,7 @@ function* loadUser(action) {
 function* watchLoadUser() {
   yield takeEvery(LOAD_USER_REQUEST, loadUser)
 }
+
 // 팔로우 // FOLLOW_USER_REQUEST // api/user/:id/follow
 function followAPI(userId) {
   return axios.post(
@@ -202,6 +200,7 @@ function* follow(action) {
 function* watchFollow() {
   yield takeEvery(FOLLOW_USER_REQUEST, follow)
 }
+
 // 언팔로우 // UNFOLLOW_USER_REQUEST // api/user/:id/follow
 function unfollowAPI(userId) {
   return axios.delete(`/user/${userId}/follow`, {
@@ -280,6 +279,8 @@ function* loadFollowings(action) {
 function* watchLoadFollowings() {
   yield takeEvery(LOAD_FOLLOWINGS_REQUEST, loadFollowings)
 }
+
+// 팔로워 삭제 // REMOVE_FOLLOWER_REQUEST // api/user/:id/follower
 function removeFollowerAPI(userId) {
   return axios.delete(`/user/${userId}/follower`, {
     withCredentials: true
@@ -337,6 +338,7 @@ function* editNickname(action) {
 function* watchEditNickname() {
   yield takeEvery(EDIT_NICKNAME_REQUEST, editNickname)
 }
+
 // 몸무게 삭제 // WEIGHT_DELETE_REQUEST // api/user/wieght/:id
 function weightDeleteAPI(index) {
   return axios.delete(`/user/weight/${index}`, { withCredentials: true })
@@ -378,3 +380,5 @@ export default function* userSaga() {
     fork(watchWeightDelete)
   ])
 }
+// 그거 팔로잉 팔로워 목록 offset 문제만남음
+//

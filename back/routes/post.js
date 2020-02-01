@@ -74,6 +74,7 @@ router.post('/images', upload.array('image'), (req, res, next) => {
   }
 })
 
+// 싱글 게시글 정보 불러오기 // LOAD_POST_REQUEST // api/post/:id
 router.get('/:id', async (req, res, next) => {
   try {
     const post = await db.Post.findOne({
@@ -85,7 +86,7 @@ router.get('/:id', async (req, res, next) => {
         },
         {
           model: db.Image
-        }
+        } // 나중엔 postcard 형식으로 다 불러오자!
       ]
     })
     res.json(post)

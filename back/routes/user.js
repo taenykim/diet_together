@@ -5,15 +5,47 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const { isLoggedIn } = require('./middleware')
 
-/**
- * 로그인유지(me) *
- * server : /api/user/ (GET)
- * front : LOG_OUT_REQUEST
- */
+// 회원정보 불러오기(내정보:로그인유지기능) // LOAD_USER_REQUEST // api/user/:id
 router.get('/', isLoggedIn, (req, res) => {
   const user = Object.assign({}, req.user.toJSON())
   delete user.password
   return res.json(user)
+})
+
+// 회원정보 불러오기(남의정보(userIfno)) // LOAD_USER_REQUEST // api/user/:id
+router.get('/:id', async (req, res, next) => {
+  // 남의 정보 가져오는 것 ex) /api/user/123
+  try {
+    const user = await db.User.findOne({
+      where: { id: parseInt(req.params.id, 10) },
+      include: [
+        {
+          model: db.Post,
+          as: 'Posts',
+          attributes: ['id']
+        },
+        {
+          model: db.User,
+          as: 'Followings',
+          attributes: ['id']
+        },
+        {
+          model: db.User,
+          as: 'Followers',
+          attributes: ['id']
+        }
+      ],
+      attributes: ['id', 'nickname']
+    })
+    const jsonUser = user.toJSON()
+    jsonUser.Posts = jsonUser.Posts ? jsonUser.Posts.length : 0
+    jsonUser.Followings = jsonUser.Followings ? jsonUser.Followings.length : 0
+    jsonUser.Followers = jsonUser.Followers ? jsonUser.Followers.length : 0
+    res.json(jsonUser)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
 })
 
 // 회원가입 // SIGN_UP_REQUEST // api/user
@@ -51,46 +83,6 @@ router.post('/weight', isLoggedIn, async (req, res, next) => {
   } catch (e) {
     console.error(e)
     return next(e)
-  }
-})
-
-/**
- * 유저정보(게시글) 가져오기(click) *
- * server : api/user/:id (GET)
- * front : LOAD_USER_POST_REQUEST
- */
-router.get('/:id', async (req, res, next) => {
-  // 남의 정보 가져오는 것 ex) /api/user/123
-  try {
-    const user = await db.User.findOne({
-      where: { id: parseInt(req.params.id, 10) },
-      include: [
-        {
-          model: db.Post,
-          as: 'Posts',
-          attributes: ['id']
-        },
-        {
-          model: db.User,
-          as: 'Followings',
-          attributes: ['id']
-        },
-        {
-          model: db.User,
-          as: 'Followers',
-          attributes: ['id']
-        }
-      ],
-      attributes: ['id', 'nickname']
-    })
-    const jsonUser = user.toJSON()
-    jsonUser.Posts = jsonUser.Posts ? jsonUser.Posts.length : 0
-    jsonUser.Followings = jsonUser.Followings ? jsonUser.Followings.length : 0
-    jsonUser.Followers = jsonUser.Followers ? jsonUser.Followers.length : 0
-    res.json(jsonUser)
-  } catch (e) {
-    console.error(e)
-    next(e)
   }
 })
 
@@ -198,6 +190,7 @@ router.get('/:id/followers', isLoggedIn, async (req, res, next) => {
   }
 })
 
+// 팔로워 삭제 // REMOVE_FOLLOWER_REQUEST // api/user/:id/follower
 router.delete('/:id/follower', isLoggedIn, async (req, res, next) => {
   try {
     const me = await db.User.findOne({
@@ -237,34 +230,6 @@ router.delete('/:id/follow', isLoggedIn, async (req, res, next) => {
   }
 })
 
-router.get('/:id/posts', async (req, res, next) => {
-  try {
-    const posts = await db.Post.findAll({
-      where: {
-        UserId: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0
-      },
-      include: [
-        {
-          model: db.User,
-          attributes: ['id', 'nickname']
-        },
-        {
-          model: db.Image
-        },
-        {
-          model: db.User,
-          through: 'Like',
-          as: 'Likers',
-          attributes: ['id']
-        }
-      ]
-    })
-    res.json(posts)
-  } catch (e) {
-    console.error(e)
-    next(e)
-  }
-})
 // 닉네임 수정 // EDIT_NICKNAME_REQUEST // api/user/nickname
 router.patch('/nickname', isLoggedIn, async (req, res, next) => {
   try {

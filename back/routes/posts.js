@@ -44,5 +44,35 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+// 남의 게시글 불러오기 // LOAD_USER_POSTS_REQUEST // api/posts/user/:id
+router.get('/user/:id', async (req, res, next) => {
+  try {
+    const posts = await db.Post.findAll({
+      where: {
+        UserId: parseInt(req.params.id, 10) || (req.user && req.user.id) || 0
+      },
+      include: [
+        {
+          model: db.User,
+          attributes: ['id', 'nickname']
+        },
+        {
+          model: db.Image
+        },
+        {
+          model: db.User,
+          through: 'Like',
+          as: 'Likers',
+          attributes: ['id']
+        }
+      ]
+    })
+    res.json(posts)
+  } catch (e) {
+    console.error(e)
+    next(e)
+  }
+})
+
 module.exports = router
 //

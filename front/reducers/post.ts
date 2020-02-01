@@ -118,6 +118,7 @@ export default (state = initialState, action) => {
         break
       }
       // 모든 게시글 불러오기 // LOAD_MAIN_POSTS_REQUEST // api/posts?lastID=''&limit=''
+      // 남의 게시글 불러오기 // LOAD_USER_POSTS_REQUEST // api/posts/user/:id
       case LOAD_MAIN_POSTS_REQUEST:
       case LOAD_USER_POSTS_REQUEST: {
         draft.mainPosts = !action.lastId ? [] : draft.mainPosts
@@ -176,8 +177,14 @@ export default (state = initialState, action) => {
       case REMOVE_POST_FAILURE: {
         break
       }
+      case LOAD_POST_REQUEST: {
+        break
+      }
       case LOAD_POST_SUCCESS: {
         draft.singlePost = action.data
+        break
+      }
+      case LOAD_POST_FAILURE: {
         break
       }
       default: {
