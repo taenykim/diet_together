@@ -46,6 +46,10 @@ app.use('/api/user', userAPIRouter)
 app.use('/api/post', postAPIRouter)
 app.use('/api/posts', postsAPIRouter)
 
-app.listen(3065, () => {
+app.get('/', (req, res) => {
+  res.send('diet_together 백엔드서버')
+})
+
+app.listen(process.env.NODE_ENV === 'production' ? process.env.PORT : 3065, () => {
   console.log('server is running on http://localhost:3065')
 })
