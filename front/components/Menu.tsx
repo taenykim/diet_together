@@ -46,9 +46,19 @@ const Menu = ({ children }) => {
           </Link>
         </div>
         <div> {me ? <UserProfile /> : <LoginForm />}</div>
+        <div key="weight">
+          <Link href="/weight" prefetch>
+            <a>내 그래프</a>
+          </Link>
+        </div>
         <div key="like">
           <Link href="/like" prefetch>
             <a>좋아요</a>
+          </Link>
+        </div>
+        <div key="appinfo">
+          <Link href="/appinfo" prefetch>
+            <a>앱 정보</a>
           </Link>
         </div>
       </Menu_Container>

@@ -32,6 +32,7 @@ const PostCard = ({ post }) => {
   // }, [id])
   ////////////////////////////////////
   const liked = id && post.Likers && post.Likers.find(v => v.id === id)
+  const myPost = id === post.User.id
 
   const onToggleComment = useCallback(() => {
     setCommentFormOpened(prev => !prev)
@@ -116,9 +117,11 @@ const PostCard = ({ post }) => {
         >
           좋아요
         </button>
-        <button type="button" onClick={onRemovePost(post.id)}>
-          삭제
-        </button>
+        {myPost && (
+          <button type="button" onClick={onRemovePost(post.id)}>
+            삭제
+          </button>
+        )}
         {<FollowButton post={post} onUnfollow={onUnfollow} onFollow={onFollow} />}
       </PostCardContainer>
       {commentFormOpened && (

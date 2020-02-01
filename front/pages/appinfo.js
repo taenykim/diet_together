@@ -4,9 +4,8 @@ import styled from 'styled-components'
 const MainPage = styled.div`
   margin-top: 19px;
 `
-const search = () => {
-  return <MainPage>검색페이지임다</MainPage>
+const appinfo = () => {
+  return <MainPage>앱 정보</MainPage>
 }
 
-export default search
-//
+export default appinfo

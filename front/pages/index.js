@@ -12,7 +12,7 @@ const index = () => {
   const { me } = useSelector(state => state.user)
   const { mainPosts, hasMorePost } = useSelector(state => state.post)
   const dispatch = useDispatch()
-  const countRef = useRef([]) // 다시
+  // const countRef = useRef([]) // 다시
 
   const onScroll = useCallback(() => {
     // console.log(
@@ -26,13 +26,13 @@ const index = () => {
     ) {
       if (hasMorePost) {
         const lastId = mainPosts[mainPosts.length - 1].id
-        if (!countRef.current.includes(lastId)) {
-          dispatch({
-            type: LOAD_MAIN_POSTS_REQUEST,
-            lastId
-          })
-          countRef.current.push(lastId)
-        }
+        // if (!countRef.current.includes(lastId)) {
+        dispatch({
+          type: LOAD_MAIN_POSTS_REQUEST,
+          lastId
+        })
+        // countRef.current.push(lastId)
+        // }
       }
     }
   }, [hasMorePost, mainPosts.length])

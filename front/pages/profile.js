@@ -3,7 +3,6 @@ import NicknameEditForm from '../components/profile/NicknameEditForm'
 import { useSelector } from 'react-redux'
 import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
 import PostCard from '../components/index/PostCard'
-import WeightView from '../components/profile/WeightView'
 import styled from 'styled-components'
 
 const MainPage = styled.div`
@@ -11,17 +10,12 @@ const MainPage = styled.div`
 `
 
 const profile = () => {
-  const Weights = useSelector(state => state.user.me && state.user.me.Weights)
-
   const { mainPosts } = useSelector(state => state.post)
 
   return (
     <MainPage>
       <NicknameEditForm />
       <div>
-        <div>
-          <WeightView weights={Weights} />
-        </div>
         <div>
           {mainPosts.map((c, i) => (
             <PostCard key={i} post={c} />
