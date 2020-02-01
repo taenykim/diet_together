@@ -7,7 +7,7 @@
     "dev": "nodemon",
     "build": "ANALYZE=false next build",
     "prestart": "npm run build",
-    "start": "PORT=80 pm2 start server"
+    "start": "NODE_ENV=production PORT=80 pm2 start server.js"
   },
   "author": "taenykim",
   "license": "MIT",
