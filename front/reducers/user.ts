@@ -154,9 +154,9 @@ export default (state = initialState, action) => {
         break
       }
       case UNFOLLOW_USER_SUCCESS: {
-        const index = draft.me.Followings.indexOf(action.data)
+        const index = draft.me.Followings.findIndex(v => v.id === action.data)
         draft.me.Followings.splice(index, 1)
-        const index2 = draft.followingList.indexOf(action.data)
+        const index2 = draft.me.Followings.findIndex(v => v.id === action.data)
         draft.followingList.splice(index2, 1)
         break
       }
