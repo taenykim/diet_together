@@ -1,6 +1,46 @@
 import { createGlobalStyle } from 'styled-components'
 
-export const GlobalStyle = createGlobalStyle`html, body, div, span, applet, object, iframe,
+export const GlobalStyle = createGlobalStyle`
+@font-face {
+	font-family: "escore1"; 
+	src: url(/SCDream1.otf) format("opentype");
+}
+@font-face {
+	font-family: "escore2"; 
+	src: url(/SCDream2.otf) format("opentype");
+}
+@font-face {
+	font-family: "escore3"; 
+	src: url(/SCDream3.otf) format("opentype");
+}
+@font-face {
+	font-family: "escore4"; 
+	src: url(/SCDream4.otf) format("opentype");
+}
+@font-face {
+	font-family: "escore5"; 
+	src: url(/SCDream5.otf) format("opentype");
+}
+@font-face {
+	font-family: "escore6"; 
+	src: url(/SCDream6.otf) format("opentype");
+}
+@font-face {
+	font-family: "escore7"; 
+	src: url(/SCDream7.otf) format("opentype");
+}
+@font-face {
+	font-family: "escore8"; 
+	src: url(/SCDream8.otf) format("opentype");
+}
+@font-face {
+	font-family: "escore9"; 
+	src: url(/SCDream9.otf) format("opentype");
+}
+  
+
+
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,

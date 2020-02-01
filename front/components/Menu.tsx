@@ -16,22 +16,34 @@ const FullContainer = styled.div`
 const Menu_Container = styled.div`
   position: sticky;
   top: 0px;
+  width: 280px;
   height: 100%;
   display: flex;
   flex-direction: column;
-  div {
-    padding: 10px;
+  justify-content: center;
+  & > div {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 80px;
+    padding-right: 60px;
+    font-size: 16px;
+    font-family: 'escore7';
   }
   div:nth-child(1) {
     margin-top: 30px;
   }
-  border: 2px solid #444;
+  border-right: 2px solid #444;
+  border-top: 2px solid #444;
+  border-collapse: collapse;
+  z-index: 10;
 `
 const SearchBar = styled.div`
   z-index: 5;
   position: fixed;
+  left: 280px;
   width: 100vw;
-  border: 2px solid #444;
+  border-bottom: 2px solid #444;
+  border-top: 2px solid #444;
 `
 
 const HomeIcon = styled.img`

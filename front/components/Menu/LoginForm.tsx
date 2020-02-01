@@ -46,9 +46,12 @@ const LoginForm = () => {
     <>
       <LoginFormContainer onSubmit={onSubmitForm}>
         <div>
-          <label htmlFor="user-id">아이디</label>
-          <br />
-          <input name="user-id" value={id} onChange={onChangeId} required />
+          <div>
+            <label htmlFor="user-id">아이디</label>
+          </div>
+          <div>
+            <input name="user-id" value={id} onChange={onChangeId} required />
+          </div>
         </div>
         <div>
           <label htmlFor="user-password">비밀번호</label>
