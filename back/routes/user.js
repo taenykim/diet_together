@@ -145,6 +145,11 @@ router.post('/login/', (req, res, next) => {
               model: db.Weight,
               as: 'Weights',
               attrigutes: ['weight']
+            },
+            {
+              model: db.Post,
+              through: 'Like',
+              as: 'Liked'
             }
           ],
           attributes: ['id', 'nickname', 'userId']

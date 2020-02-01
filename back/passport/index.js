@@ -32,6 +32,11 @@ module.exports = () => {
           {
             model: db.Weight,
             as: 'Weights'
+          },
+          {
+            model: db.Post,
+            through: 'Like',
+            as: 'Liked'
           }
         ]
       })
