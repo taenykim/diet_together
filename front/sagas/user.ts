@@ -64,7 +64,6 @@ function* logIn(action) {
 function* watchLogIn() {
   yield takeLatest(LOG_IN_REQUEST, logIn)
 }
-
 /**
  * 회원가입 *
  * server : /api/user/ (POST)
