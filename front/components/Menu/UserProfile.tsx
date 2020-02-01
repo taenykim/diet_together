@@ -25,12 +25,14 @@ const UserProfile = () => {
     <UserProfileContainer>
       <div>
         <Link href="/profile" prefetch>
-          <a>
-            <div>내 이름 : {me.nickname}</div>
-          </a>
+          <a>내 이름 : {me.nickname}</a>
         </Link>
       </div>
-      <div>게시물 수 : {me.Posts.length}</div>
+      <div>
+        <Link href="/profile" prefetch>
+          <a>게시물 수 : {me.Posts.length}</a>
+        </Link>
+      </div>
       <div>
         <Link href="/followings">
           <a>팔로잉 수 : {me.Followings.length}</a>

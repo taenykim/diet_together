@@ -7,6 +7,12 @@ import { useSelector } from 'react-redux'
 import SearchingForm from './Menu/SearchingForm'
 import { RootState } from '../reducers'
 
+const FullContainer = styled.div`
+  display: flex;
+  justify-content: stretch;
+  align-items: stretch;
+`
+
 const Menu_Container = styled.div`
   margin-top: 19px;
   display: flex;
@@ -24,12 +30,12 @@ const SearchBar = styled.div`
 
 const HomeIcon = styled.img`
   position: fixed;
+  width: 19px;
+  height: 19px;
 `
 
-const FullContainer = styled.div`
-  display: flex;
-  justify-content: stretch;
-  align-items: stretch;
+const Content_Container = styled.div`
+  margin-top: 50px;
 `
 
 // children 은 Menu의 props 인 페이지들!
@@ -41,7 +47,7 @@ const Menu = ({ children }) => {
       <SearchBar key="search">
         <Link href="/">
           <a>
-            <HomeIcon src="localhost:3060/favicon.ico" /> {/*아직못불러옴*/}
+            <HomeIcon src="https://image.flaticon.com/icons/svg/2502/2502945.svg" />
           </a>
         </Link>
         <SearchingForm />
@@ -74,7 +80,7 @@ const Menu = ({ children }) => {
           </Link>
         </div>
       </Menu_Container>
-      <div>{children}</div>
+      <Content_Container>{children}</Content_Container>
     </FullContainer>
   )
 }
