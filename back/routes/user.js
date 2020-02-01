@@ -72,6 +72,7 @@ router.post('/', async (req, res, next) => {
     return next(e)
   }
 })
+
 // 몸무게 추가 // WEIGHT_POST_REQUEST // api/user/weight
 router.post('/weight', isLoggedIn, async (req, res, next) => {
   try {
@@ -150,12 +151,7 @@ router.post('/login/', (req, res, next) => {
   })(req, res, next)
 })
 
-/**
- * *
- * server :  (GET)
- * front :
- */
-
+//
 router.get('/:id/followings', isLoggedIn, async (req, res, next) => {
   try {
     const user = await db.User.findOne({
@@ -173,6 +169,7 @@ router.get('/:id/followings', isLoggedIn, async (req, res, next) => {
   }
 })
 
+//
 router.get('/:id/followers', isLoggedIn, async (req, res, next) => {
   try {
     const user = await db.User.findOne({
@@ -247,6 +244,7 @@ router.patch('/nickname', isLoggedIn, async (req, res, next) => {
     next(e)
   }
 })
+
 // 몸무게 삭제 // WEIGHT_DELETE_REQUEST // api/user/weight/:id
 router.delete('/weight/:id', isLoggedIn, async (req, res, next) => {
   try {

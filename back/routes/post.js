@@ -63,6 +63,7 @@ router.post('/', isLoggedIn, upload.none(), async (req, res, next) => {
     next(e)
   }
 })
+
 // 이미지 미리보기 업로드 // UPLOAD_IMAGES_REQUEST // api/post/images
 router.post('/images', upload.array('image'), (req, res, next) => {
   try {
@@ -152,6 +153,7 @@ router.post('/:id/comment', isLoggedIn, async (req, res, next) => {
     return next(e)
   }
 })
+
 // 게시글 좋아요 // LIKE_POST_REQUEST // api/post/:id/like
 router.post('/:id/like', isLoggedIn, async (req, res, next) => {
   try {
@@ -166,6 +168,7 @@ router.post('/:id/like', isLoggedIn, async (req, res, next) => {
     next(e)
   }
 })
+
 // 게시글 좋아요 취소 // UNLIKE_POST_REQUEST // api/post/:id/like
 router.delete('/:id/like', isLoggedIn, async (req, res, next) => {
   try {

@@ -10,6 +10,7 @@ export const initialState = {
   logInErrorReason: '',
   signUpErrorReason: '',
   isSignedUp: false,
+  isWeightPosted: false,
 
   hasMoreFollower: false,
   hasMoreFollowing: false
@@ -116,6 +117,7 @@ export default (state = initialState, action) => {
       }
       case WEIGHT_POST_SUCCESS: {
         draft.me.Weights.push(action.data)
+        draft.isWeightPosted = true
         break
       }
       case WEIGHT_POST_FAILURE: {

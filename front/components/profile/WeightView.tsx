@@ -1,15 +1,18 @@
 import * as React from 'react'
-import { useState, useCallback } from 'react'
-import { useDispatch } from 'react-redux'
+import { useEffect, useState, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { WEIGHT_POST_REQUEST, WEIGHT_DELETE_REQUEST } from '../../reducers/user'
+import { RootState } from '../../reducers'
 
 const WeightView = ({ weights }) => {
   const [weight, setWeight] = useState('')
   const dispatch = useDispatch()
+  const { isWeightPosted } = useSelector((state: RootState) => state.user)
 
   const onChangeWeight = useCallback(e => {
     setWeight(e.target.value)
   }, [])
+
   const onSubmitWeight = useCallback(
     e => {
       e.preventDefault()
@@ -20,6 +23,7 @@ const WeightView = ({ weights }) => {
     },
     [weight]
   )
+
   const onRemoveWeight = useCallback(
     weight => () => {
       dispatch({
@@ -29,6 +33,13 @@ const WeightView = ({ weights }) => {
     },
     []
   )
+
+  useEffect(() => {
+    if (isWeightPosted) {
+      setWeight('')
+    }
+  }, [isWeightPosted])
+
   return (
     <>
       <form onSubmit={onSubmitWeight}>
