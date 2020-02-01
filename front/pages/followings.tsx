@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { UNFOLLOW_USER_REQUEST, LOAD_FOLLOWINGS_REQUEST } from '../reducers/user'
 import { RootState } from '../reducers'
 import Menu from '../components/Menu'
+import Link from 'next/link'
 
 const MainPage = styled.div`
   margin-top: 19px;
@@ -38,7 +39,9 @@ const followings = () => {
           {followingList.map((item, i) => {
             return (
               <>
-                {item.nickname}
+                <Link href={{ pathname: '/user', query: { id: item.id } }} as={`/user/${item.id}`}>
+                  <a>{item.nickname}</a>
+                </Link>
                 <button key={i} type="button" onClick={onUnfollow(item.id)}>
                   삭제
                 </button>
@@ -51,7 +54,7 @@ const followings = () => {
             더보기
           </button>
         )}
-      </MainPage>{' '}
+      </MainPage>
     </Menu>
   )
 }

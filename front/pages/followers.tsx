@@ -4,6 +4,7 @@ import { LOAD_FOLLOWERS_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/use
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../reducers'
 import Menu from '../components/Menu'
+import Link from 'next/link'
 
 const MainPage = styled.div`
   margin-top: 19px;
@@ -38,7 +39,9 @@ const followers = () => {
           {followerList.map((item, i) => {
             return (
               <>
-                {item.nickname}
+                <Link href={{ pathname: '/user', query: { id: item.id } }} as={`/user/${item.id}`}>
+                  <a>{item.nickname}</a>
+                </Link>
                 <button key={i} type="button" onClick={onRemoveFollower(item.id)}>
                   삭제
                 </button>
@@ -51,7 +54,7 @@ const followers = () => {
             더보기
           </button>
         )}
-      </MainPage>{' '}
+      </MainPage>
     </Menu>
   )
 }
