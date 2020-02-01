@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
-import PostCard from '../components/index/PostCard'
+import PostCard from '../components/mainPost/PostCard'
 import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post'
 import { LOAD_USER_REQUEST } from '../reducers/user'
 import { RootState } from '../reducers'

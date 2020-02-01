@@ -1,10 +1,10 @@
 import * as React from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
-import LoginForm from './LoginForm'
-import UserProfile from './UserProfile'
+import LoginForm from './Menu/LoginForm'
+import UserProfile from './Menu/UserProfile'
 import { useSelector } from 'react-redux'
-import SearchingForm from './SearchingForm'
+import SearchingForm from './Menu/SearchingForm'
 import { RootState } from '../reducers'
 
 const Menu_Container = styled.div`

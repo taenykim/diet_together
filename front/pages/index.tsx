@@ -1,6 +1,6 @@
 import React, { useEffect, useCallback, useRef } from 'react'
-import PostForm from '../components/index/PostForm'
-import PostCard from '../components/index/PostCard'
+import PostForm from '../components/mainPost/PostForm'
+import PostCard from '../components/mainPost/PostCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post'
 import styled from 'styled-components'

@@ -1,10 +1,10 @@
 import * as React from 'react'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { LOG_OUT_REQUEST } from '../reducers/user'
+import { LOG_OUT_REQUEST } from '../../reducers/user'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { RootState } from '../reducers'
+import { RootState } from '../../reducers'
 
 const UserProfileContainer = styled.div`
   color: skyblue;

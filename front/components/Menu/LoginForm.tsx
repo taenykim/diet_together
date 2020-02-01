@@ -2,9 +2,9 @@ import * as React from 'react'
 import { useState, useCallback } from 'react'
 import Link from 'next/link'
 import { useDispatch, useSelector } from 'react-redux'
-import { LOG_IN_REQUEST } from '../reducers/user'
+import { LOG_IN_REQUEST } from '../../reducers/user'
 import styled from 'styled-components'
-import { RootState } from '../reducers'
+import { RootState } from '../../reducers'
 
 const LoginFormContainer = styled.form`
   border: 1px solid black;
