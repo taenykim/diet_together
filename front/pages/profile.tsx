@@ -4,13 +4,14 @@ import { useSelector } from 'react-redux'
 import { LOAD_USER_POSTS_REQUEST } from '../reducers/post'
 import PostCard from '../components/index/PostCard'
 import styled from 'styled-components'
+import { RootState } from '../reducers'
 
 const MainPage = styled.div`
   margin-top: 19px;
 `
 
 const profile = () => {
-  const { mainPosts } = useSelector(state => state.post)
+  const { mainPosts } = useSelector((state: RootState) => state.post)
 
   return (
     <MainPage>

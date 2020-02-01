@@ -2,6 +2,7 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { useDispatch, useSelector } from 'react-redux'
 import { UNFOLLOW_USER_REQUEST, LOAD_FOLLOWINGS_REQUEST } from '../reducers/user'
+import { RootState } from '../reducers'
 
 const MainPage = styled.div`
   margin-top: 19px;
@@ -9,7 +10,7 @@ const MainPage = styled.div`
 
 const followings = () => {
   const dispatch = useDispatch()
-  const { followingList, hasMoreFollowing } = useSelector(state => state.user)
+  const { followingList, hasMoreFollowing } = useSelector((state: RootState) => state.user)
 
   const onUnfollow = useCallback(
     userId => () => {

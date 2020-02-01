@@ -3,13 +3,14 @@ import { useSelector } from 'react-redux'
 import { LOAD_POST_REQUEST } from '../reducers/post'
 import Helmet from 'react-helmet'
 import styled from 'styled-components'
+import { RootState } from '../reducers'
 
 const MainPage = styled.div`
   margin-top: 19px;
 `
 
 const Post = ({ id }) => {
-  const { singlePost } = useSelector(state => state.post)
+  const { singlePost } = useSelector((state: RootState) => state.post)
   return (
     <>
       <Helmet

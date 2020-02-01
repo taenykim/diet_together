@@ -4,15 +4,18 @@ import { useSelector } from 'react-redux'
 import PostCard from '../components/index/PostCard'
 import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post'
 import { LOAD_USER_REQUEST } from '../reducers/user'
+import { RootState } from '../reducers'
 
 const MainPage = styled.div`
   margin-top: 19px;
 `
 const like = () => {
-  const { mainPosts } = useSelector(state => state.post)
+  const { mainPosts } = useSelector((state: RootState) => state.post)
   const tmpPosts = []
-  const Liked = useSelector(state => state.user && state.user.me && state.user.me.Liked)
-  const { me } = useSelector(state => state.user)
+  const Liked = useSelector(
+    (state: RootState) => state.user && state.user.me && state.user.me.Liked
+  )
+  const { me } = useSelector((state: RootState) => state.user)
   console.log(mainPosts, Liked)
   return (
     <MainPage>

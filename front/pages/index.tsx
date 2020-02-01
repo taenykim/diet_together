@@ -4,13 +4,14 @@ import PostCard from '../components/index/PostCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post'
 import styled from 'styled-components'
+import { RootState } from '../reducers'
 
 const MainPage = styled.div`
   margin-top: 19px;
 `
 const index = () => {
-  const { me } = useSelector(state => state.user)
-  const { mainPosts, hasMorePost } = useSelector(state => state.post)
+  const { me } = useSelector((state: RootState) => state.user)
+  const { mainPosts, hasMorePost } = useSelector((state: RootState) => state.post)
   const dispatch = useDispatch()
   // const countRef = useRef([]) // 다시
 

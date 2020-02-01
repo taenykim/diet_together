@@ -2,13 +2,14 @@ import React, { useCallback } from 'react'
 import styled from 'styled-components'
 import { LOAD_FOLLOWERS_REQUEST, REMOVE_FOLLOWER_REQUEST } from '../reducers/user'
 import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '../reducers'
 
 const MainPage = styled.div`
   margin-top: 19px;
 `
 
 const followers = () => {
-  const { followerList, hasMoreFollower } = useSelector(state => state.user)
+  const { followerList, hasMoreFollower } = useSelector((state: RootState) => state.user)
   const dispatch = useDispatch()
 
   const loadMoreFollowers = useCallback(() => {
