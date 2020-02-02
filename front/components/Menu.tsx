@@ -23,9 +23,13 @@ const Menu_Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  border-right: 1px solid rgb(148, 148, 148);
+  border-top: 1px solid rgb(148, 148, 148);
+  border-collapse: collapse;
+  z-index: 10;
+  background: #e0e5ec;
   & > div {
     position: relative;
-    background-color: #e0e5ec;
     display: flex;
     justify-content: flex-start;
     padding: 20px 20px 16px 46px;
@@ -44,11 +48,6 @@ const Menu_Container = styled.div`
   & > div:nth-child(1) {
     margin-top: 72px;
   }
-  border-right: 1px solid rgb(148, 148, 148);
-  border-top: 1px solid rgb(148, 148, 148);
-  border-collapse: collapse;
-  z-index: 10;
-  background: #e0e5ec;
 `
 const SearchBar = styled.div`
   z-index: 5;

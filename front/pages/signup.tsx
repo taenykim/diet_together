@@ -1,31 +1,27 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
 import SignUpForm from '../components/signup/SignUpForm'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import Router from 'next/router'
 import { RootState } from '../reducers'
 import Menu from '../components/Menu'
-
-const MainPage = styled.div`
-  margin-top: 19px;
-`
+import { SIGN_UP_SIDEEFFECT } from '../reducers/user'
 
 const signup = () => {
-  const { isSignedUp } = useSelector((state: RootState) => state.user)
+  const { isSignedUp, me } = useSelector((state: RootState) => state.user)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (isSignedUp) {
-      confirm('튜토리얼 페이지 가쉴?') === true ? Router.push('/tutorial') : null
+      confirm('회원가입이 성공했습니다. 튜토리얼을 하시겠습니까?') === true
+        ? Router.push('/tutorial')
+        : Router.push('/')
+      dispatch({
+        type: SIGN_UP_SIDEEFFECT
+      })
     }
   }, [isSignedUp])
 
-  return (
-    <Menu>
-      <MainPage>
-        <SignUpForm />
-      </MainPage>
-    </Menu>
-  )
+  return <Menu>{me ? <div>이미 회원이십니다 ^^</div> : <SignUpForm />}</Menu>
 }
 
 export default signup

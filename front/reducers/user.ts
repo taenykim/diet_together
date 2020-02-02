@@ -19,6 +19,7 @@ export const initialState = {
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST' as const
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS' as const
 export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE' as const
+export const SIGN_UP_SIDEEFFECT = 'SIGN_UP_SIDEEFFECT' as const
 
 export const WEIGHT_POST_FAILURE = 'WEIGHT_POST_FAILURE' as const
 export const WEIGHT_POST_SUCCESS = 'WEIGHT_POST_SUCCESS' as const
@@ -109,6 +110,10 @@ export default (state = initialState, action) => {
       }
       case SIGN_UP_FAILURE: {
         draft.signUpErrorReason = action.reason
+        break
+      }
+      case SIGN_UP_SIDEEFFECT: {
+        draft.isSignedUp = false
         break
       }
       // 몸무게 추가 // WEIGHT_POST_REQUEST // api/user/weight

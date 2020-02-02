@@ -20,7 +20,6 @@ const SignUpForm = () => {
   const [termError, setTermError] = useState(false)
 
   const dispatch = useDispatch()
-  const { me } = useSelector((state: RootState) => state.user)
 
   const onSubmit = useCallback(
     e => {
@@ -68,9 +67,6 @@ const SignUpForm = () => {
     setTerm(e.target.checked)
   }, [])
 
-  if (me) {
-    return null
-  }
   return (
     <form onSubmit={onSubmit}>
       <div>
