@@ -53,6 +53,8 @@ const index = () => {
     ) {
       if (hasMorePost) {
         const lastId = mainPosts[mainPosts.length - 1].id
+        console.log(lastId)
+
         // if (!countRef.current.includes(lastId)) {
         dispatch({
           type: LOAD_MAIN_POSTS_REQUEST,

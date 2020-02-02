@@ -141,9 +141,10 @@ export default (state = initialState, action) => {
       }
       case LOAD_MAIN_POSTS_FAILURE:
       case LOAD_USER_POSTS_FAILURE:
-      case LOAD_LIKED_POSTS_SUCCESS: {
+      case LOAD_LIKED_POSTS_FAILURE: {
         break
       }
+
       // 게시글 좋아요 // LIKE_POST_REQUEST // api/post/:id/like
       case LIKE_POST_REQUEST: {
         break

@@ -98,13 +98,14 @@ function* watchLoadMainPosts() {
 }
 
 // 남의 게시글 불러오기 // LOAD_USER_POSTS_REQUEST // api/posts/user/:id
-function loadUserPostsAPI(id) {
-  return axios.get(`/posts/user/${id}`)
+function loadUserPostsAPI(id, lastId = 0, limit = 10) {
+  return axios.get(`/posts/user/${id}/?lastId=${lastId}&limit=${limit}`)
 }
 
 function* loadUserPosts(action) {
   try {
-    const result = yield call(loadUserPostsAPI, action.data)
+    // console.log('엑션', action.data)
+    const result = yield call(loadUserPostsAPI, action.data, action.lastId)
     yield put({
       type: LOAD_USER_POSTS_SUCCESS,
       data: result.data
