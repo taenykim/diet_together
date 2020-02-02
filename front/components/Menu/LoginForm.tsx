@@ -69,11 +69,13 @@ const LoginForm = () => {
         {/* {console.log(logInErrorReason)} */}
         <LoginError>{logInErrorReason}</LoginError>
         <div>
-          <button type="submit">로그인</button>
+          <button style={{ cursor: 'pointer' }} type="submit">
+            로그인
+          </button>
         </div>
         <Link href="/signup">
           <a>
-            <button>회원가입</button>
+            <button style={{ cursor: 'pointer' }}>회원가입</button>
           </a>
         </Link>
       </LoginFormContainer>

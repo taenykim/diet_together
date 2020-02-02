@@ -33,7 +33,7 @@ const Menu_Container = styled.div`
     display: flex;
     justify-content: flex-start;
     padding: 20px 20px 16px 46px;
-    margin: 0px 40px 8px 60px;
+    margin: 0px 40px 8px 40px;
     font-size: 18px;
     font-family: 'escore4';
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -44,9 +44,20 @@ const Menu_Container = styled.div`
       text-decoration: none;
       color: rgb(94, 94, 94);
     }
+    a: hover {
+      color: black;
+    }
+  }
+  & > div:hover {
+    box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48), inset -3px -3px 7px #ffffff;
   }
   & > div:nth-child(1) {
-    margin-top: 72px;
+    font-family: escore9;
+    font-size: 30px;
+    padding: 20px 20px 16px 14px;
+    margin: 26px 40px 16px 40px;
+    box-shadow: none;
+    border: none;
   }
 `
 const SearchBar = styled.div`
@@ -88,6 +99,7 @@ const Menu = ({ children }) => {
   return (
     <FullContainer>
       <Menu_Container>
+        <div style={{ cursor: 'pointer' }}>DIET TOGETHER</div>
         <div key="tutorial">
           <MenuIcon src="https://image.flaticon.com/icons/svg/82/82648.svg"></MenuIcon>
           <Link href="/tutorial" prefetch>
