@@ -16,7 +16,8 @@ import styled from 'styled-components'
 import { RootState } from '../../reducers'
 
 const PostCardContainer = styled.div`
-  width: 320px;
+  border-radius: 4px;
+  box-shadow: 4px 2px 16px rgba(136, 165, 191, 0.48), -4px -2px 16px #ffffff;
 `
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)

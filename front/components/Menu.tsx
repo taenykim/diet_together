@@ -63,6 +63,7 @@ const SearchBar = styled.div`
 const Content_Container = styled.div`
   margin: 50px 0px 0px 0px;
   width: calc(100vw - 280px);
+  padding: 10px;
 `
 
 // children 은 Menu의 props 인 페이지들!

@@ -8,6 +8,7 @@ import { backUrl } from '../../config/config'
 
 const PostFormContainer = styled.form`
   border: 1px solid black;
+  margin-bottom: 20px;
 `
 const PostForm = () => {
   const dispatch = useDispatch()
