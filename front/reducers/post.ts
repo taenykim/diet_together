@@ -19,6 +19,10 @@ export const LOAD_USER_POSTS_REQUEST = 'LOAD_USER_POSTS_REQUEST'
 export const LOAD_USER_POSTS_SUCCESS = 'LOAD_USER_POSTS_SUCCESS'
 export const LOAD_USER_POSTS_FAILURE = 'LOAD_USER_POSTS_FAILURE'
 
+export const LOAD_LIKED_POSTS_REQUEST = 'LOAD_LIKED_POSTS_REQUEST'
+export const LOAD_LIKED_POSTS_SUCCESS = 'LOAD_LIKED_POSTS_SUCCESS'
+export const LOAD_LIKED_POSTS_FAILURE = 'LOAD_LIKED_POSTS_FAILURE'
+
 export const UPLOAD_IMAGES_REQUEST = 'UPLOAD_IMAGES_REQUEST'
 export const UPLOAD_IMAGES_SUCCESS = 'UPLOAD_IMAGES_SUCCESS'
 export const UPLOAD_IMAGES_FAILURE = 'UPLOAD_IMAGES_FAILURE'
@@ -117,14 +121,17 @@ export default (state = initialState, action) => {
       }
       // 모든 게시글 불러오기 // LOAD_MAIN_POSTS_REQUEST // api/posts?lastID=''&limit=''
       // 남의 게시글 불러오기 // LOAD_USER_POSTS_REQUEST // api/posts/user/:id
+      // 좋아요 게시글 불러오기 // LOAD_LIKED_POSTS_REQUEST // api/posts/like/:id
       case LOAD_MAIN_POSTS_REQUEST:
-      case LOAD_USER_POSTS_REQUEST: {
+      case LOAD_USER_POSTS_REQUEST:
+      case LOAD_LIKED_POSTS_REQUEST: {
         draft.mainPosts = !action.lastId ? [] : draft.mainPosts
         draft.hasMorePost = action.lastId ? draft.hasMorePost : true
         break
       }
       case LOAD_MAIN_POSTS_SUCCESS:
-      case LOAD_USER_POSTS_SUCCESS: {
+      case LOAD_USER_POSTS_SUCCESS:
+      case LOAD_LIKED_POSTS_SUCCESS: {
         action.data.forEach(d => {
           draft.mainPosts.push(d)
         })
@@ -133,7 +140,8 @@ export default (state = initialState, action) => {
         break
       }
       case LOAD_MAIN_POSTS_FAILURE:
-      case LOAD_USER_POSTS_FAILURE: {
+      case LOAD_USER_POSTS_FAILURE:
+      case LOAD_LIKED_POSTS_SUCCESS: {
         break
       }
       // 게시글 좋아요 // LIKE_POST_REQUEST // api/post/:id/like

@@ -29,7 +29,10 @@ import {
   REMOVE_POST_SUCCESS,
   LOAD_POST_FAILURE,
   LOAD_POST_REQUEST,
-  LOAD_POST_SUCCESS
+  LOAD_POST_SUCCESS,
+  LOAD_LIKED_POSTS_REQUEST,
+  LOAD_LIKED_POSTS_FAILURE,
+  LOAD_LIKED_POSTS_SUCCESS
 } from '../reducers/post'
 import axios from 'axios'
 
@@ -116,6 +119,32 @@ function* loadUserPosts(action) {
 
 function* watchLoadUserPosts() {
   yield takeLatest(LOAD_USER_POSTS_REQUEST, loadUserPosts)
+}
+
+// 좋아요 게시글 불러오기 // LOAD_LIKED_POSTS_REQUEST // api/posts/like?lastID=''&limit=''
+function loadLikedPostsAPI(lastId = 0, limit = 10) {
+  return axios.get(`/posts/like?lastId=${lastId}&limit=${limit}`, {
+    withCredentials: true
+  })
+}
+
+function* loadLikedPosts(action) {
+  try {
+    const result = yield call(loadLikedPostsAPI, action.lastId)
+    yield put({
+      type: LOAD_LIKED_POSTS_SUCCESS,
+      data: result.data
+    })
+  } catch (e) {
+    yield put({
+      type: LOAD_LIKED_POSTS_FAILURE,
+      error: e
+    })
+  }
+}
+
+function* watchLoadLikedPosts() {
+  yield throttle(1000, LOAD_LIKED_POSTS_REQUEST, loadLikedPosts)
 }
 
 // 댓글 작성 // ADD_COMMENT_REQUEST // api/post/:id/comment
@@ -335,7 +364,8 @@ export default function* postSaga() {
     fork(watchLikePost),
     fork(watchUnlikePost),
     fork(watchRemovePost),
-    fork(watchLoadPost)
+    fork(watchLoadPost),
+    fork(watchLoadLikedPosts)
   ])
 }
 //
