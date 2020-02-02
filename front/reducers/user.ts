@@ -108,7 +108,7 @@ export default (state = initialState, action) => {
         break
       }
       case SIGN_UP_FAILURE: {
-        draft.signUpErrorReason = action.error
+        draft.signUpErrorReason = action.reason
         break
       }
       // 몸무게 추가 // WEIGHT_POST_REQUEST // api/user/weight

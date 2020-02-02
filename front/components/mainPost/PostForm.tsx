@@ -7,8 +7,19 @@ import { RootState } from '../../reducers'
 import { backUrl } from '../../config/config'
 
 const PostFormContainer = styled.form`
-  border: 1px solid black;
+  box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 20px;
+  margin-top: 10px;
+  padding: 15px;
+`
+
+const PostInput = styled.input`
+  width: 100%;
+  border-radius: 5px;
+  height: 30px;
+  margin-bottom: 10px;
 `
 const PostForm = () => {
   const dispatch = useDispatch()
@@ -74,7 +85,12 @@ const PostForm = () => {
   return (
     <>
       <PostFormContainer encType="multipart/form-data" onSubmit={onSubmitForm}>
-        <input placeholder="글을 작성해주세요." value={text} onChange={onChangeText} />
+        <PostInput
+          type="textarea"
+          placeholder="글을 작성해주세요."
+          value={text}
+          onChange={onChangeText}
+        />
         <div>
           <input type="file" multiple hidden ref={imageInput} onChange={onChangeImages} />
           <button type="button" onClick={onClickImageUpload}>

@@ -97,6 +97,16 @@ const PostCard = ({ post }) => {
       <PostCardContainer>
         <div>{post.Images && post.Images[0] && <PostImages images={post.Images} />}</div>
         <div>
+          {post.Images.length === 0 && (
+            <>
+              <div>"</div>
+              <div>"</div>
+              <div>"</div>
+              <div>"</div>
+            </>
+          )}
+        </div>
+        <div>
           <Link
             href={{ pathname: '/user', query: { id: post.User.id } }}
             as={`/user/${post.User.id}`}

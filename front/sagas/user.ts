@@ -80,7 +80,7 @@ function* signUp(action) {
     console.error(e)
     yield put({
       type: SIGN_UP_FAILURE,
-      error: e
+      reason: e.response && e.response.data
     })
   }
 }

@@ -5,7 +5,11 @@ import styled from 'styled-components'
 
 const SearchingFormContainer = styled.form`
   display: flex;
-  background-color: white;
+  margin-right: 20px;
+  input {
+    border-radius: 4px;
+    width: 200px;
+  }
 `
 
 const SearchingForm = () => {

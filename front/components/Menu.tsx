@@ -24,10 +24,11 @@ const Menu_Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   & > div {
+    position: relative;
     background-color: #e0e5ec;
     display: flex;
     justify-content: flex-start;
-    padding: 20px 20px 16px 36px;
+    padding: 20px 20px 16px 46px;
     margin: 0px 40px 8px 60px;
     font-size: 18px;
     font-family: 'escore4';
@@ -47,13 +48,17 @@ const Menu_Container = styled.div`
   border-top: 1px solid rgb(148, 148, 148);
   border-collapse: collapse;
   z-index: 10;
+  background: #e0e5ec;
 `
 const SearchBar = styled.div`
   z-index: 5;
-  position: fixed;
+  padding: 10px;
+  background: #e0e5ec;
+  position: sticky;
+  right: 0;
+  top: 0;
   display: flex;
   justify-content: flex-end;
-  left: 280px;
   height: 40px;
   border-bottom: 1px solid rgb(148, 148, 148);
   border-top: 1px solid rgb(148, 148, 148);
@@ -61,9 +66,20 @@ const SearchBar = styled.div`
 // props 로 서칭바랑 컨텐츠 조절해보기!
 
 const Content_Container = styled.div`
-  margin: 50px 0px 0px 0px;
   width: calc(100vw - 280px);
+  display: flex;
+  flex-direction: column;
+`
+
+const Content = styled.div`
   padding: 10px;
+`
+
+const MenuIcon = styled.img`
+  position: absolute;
+  width: 18px;
+  top: 18px;
+  left: 16px;
 `
 
 // children 은 Menu의 props 인 페이지들!
@@ -72,38 +88,45 @@ const Menu = ({ children }) => {
 
   return (
     <FullContainer>
-      <SearchBar key="search">
-        <SearchingForm />
-      </SearchBar>
       <Menu_Container>
         <div key="tutorial">
+          <MenuIcon src="https://image.flaticon.com/icons/svg/82/82648.svg"></MenuIcon>
           <Link href="/tutorial" prefetch>
             <a>튜토리얼</a>
           </Link>
         </div>
         <div key="home">
+          <MenuIcon src="https://image.flaticon.com/icons/svg/82/82631.svg"></MenuIcon>
           <Link href="/">
             <a>홈</a>
           </Link>
         </div>
         <div> {me ? <UserProfile /> : <LoginForm />}</div>
         <div key="weight">
+          <MenuIcon src="https://image.flaticon.com/icons/svg/82/82621.svg"></MenuIcon>
           <Link href="/weight" prefetch>
             <a>내 그래프</a>
           </Link>
         </div>
         <div key="like">
+          <MenuIcon src="https://image.flaticon.com/icons/svg/82/82477.svg"></MenuIcon>
           <Link href="/like" prefetch>
             <a>좋아요</a>
           </Link>
         </div>
         <div key="appinfo">
+          <MenuIcon src="https://image.flaticon.com/icons/svg/82/82302.svg"></MenuIcon>
           <Link href="/appinfo" prefetch>
             <a>앱 정보</a>
           </Link>
         </div>
       </Menu_Container>
-      <Content_Container>{children}</Content_Container>
+      <Content_Container>
+        <SearchBar key="search">
+          <SearchingForm />
+        </SearchBar>
+        <Content>{children}</Content>
+      </Content_Container>
     </FullContainer>
   )
 }

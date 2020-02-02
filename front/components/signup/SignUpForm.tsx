@@ -2,8 +2,14 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { SIGN_UP_REQUEST } from '../../reducers/user'
 import { RootState } from '../../reducers'
+import styled from 'styled-components'
 
 const SignUpForm = () => {
+  const SignUpError = styled.div`
+    color: red;
+  `
+  const { signUpErrorReason } = useSelector((state: RootState) => state.user)
+
   const [id, setId] = useState('')
   const [nickname, setNickname] = useState('')
   const [password, setPassword] = useState('')
@@ -108,6 +114,7 @@ const SignUpForm = () => {
       <div>
         <button type="submit">가입하기</button>
       </div>
+      <SignUpError>{signUpErrorReason}</SignUpError>
     </form>
   )
 }
