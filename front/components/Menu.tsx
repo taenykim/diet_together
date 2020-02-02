@@ -11,34 +11,37 @@ const FullContainer = styled.div`
   display: flex;
   justify-content: stretch;
   align-items: stretch;
+  background: #e0e5ec;
 `
 
 const Menu_Container = styled.div`
   position: sticky;
+  color: rgb(94, 94, 94);
   top: 0px;
   width: 280px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  background-color: #fff;
   & > div {
-    background-color: white;
+    background-color: #e0e5ec;
     display: flex;
     justify-content: flex-start;
     padding: 20px 20px 16px 36px;
     margin: 0px 40px 8px 60px;
     font-size: 18px;
-    font-family: 'escore3';
-    box-shadow: inset -3px -3px 7px #ffffffb0, inset 3px 3px 5px rgba(94, 104, 121, 0.692);
+    font-family: 'escore4';
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
     border-radius: 5px;
     a {
-      color: rgb(94, 94, 94);
       text-decoration: none;
+      color: rgb(94, 94, 94);
     }
   }
-  div:nth-child(1) {
-    margin-top: 40px;
+  & > div:nth-child(1) {
+    margin-top: 72px;
   }
   border-right: 1px solid rgb(148, 148, 148);
   border-top: 1px solid rgb(148, 148, 148);
@@ -58,9 +61,8 @@ const SearchBar = styled.div`
 // props 로 서칭바랑 컨텐츠 조절해보기!
 
 const Content_Container = styled.div`
-  margin-top: 50px;
-  width: 50vw;
-  margin-left: 20px;
+  margin: 50px 0px 0px 0px;
+  width: calc(100vw - 280px);
 `
 
 // children 은 Menu의 props 인 페이지들!

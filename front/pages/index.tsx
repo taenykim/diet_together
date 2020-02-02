@@ -10,6 +10,12 @@ import Menu from '../components/Menu'
 const MainPage = styled.div`
   margin-top: 19px;
 `
+
+const PostCardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+`
+
 const index = () => {
   const { me } = useSelector((state: RootState) => state.user)
   const { mainPosts, hasMorePost } = useSelector((state: RootState) => state.post)
@@ -50,10 +56,12 @@ const index = () => {
     <Menu>
       <MainPage>
         {me && <PostForm />}
-        {mainPosts.map((c, i) => {
-          return <PostCard key={c.id} post={c} />
-        })}
-      </MainPage>{' '}
+        <PostCardContainer>
+          {mainPosts.map((c, i) => {
+            return <PostCard key={c.id} post={c} />
+          })}
+        </PostCardContainer>
+      </MainPage>
     </Menu>
   )
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Menu from '../components/Menu'
 
 const Test = styled.div`
-  font-size: 40px;
+  font-size: 20px;
 `
 
 const tutorial = () => {

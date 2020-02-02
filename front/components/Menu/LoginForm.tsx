@@ -7,7 +7,9 @@ import styled from 'styled-components'
 import { RootState } from '../../reducers'
 
 const LoginFormContainer = styled.form`
-  border: 1px solid black;
+  input {
+    border-radius: 3px;
+  }
 `
 const LoginError = styled.div`
   color: red;

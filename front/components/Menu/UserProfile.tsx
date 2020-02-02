@@ -7,10 +7,14 @@ import styled from 'styled-components'
 import { RootState } from '../../reducers'
 
 const UserProfileContainer = styled.div`
-  color: skyblue;
   display: flex;
   flex-direction: column;
-  border: 1px solid black;
+  & > div {
+    margin-bottom: 2px;
+  }
+  & > button {
+    margin-top: 6px;
+  }
 `
 
 const UserProfile = () => {
