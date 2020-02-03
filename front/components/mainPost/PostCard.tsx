@@ -14,12 +14,43 @@ import CommentForm from '../postCard/CommentForm'
 import FollowButton from '../postCard/FollowButton'
 import styled from 'styled-components'
 import { RootState } from '../../reducers'
-
+import { ProfileAvatar as UserAvatar, ProfileName as UserName } from '../Menu/UserProfile'
 const PostCardContainer = styled.div`
-  border-radius: 4px;
-  box-shadow: 4px 2px 16px rgba(136, 165, 191, 0.48), -4px -2px 16px #ffffff;
-  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: -6px -6px 20px rgba(255, 255, 255, 1), 6px 6px 20px rgba(0, 0, 0, 0.4);
+  margin-bottom: 20px;
 `
+
+const UserAvatarAndName = styled.div`
+  display: flex;
+  padding: 10px 15px 10px 20px;
+  margin-bottom: 10px;
+  align-items: center;
+  border-radius: 0px 0px 0px 0px;
+`
+
+const PostCardContent = styled.div`
+  padding: 0px 15px 10px 20px;
+  font-family: escore5;
+  font-size: 13px;
+  color: #555;
+`
+
+const PostCardSub = styled.div`
+  font-family: escore5;
+  font-size: 13px;
+  display: flex;
+  padding: 10px 15px 30px 20px;
+  div {
+    padding-right: 5px;
+    cursor: pointer;
+  }
+`
+
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
   const id = useSelector((state: RootState) => state.user.me && state.user.me.id)
@@ -96,41 +127,48 @@ const PostCard = ({ post }) => {
   return (
     <>
       <PostCardContainer>
-        <div>{post.Images && post.Images[0] && <PostImages images={post.Images} />}</div>
-        <div>
-          <Link
-            href={{ pathname: '/user', query: { id: post.User.id } }}
-            as={`/user/${post.User.id}`}
+        <UserAvatarAndName>
+          <UserAvatar>
+            <Link href="/profile" prefetch>
+              <a>
+                <img
+                  style={{ width: '100%' }}
+                  src="http://start.goodtime.co.kr/wp-content/uploads/2014/02/aspect_good.jpg"
+                />
+              </a>
+            </Link>
+          </UserAvatar>
+          <UserName>
+            <div>
+              <Link
+                href={{ pathname: '/user', query: { id: post.User.id } }}
+                as={`/user/${post.User.id}`}
+              >
+                <a>{post.User.nickname}</a>
+              </Link>
+            </div>
+          </UserName>
+        </UserAvatarAndName>
+        <PostCardContent>{post.content}</PostCardContent>
+        {post.Images && post.Images[0] && <PostImages images={post.Images} />}
+
+        <PostCardSub>
+          <div onClick={onToggleComment}>댓글</div>
+          <div onClick={onToggleComment}>{post.Comments ? post.Comments.length : 0}</div>
+          <div // 나중에 스타일드 컴포넌트 스타일링 할 때, props 이용할 것.
+            style={liked ? { color: 'red' } : { color: 'black' }}
+            onClick={onToggleLike}
           >
-            <a>{post.User.nickname}</a>
-          </Link>
-        </div>
-        <div>{post.content}</div>
-        <div>
-          {post.Images.length === 0 && (
-            <>
-              <div>"</div>
-              <div>"</div>
-              <div>"</div>
-              <div>"</div>
-            </>
-          )}
-        </div>
-        <br />
-        {post.Comments ? post.Comments.length : 0}개의
-        <button type="button" onClick={onToggleComment}>
-          댓글
-        </button>
-        {post.Likers ? post.Likers.length : 0}개의
-        <button // 나중에 스타일드 컴포넌트 스타일링 할 때, props 이용할 것.
-          type="button"
-          style={liked ? { color: 'red' } : { color: 'black' }}
-          onClick={onToggleLike}
-        >
-          좋아요
-        </button>
+            좋아요
+          </div>
+          <div onClick={onToggleLike}> {post.Likers ? post.Likers.length : 0}</div>
+        </PostCardSub>
         {myPost && (
-          <button type="button" onClick={onRemovePost(post.id)}>
+          <button
+            style={{ position: 'absolute', top: 0, right: 0, background: 'orange', color: 'white' }}
+            type="button"
+            onClick={onRemovePost(post.id)}
+          >
             삭제
           </button>
         )}

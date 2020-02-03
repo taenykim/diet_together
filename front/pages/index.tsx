@@ -6,33 +6,10 @@ import { LOAD_MAIN_POSTS_REQUEST } from '../reducers/post'
 import styled from 'styled-components'
 import { RootState } from '../reducers'
 import Menu from '../components/Menu'
-import Masonry from 'react-masonry-css'
 
-const breakpointColumnsObj = {
-  default: 3,
-  1100: 2,
-  700: 1,
-  500: 1
-}
-
-const MainPage = styled.div`
-  .my-masonry-grid {
-    display: -webkit-box; /* Not needed if autoprefixing */
-    display: -ms-flexbox; /* Not needed if autoprefixing */
-    display: flex;
-    margin-left: -30px; /* gutter size offset */
-    width: auto;
-  }
-  .my-masonry-grid_column {
-    padding-left: 30px; /* gutter size */
-    background-clip: padding-box;
-  }
-
-  /* Style your items */
-  .my-masonry-grid_column > div {
-    /* change div to reference your elements you put in <Masonry> */
-    margin-bottom: 30px;
-  }
+const MainPostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
 `
 
 const index = () => {
@@ -75,18 +52,13 @@ const index = () => {
 
   return (
     <Menu>
-      <MainPage>
+      <MainPostContainer>
         {me && <PostForm />}
-        <Masonry
-          breakpointCols={breakpointColumnsObj}
-          className="my-masonry-grid"
-          columnClassName="my-masonry-grid_column"
-        >
-          {mainPosts.map((c, i) => {
-            return <PostCard key={c.id} post={c} />
-          })}
-        </Masonry>
-      </MainPage>
+
+        {mainPosts.map((c, i) => {
+          return <PostCard key={c.id} post={c} />
+        })}
+      </MainPostContainer>
     </Menu>
   )
 }

@@ -15,7 +15,7 @@ const UserProfileContainer = styled.div`
     margin-top: 6px;
   }
 `
-const ProfileAvatarAndName = styled.div`
+export const ProfileAvatarAndName = styled.div`
   display: flex;
   padding: 10px 15px 10px 20px;
   margin-bottom: 10px;
@@ -23,14 +23,14 @@ const ProfileAvatarAndName = styled.div`
   background: rgb(248, 248, 248);
   border-radius: 0px 0px 0px 0px;
 `
-const ProfileAvatar = styled.div`
+export const ProfileAvatar = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 30%;
   overflow: hidden;
   box-shadow: 4px 4px 8px rgb(151, 151, 151);
 `
-const ProfileName = styled.div`
+export const ProfileName = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 5px;
