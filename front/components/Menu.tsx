@@ -64,7 +64,7 @@ const Menu_Container = styled.div`
   }
   & > div:nth-child(4) {
     padding: 0px 0px 0px 0px;
-    border: 5px solid rgb(240, 240, 240);
+    border: 5px solid rgb(248, 248, 248);
     box-sizing: border-box;
   }
 `
@@ -77,7 +77,7 @@ const SearchBar = styled.div`
   top: 0;
   display: flex;
   justify-content: flex-end;
-  height: 40px;
+  height: 26px;
   border-bottom: 1px solid rgb(148, 148, 148);
   border-top: 1px solid rgb(148, 148, 148);
 `

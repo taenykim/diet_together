@@ -7,8 +7,28 @@ const SearchingFormContainer = styled.form`
   display: flex;
   margin-right: 20px;
   input {
-    border-radius: 4px;
+    font-family: escore5;
+    border-radius: 10px;
     width: 200px;
+    border-width: 0px;
+    font-size: 12px;
+    box-shadow: 2px 2px 10px #888;
+    padding-left: 10px;
+  }
+  button {
+    font-family: escore5;
+    border-radius: 9px;
+    margin-left: 12px;
+    background: rgb(94, 94, 94);
+    color: white;
+    border-width: 0px;
+    box-shadow: 2px 2px 2px #444;
+  }
+  button:focus {
+    outline: none;
+  }
+  button:active {
+    box-shadow: inset 2px 2px 2px #888;
   }
 `
 

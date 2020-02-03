@@ -20,8 +20,8 @@ const ProfileAvatarAndName = styled.div`
   padding: 10px 15px 10px 20px;
   margin-bottom: 10px;
   align-items: center;
-  background: rgb(240, 240, 240);
-  border-radius: 5px 5px 0px 0px;
+  background: rgb(248, 248, 248);
+  border-radius: 0px 0px 0px 0px;
 `
 const ProfileAvatar = styled.div`
   width: 40px;
