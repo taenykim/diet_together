@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { RootState } from '../../reducers'
 
-const CommentFormContainer = styled.form`
-  border: 1px solid black;
-`
+const CommentFormContainer = styled.form``
 const CommentForm = ({ post }) => {
   const { commentAdded } = useSelector((state: RootState) => state.post)
   const { me } = useSelector((state: RootState) => state.user)

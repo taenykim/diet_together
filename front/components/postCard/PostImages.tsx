@@ -22,15 +22,16 @@ const PostImages = ({ images }) => {
       <>
         <div
           style={{
-            height: '300px',
-            padding: '10px 15px 30px 20px',
-            overflow: 'hidden'
+            height: '200px',
+            margin: '10px 15px 30px 20px'
             // 얘는 왜 styled 안됐지?ㅠㅠ
           }}
         >
-          <div>
-            <img style={{ width: '100%' }} src={`${backUrl}/${images[0].src}`} onClick={onZoom} />
-          </div>
+          <img
+            style={{ height: '100%', borderRadius: '10%' }}
+            src={`${backUrl}/${images[0].src}`}
+            onClick={onZoom}
+          />
         </div>
         {showImagesZoom && <ImagesZoom images={images} onClose={onClose} />}
       </>

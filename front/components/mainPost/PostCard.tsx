@@ -22,7 +22,7 @@ const PostCardContainer = styled.div`
   position: relative;
   border-radius: 10px;
   box-shadow: -6px -6px 20px rgba(255, 255, 255, 1), 6px 6px 20px rgba(0, 0, 0, 0.4);
-  margin-bottom: 20px;
+  margin-top: 20px;
 `
 
 const UserAvatarAndName = styled.div`
@@ -49,6 +49,15 @@ const PostCardSub = styled.div`
     padding-right: 5px;
     cursor: pointer;
   }
+`
+
+const CommentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  background: white;
+  align-self: center;
+  padding: 0px 30px; 0px 30px;
 `
 
 const PostCard = ({ post }) => {
@@ -129,7 +138,10 @@ const PostCard = ({ post }) => {
       <PostCardContainer>
         <UserAvatarAndName>
           <UserAvatar>
-            <Link href="/profile" prefetch>
+            <Link
+              href={{ pathname: '/user', query: { id: post.User.id } }}
+              as={`/user/${post.User.id}`}
+            >
               <a>
                 <img
                   style={{ width: '100%' }}
@@ -175,28 +187,55 @@ const PostCard = ({ post }) => {
         {<FollowButton post={post} onUnfollow={onUnfollow} onFollow={onFollow} />}
       </PostCardContainer>
       {commentFormOpened && (
-        <>
+        <CommentContainer>
           <div>
-            <CommentForm post={post} />
-          </div>
-          <div>
-            <div>{post.Comments ? post.Comments.length : 0}개의 댓글</div>
+            <div style={{ marginTop: '30px' }}>
+              {post.Comments ? post.Comments.length : 0}개의 댓글
+            </div>
             <div>
               {/* {console.log(post.Comments)} */}
               {post.Comments &&
                 post.Comments.map(item => {
                   return (
-                    <>
+                    <div style={{ display: 'flex', alignItems: 'center' }}>
+                      <UserAvatarAndName>
+                        <UserAvatar>
+                          <Link
+                            href={{ pathname: '/user', query: { id: post.User.id } }}
+                            as={`/user/${post.User.id}`}
+                          >
+                            <a>
+                              <img
+                                style={{ width: '100%' }}
+                                src="http://start.goodtime.co.kr/wp-content/uploads/2014/02/aspect_good.jpg"
+                              />
+                            </a>
+                          </Link>
+                        </UserAvatar>
+                        <UserName>
+                          <div>
+                            <Link
+                              href={{ pathname: '/user', query: { id: post.User.id } }}
+                              as={`/user/${post.User.id}`}
+                            >
+                              <a>{post.User.nickname}</a>
+                            </Link>
+                          </div>
+                        </UserName>
+                        <div
+                          style={{ marginLeft: '15px', fontFamily: 'escore5', fontSize: '14px' }}
+                        >
+                          : {item.content}
+                        </div>
+                      </UserAvatarAndName>
                       <br />
-                      <div>닉네임 : {item.User && item.User.nickname}</div>
-                      <div>댓글내용 : {item.content}</div>
-                      <br />
-                    </>
+                    </div>
                   )
                 })}
             </div>
           </div>
-        </>
+          <CommentForm post={post} />
+        </CommentContainer>
       )}
     </>
   )
