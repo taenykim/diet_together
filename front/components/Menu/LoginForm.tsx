@@ -7,14 +7,48 @@ import styled from 'styled-components'
 import { RootState } from '../../reducers'
 
 const LoginFormContainer = styled.form`
+  padding: 20px 10px 10px 15px;
   input {
     border-radius: 3px;
+  }
+  label {
+    width: 70px;
+  }
+  div {
+    margin-bottom: 3px;
+  }
+`
+
+const IdContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  input {
+    width: 80px;
+  }
+`
+const PasswordContainer = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  input {
+    width: 80px;
   }
 `
 const LoginError = styled.div`
   color: red;
 `
-
+const LoginAndSignUpContainer = styled.div`
+  display: flex;
+  margin-top: 10px;
+  justify-content: stretch;
+  & > button {
+    width: 50%;
+  }
+  a {
+    width: 50%;
+  }
+`
 const LoginForm = () => {
   const [id, setId] = useState('')
   const [password, setPassword] = useState('')
@@ -47,17 +81,12 @@ const LoginForm = () => {
   return (
     <>
       <LoginFormContainer onSubmit={onSubmitForm}>
-        <div>
-          <div>
-            <label htmlFor="user-id">아이디</label>
-          </div>
-          <div>
-            <input name="user-id" value={id} onChange={onChangeId} required />
-          </div>
-        </div>
-        <div>
+        <IdContainer>
+          <label htmlFor="user-id">아이디</label>
+          <input name="user-id" value={id} onChange={onChangeId} required />
+        </IdContainer>
+        <PasswordContainer>
           <label htmlFor="user-password">비밀번호</label>
-          <br />
           <input
             name="user-password"
             type="password"
@@ -65,19 +94,19 @@ const LoginForm = () => {
             onChange={onChangePassword}
             required
           />
-        </div>
+        </PasswordContainer>
         {/* {console.log(logInErrorReason)} */}
         <LoginError>{logInErrorReason}</LoginError>
-        <div>
+        <LoginAndSignUpContainer>
           <button style={{ cursor: 'pointer' }} type="submit">
             로그인
           </button>
-        </div>
-        <Link href="/signup">
-          <a>
-            <button style={{ cursor: 'pointer' }}>회원가입</button>
-          </a>
-        </Link>
+          <Link href="/signup">
+            <a>
+              <button style={{ cursor: 'pointer', width: '100%' }}>회원가입</button>
+            </a>
+          </Link>
+        </LoginAndSignUpContainer>
       </LoginFormContainer>
     </>
   )
