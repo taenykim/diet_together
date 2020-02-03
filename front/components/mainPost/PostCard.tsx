@@ -18,6 +18,7 @@ import { RootState } from '../../reducers'
 const PostCardContainer = styled.div`
   border-radius: 4px;
   box-shadow: 4px 2px 16px rgba(136, 165, 191, 0.48), -4px -2px 16px #ffffff;
+  padding: 15px;
 `
 const PostCard = ({ post }) => {
   const [commentFormOpened, setCommentFormOpened] = useState(false)
@@ -97,6 +98,15 @@ const PostCard = ({ post }) => {
       <PostCardContainer>
         <div>{post.Images && post.Images[0] && <PostImages images={post.Images} />}</div>
         <div>
+          <Link
+            href={{ pathname: '/user', query: { id: post.User.id } }}
+            as={`/user/${post.User.id}`}
+          >
+            <a>{post.User.nickname}</a>
+          </Link>
+        </div>
+        <div>{post.content}</div>
+        <div>
           {post.Images.length === 0 && (
             <>
               <div>"</div>
@@ -106,15 +116,6 @@ const PostCard = ({ post }) => {
             </>
           )}
         </div>
-        <div>
-          <Link
-            href={{ pathname: '/user', query: { id: post.User.id } }}
-            as={`/user/${post.User.id}`}
-          >
-            <a>{post.User.nickname}</a>
-          </Link>
-        </div>
-        <div>{post.content}</div>
         <br />
         {post.Comments ? post.Comments.length : 0}개의
         <button type="button" onClick={onToggleComment}>

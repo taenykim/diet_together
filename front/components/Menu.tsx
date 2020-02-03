@@ -47,6 +47,9 @@ const Menu_Container = styled.div`
     a: hover {
       color: black;
     }
+    a:nth-child(1):hover {
+      color: rgb(173, 163, 13);
+    }
   }
   & > div:hover {
     box-shadow: inset 3px 3px 7px rgba(136, 165, 191, 0.48), inset -3px -3px 7px #ffffff;
@@ -99,7 +102,11 @@ const Menu = ({ children }) => {
   return (
     <FullContainer>
       <Menu_Container>
-        <div style={{ cursor: 'pointer' }}>DIET TOGETHER</div>
+        <div style={{ cursor: 'pointer' }}>
+          <Link href="/">
+            <a>DIET TOGETHER</a>
+          </Link>
+        </div>
         <div key="tutorial">
           <MenuIcon src="https://image.flaticon.com/icons/svg/82/82648.svg"></MenuIcon>
           <Link href="/tutorial" prefetch>

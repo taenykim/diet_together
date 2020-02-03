@@ -7,6 +7,7 @@ import { RootState } from '../../reducers'
 import { backUrl } from '../../config/config'
 
 const PostFormContainer = styled.form`
+  position: sticky;
   box-shadow: 9px 9px 16px rgba(163, 177, 198, 0.6), -9px -9px 16px rgba(255, 255, 255, 0.5);
   border-radius: 5px;
   border: 1px solid rgba(255, 255, 255, 0.2);
