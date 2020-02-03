@@ -47,7 +47,7 @@ const Menu_Container = styled.div`
     a: hover {
       color: black;
     }
-    a:nth-child(1):hover {
+    & > a:nth-child(1):hover {
       color: rgb(173, 163, 13);
     }
   }
@@ -61,6 +61,11 @@ const Menu_Container = styled.div`
     margin: 26px 40px 16px 40px;
     box-shadow: none;
     border: none;
+  }
+  & > div:nth-child(4) {
+    padding: 0px 0px 0px 0px;
+    border: 5px solid rgb(240, 240, 240);
+    box-sizing: border-box;
   }
 `
 const SearchBar = styled.div`
